@@ -1,0 +1,60 @@
+createReview:
+  handler: src/functions/review/review.createReview
+  events:
+    - http:
+        path: review/create
+        method: post
+        cors: true
+        authorizer:
+          name: userAuthorizer
+          identitySource: method.request.header.Authorization
+findReviewById:
+  handler: src/functions/review/review.findReviewById
+  events:
+    - http:
+        path: review/findById
+        method: get
+        cors: true
+        authorizer:
+          name: userAuthorizer
+          identitySource: method.request.header.Authorization
+findReviewsByUser:
+  handler: src/functions/review/review.findReviewsByUser
+  events:
+    - http:
+        path: review/findByUser
+        method: get
+        cors: true
+        authorizer:
+          name: userAuthorizer
+          identitySource: method.request.header.Authorization
+findReviewsByRestaurant:
+  handler: src/functions/review/review.findReviewsByRestaurant
+  events:
+    - http:
+        path: review/findByRestaurant
+        method: get
+        cors: true
+        authorizer:
+          name: userAuthorizer
+          identitySource: method.request.header.Authorization
+updateReviewById:
+  handler: src/functions/review/review.updateReviewById
+  events:
+    - http:
+        path: review/update
+        method: put
+        cors: true
+        authorizer:
+          name: userAuthorizer
+          identitySource: method.request.header.Authorization
+deleteReviewById:
+  handler: src/functions/review/review.deleteReviewById
+  events:
+    - http:
+        path: review/delete
+        method: delete
+        cors: true
+        authorizer:
+          name: userAuthorizer
+          identitySource: method.request.header.Authorization

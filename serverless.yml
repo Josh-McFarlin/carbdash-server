@@ -50,3 +50,4 @@ functions:
   - ${file(src/functions/lambdaAuth/functions.yml)}
   - ${file(src/functions/user/functions.yml)}
   - ${file(src/functions/restaurant/functions.yml)}
+  - ${file(src/functions/review/functions.yml)}
