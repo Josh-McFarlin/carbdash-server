@@ -1,0 +1,50 @@
+createUser:
+  handler: src/functions/user/user.createUser
+  events:
+    - http:
+        path: user/create
+        method: post
+        cors: true
+        authorizer:
+          name: userAuthorizer
+          identitySource: method.request.header.Authorization
+findUserById:
+  handler: src/functions/user/user.findUserById
+  events:
+    - http:
+        path: user/findById
+        method: get
+        cors: true
+        authorizer:
+          name: userAuthorizer
+          identitySource: method.request.header.Authorization
+findUserByEmail:
+  handler: src/functions/user/user.findUserByEmail
+  events:
+    - http:
+        path: user/findByEmail
+        method: get
+        cors: true
+        authorizer:
+          name: userAuthorizer
+          identitySource: method.request.header.Authorization
+updateUserById:
+  handler: src/functions/user/user.updateUserById
+  events:
+    - http:
+        path: user/update
+        method: put
+        cors: true
+        authorizer:
+          name: userAuthorizer
+          identitySource: method.request.header.Authorization
+deleteUserById:
+  handler: src/functions/user/user.deleteUserById
+  events:
+    - http:
+        path: user/delete
+        method: delete
+        cors: true
+        authorizer:
+          name: userAuthorizer
+          identitySource: method.request.header.Authorization

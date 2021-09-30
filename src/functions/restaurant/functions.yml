@@ -1,0 +1,50 @@
+createRestaurant:
+  handler: src/functions/restaurant/restaurant.createRestaurant
+  events:
+    - http:
+        path: restaurant/create
+        method: post
+        cors: true
+        authorizer:
+          name: restaurantAuthorizer
+          identitySource: method.request.header.Authorization
+findRestaurantById:
+  handler: src/functions/restaurant/restaurant.findRestaurantById
+  events:
+    - http:
+        path: restaurant/findById
+        method: get
+        cors: true
+        authorizer:
+          name: restaurantAuthorizer
+          identitySource: method.request.header.Authorization
+findRestaurantByEmail:
+  handler: src/functions/restaurant/restaurant.findRestaurantByEmail
+  events:
+    - http:
+        path: restaurant/findByEmail
+        method: get
+        cors: true
+        authorizer:
+          name: restaurantAuthorizer
+          identitySource: method.request.header.Authorization
+updateRestaurantById:
+  handler: src/functions/restaurant/restaurant.updateRestaurantById
+  events:
+    - http:
+        path: restaurant/update
+        method: put
+        cors: true
+        authorizer:
+          name: restaurantAuthorizer
+          identitySource: method.request.header.Authorization
+deleteRestaurantById:
+  handler: src/functions/restaurant/restaurant.deleteRestaurantById
+  events:
+    - http:
+        path: restaurant/delete
+        method: delete
+        cors: true
+        authorizer:
+          name: restaurantAuthorizer
+          identitySource: method.request.header.Authorization

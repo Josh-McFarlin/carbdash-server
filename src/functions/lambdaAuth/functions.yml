@@ -1,0 +1,4 @@
+userAuthorizer:
+  handler: src/functions/lambdaAuth/lambdaAuth.userAuthorizer
+restaurantAuthorizer:
+  handler: src/functions/lambdaAuth/lambdaAuth.restaurantAuthorizer
