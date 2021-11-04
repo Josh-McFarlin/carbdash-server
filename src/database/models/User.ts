@@ -3,6 +3,10 @@ import type { UserType } from "../../types/User";
 import { LocationSchema } from "../schemas/Location";
 
 const UserSchema = new mongoose.Schema<UserType>({
+  auth0Id: {
+    type: String,
+    required: true,
+  },
   name: {
     type: String,
     required: true,

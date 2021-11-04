@@ -26,7 +26,9 @@ export type OpenHoursType = [
 
 export interface RestaurantType {
   id: string;
+  auth0Id: string;
   name: string;
+  email: string;
   avatarUrl: string;
   headerUrl: string;
   bio?: string;

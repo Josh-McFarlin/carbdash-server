@@ -3,6 +3,7 @@ import type { LocationType } from "./Location";
 
 export interface UserType {
   id: string;
+  auth0Id: string;
   name: string;
   email: string;
   username: string;

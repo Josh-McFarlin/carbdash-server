@@ -6,10 +6,18 @@ import { DayAvailabilitySchema } from "../schemas/OpenHours";
 const arrayLengthSeven = (arr: unknown[]) => arr.length === 7;
 
 const RestaurantSchema = new mongoose.Schema<RestaurantType>({
+  auth0Id: {
+    type: String,
+    required: true,
+  },
   name: {
     type: String,
     required: true,
     text: true,
+  },
+  email: {
+    type: String,
+    required: true,
   },
   avatarUrl: {
     type: String,
