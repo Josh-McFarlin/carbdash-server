@@ -2,6 +2,7 @@ import { APIGatewayProxyHandler, APIGatewayProxyResult } from "aws-lambda";
 import Response from "../../utils/Response";
 import { StatusCode } from "../../types/Response";
 import * as actions from "../../actions/post";
+import { createUploadUrl } from "../../utils/s3";
 import "../../database";
 
 /**
@@ -14,7 +15,13 @@ export const createPost: APIGatewayProxyHandler = async (
 ): Promise<APIGatewayProxyResult> => {
   try {
     const body = JSON.parse(event.body);
-    const post = await actions.createPost(body);
+    const photoUrls = await Promise.all(
+      Array.from(Array(body.photoUrls.length)).map(createUploadUrl)
+    );
+    const post = await actions.createPost({
+      ...body,
+      photoUrls,
+    });
 
     return Response.success({
       post,
@@ -68,7 +75,7 @@ export const findPosts: APIGatewayProxyHandler = async (
       restaurant,
       ownerType,
       tags: tags?.split(","),
-    });
+    } as any);
 
     return Response.success({
       posts,

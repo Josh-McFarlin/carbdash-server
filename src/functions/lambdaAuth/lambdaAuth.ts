@@ -6,7 +6,8 @@ import {
 import jwt from "jsonwebtoken";
 import "../../database";
 
-const AUTH0_CLIENT_SECRET: string = process.env.AUTH0_CLIENT_SECRET;
+const AUTH0_CLIENT_ID = process.env.AUTH0_CLIENT_ID;
+const AUTH0_CLIENT_PUBLIC_KEY = process.env.AUTH0_CLIENT_PUBLIC_KEY;
 
 export const userAuthorizer: APIGatewayAuthorizerHandler = async (
   event: APIGatewayTokenAuthorizerEvent
@@ -18,7 +19,9 @@ export const userAuthorizer: APIGatewayAuthorizerHandler = async (
     const authHeader = event.authorizationToken?.split(" ") || [];
 
     if (authHeader.length === 2 && authHeader[0].toLowerCase() === "bearer") {
-      const decoded = jwt.verify(authHeader[1], AUTH0_CLIENT_SECRET) as {
+      const decoded = jwt.verify(authHeader[1], AUTH0_CLIENT_PUBLIC_KEY, {
+        audience: AUTH0_CLIENT_ID,
+      }) as {
         sub: string;
       };
 
@@ -51,7 +54,9 @@ export const restaurantAuthorizer: APIGatewayAuthorizerHandler = async (
     const authHeader = event.authorizationToken?.split(" ") || [];
 
     if (authHeader.length === 2 && authHeader[0].toLowerCase() === "bearer") {
-      const decoded = jwt.verify(authHeader[1], AUTH0_CLIENT_SECRET) as {
+      const decoded = jwt.verify(authHeader[1], AUTH0_CLIENT_PUBLIC_KEY, {
+        audience: AUTH0_CLIENT_ID,
+      }) as {
         sub: string;
       };
 
