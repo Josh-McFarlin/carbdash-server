@@ -59,9 +59,9 @@ export const findPostById: APIGatewayProxyHandler = async (
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const query = event.pathParameters;
+    const { id } = event.pathParameters;
 
-    const post = await actions.findPostById(query.id);
+    const post = await actions.findPostById(id);
 
     return Response.success({
       post,
@@ -155,10 +155,10 @@ export const updatePostById: APIGatewayProxyHandler = async (
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const query = event.pathParameters;
+    const { id } = event.pathParameters;
     const body = JSON.parse(event.body);
 
-    const post = await actions.updatePostById(query.id, body);
+    const post = await actions.updatePostById(id, body);
 
     return Response.success({
       post,
@@ -180,9 +180,9 @@ export const deletePostById: APIGatewayProxyHandler = async (
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const query = event.pathParameters;
+    const { id } = event.pathParameters;
 
-    await actions.deletePostById(query.id);
+    await actions.deletePostById(id);
 
     return Response.success();
   } catch (error) {

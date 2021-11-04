@@ -2,7 +2,7 @@ createRestaurant:
   handler: src/functions/restaurant/restaurant.createRestaurant
   events:
     - http:
-        path: restaurant/create
+        path: restaurant
         method: post
         cors: true
         authorizer:
@@ -19,7 +19,7 @@ findRestaurantById:
   handler: src/functions/restaurant/restaurant.findRestaurantById
   events:
     - http:
-        path: restaurant/findById
+        path: restaurant/{id}
         method: get
         cors: true
 findRestaurantsByName:
@@ -40,7 +40,7 @@ updateRestaurantById:
   handler: src/functions/restaurant/restaurant.updateRestaurantById
   events:
     - http:
-        path: restaurant/update
+        path: restaurant/{id}
         method: put
         cors: true
         authorizer:
@@ -50,7 +50,7 @@ deleteRestaurantById:
   handler: src/functions/restaurant/restaurant.deleteRestaurantById
   events:
     - http:
-        path: restaurant/delete
+        path: restaurant/{id}
         method: delete
         cors: true
         authorizer:

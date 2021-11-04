@@ -59,9 +59,9 @@ export const findRestaurantById: APIGatewayProxyHandler = async (
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const query = event.pathParameters;
+    const { id } = event.pathParameters;
 
-    const restaurant = await actions.findRestaurantById(query.id);
+    const restaurant = await actions.findRestaurantById(id);
 
     return Response.success({
       restaurant,
@@ -133,10 +133,10 @@ export const updateRestaurantById: APIGatewayProxyHandler = async (
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const query = event.pathParameters;
+    const { id } = event.pathParameters;
     const body = JSON.parse(event.body);
 
-    const restaurant = await actions.updateRestaurantById(query.id, body);
+    const restaurant = await actions.updateRestaurantById(id, body);
 
     return Response.success({
       restaurant,
@@ -158,9 +158,9 @@ export const deleteRestaurantById: APIGatewayProxyHandler = async (
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const query = event.pathParameters;
+    const { id } = event.pathParameters;
 
-    await actions.deleteRestaurantById(query.id);
+    await actions.deleteRestaurantById(id);
 
     return Response.success();
   } catch (error) {

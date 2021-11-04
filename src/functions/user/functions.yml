@@ -2,7 +2,7 @@ createUser:
   handler: src/functions/user/user.createUser
   events:
     - http:
-        path: user/create
+        path: user
         method: post
         cors: true
         authorizer:
@@ -12,7 +12,7 @@ findUserById:
   handler: src/functions/user/user.findUserById
   events:
     - http:
-        path: user/findById
+        path: user/{id}
         method: get
         cors: true
 findUserByEmail:
@@ -26,7 +26,7 @@ updateUserById:
   handler: src/functions/user/user.updateUserById
   events:
     - http:
-        path: user/update
+        path: user/{id}
         method: put
         cors: true
         authorizer:
@@ -36,7 +36,7 @@ deleteUserById:
   handler: src/functions/user/user.deleteUserById
   events:
     - http:
-        path: user/delete
+        path: user/{id}
         method: delete
         cors: true
         authorizer:

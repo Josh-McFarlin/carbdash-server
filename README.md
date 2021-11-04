@@ -10,10 +10,10 @@
 
 - Repo: [https://github.com/josh-mcfarlin/carbdash-server](https://github.com/josh-mcfarlin/carbdash-server)
 - Authors:
-    - Joshua McFarlin
-    - Vidushi Jain
-    - Lauren Tapp
-    - Devin Raun
+  - Joshua McFarlin
+  - Vidushi Jain
+  - Lauren Tapp
+  - Devin Raun
 
 ## 🖥️ Stack
 

@@ -2,7 +2,7 @@ createReview:
   handler: src/functions/review/review.createReview
   events:
     - http:
-        path: review/create
+        path: review
         method: post
         cors: true
         authorizer:
@@ -19,7 +19,7 @@ findReviewById:
   handler: src/functions/review/review.findReviewById
   events:
     - http:
-        path: review/findById
+        path: review/{id}
         method: get
         cors: true
 findReviewsByTags:
@@ -47,7 +47,7 @@ findReviewsByRestaurant:
 #  handler: src/functions/review/review.updateReviewById
 #  events:
 #    - http:
-#        path: review/update
+#        path: review/{id}
 #        method: put
 #        cors: true
 #        authorizer:
@@ -57,7 +57,7 @@ findReviewsByRestaurant:
 #  handler: src/functions/review/review.deleteReviewById
 #  events:
 #    - http:
-#        path: review/delete
+#        path: review/{id}
 #        method: delete
 #        cors: true
 #        authorizer:

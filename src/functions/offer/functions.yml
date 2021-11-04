@@ -2,7 +2,7 @@ createOffer:
   handler: src/functions/offer/offer.createOffer
   events:
     - http:
-        path: offer/create
+        path: offer
         method: post
         cors: true
         authorizer:
@@ -19,7 +19,7 @@ findOfferById:
   handler: src/functions/offer/offer.findOfferById
   events:
     - http:
-        path: offer/findById
+        path: offer/{id}
         method: get
         cors: true
 findOffersByRestaurant:
@@ -33,7 +33,7 @@ findOffersByRestaurant:
 #  handler: src/functions/offer/offer.updateOfferById
 #  events:
 #    - http:
-#        path: offer/update
+#        path: offer/{id}
 #        method: put
 #        cors: true
 #        authorizer:
@@ -43,7 +43,7 @@ findOffersByRestaurant:
 #  handler: src/functions/offer/offer.deleteOfferById
 #  events:
 #    - http:
-#        path: offer/delete
+#        path: offer/{id}
 #        method: delete
 #        cors: true
 #        authorizer:

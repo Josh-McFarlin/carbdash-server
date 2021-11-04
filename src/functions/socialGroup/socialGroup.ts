@@ -59,9 +59,9 @@ export const findSocialGroupById: APIGatewayProxyHandler = async (
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const query = event.pathParameters;
+    const { id } = event.pathParameters;
 
-    const socialGroup = await actions.findSocialGroupById(query.id);
+    const socialGroup = await actions.findSocialGroupById(id);
 
     return Response.success({
       socialGroup,
@@ -181,10 +181,10 @@ export const updateSocialGroupById: APIGatewayProxyHandler = async (
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const query = event.pathParameters;
+    const { id } = event.pathParameters;
     const body = JSON.parse(event.body);
 
-    const socialGroup = await actions.updateSocialGroupById(query.id, body);
+    const socialGroup = await actions.updateSocialGroupById(id, body);
 
     return Response.success({
       socialGroup,
@@ -206,9 +206,9 @@ export const deleteSocialGroupById: APIGatewayProxyHandler = async (
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const query = event.pathParameters;
+    const { id } = event.pathParameters;
 
-    await actions.deleteSocialGroupById(query.id);
+    await actions.deleteSocialGroupById(id);
 
     return Response.success();
   } catch (error) {

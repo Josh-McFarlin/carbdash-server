@@ -59,9 +59,9 @@ export const findReviewById: APIGatewayProxyHandler = async (
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const query = event.pathParameters;
+    const { id } = event.pathParameters;
 
-    const review = await actions.findReviewById(query.id);
+    const review = await actions.findReviewById(id);
 
     return Response.success({
       review,
@@ -155,10 +155,10 @@ export const updateReviewById: APIGatewayProxyHandler = async (
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const query = event.pathParameters;
+    const { id } = event.pathParameters;
     const body = JSON.parse(event.body);
 
-    const review = await actions.updateReviewById(query.id, body);
+    const review = await actions.updateReviewById(id, body);
 
     return Response.success({
       review,
@@ -180,9 +180,9 @@ export const deleteReviewById: APIGatewayProxyHandler = async (
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const query = event.pathParameters;
+    const { id } = event.pathParameters;
 
-    await actions.deleteReviewById(query.id);
+    await actions.deleteReviewById(id);
 
     return Response.success();
   } catch (error) {

@@ -59,9 +59,9 @@ export const findChallengeById: APIGatewayProxyHandler = async (
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const query = event.pathParameters;
+    const { id } = event.pathParameters;
 
-    const challenge = await actions.findChallengeById(query.id);
+    const challenge = await actions.findChallengeById(id);
 
     return Response.success({
       challenge,
@@ -131,9 +131,9 @@ export const findChallengesByOwner: APIGatewayProxyHandler = async (
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const query = event.pathParameters;
+    const { id } = event.pathParameters;
 
-    const challenges = await actions.findChallengesByOwner(query.id);
+    const challenges = await actions.findChallengesByOwner(id);
 
     return Response.success({
       challenges,
@@ -155,10 +155,10 @@ export const updateChallengeById: APIGatewayProxyHandler = async (
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const query = event.pathParameters;
+    const { id } = event.pathParameters;
     const body = JSON.parse(event.body);
 
-    const challenge = await actions.updateChallengeById(query.id, body);
+    const challenge = await actions.updateChallengeById(id, body);
 
     return Response.success({
       challenge,
@@ -180,9 +180,9 @@ export const deleteChallengeById: APIGatewayProxyHandler = async (
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const query = event.pathParameters;
+    const { id } = event.pathParameters;
 
-    await actions.deleteChallengeById(query.id);
+    await actions.deleteChallengeById(id);
 
     return Response.success();
   } catch (error) {

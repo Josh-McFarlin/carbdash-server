@@ -2,7 +2,7 @@ createChallenge:
   handler: src/functions/challenge/challenge.createChallenge
   events:
     - http:
-        path: challenge/create
+        path: challenge
         method: post
         cors: true
         authorizer:
@@ -19,7 +19,7 @@ findChallengeById:
   handler: src/functions/challenge/challenge.findChallengeById
   events:
     - http:
-        path: challenge/findById
+        path: challenge/{id}
         method: get
         cors: true
 #findChallengesByName:
@@ -47,7 +47,7 @@ findChallengesByUser:
 #  handler: src/functions/challenge/challenge.updateChallengeById
 #  events:
 #    - http:
-#        path: challenge/update
+#        path: challenge/{id}
 #        method: put
 #        cors: true
 #        authorizer:
@@ -57,7 +57,7 @@ findChallengesByUser:
 #  handler: src/functions/challenge/challenge.deleteChallengeById
 #  events:
 #    - http:
-#        path: challenge/delete
+#        path: challenge/{id}
 #        method: delete
 #        cors: true
 #        authorizer:

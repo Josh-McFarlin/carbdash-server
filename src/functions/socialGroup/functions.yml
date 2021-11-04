@@ -2,7 +2,7 @@ createSocialGroup:
   handler: src/functions/socialGroup/socialGroup.createSocialGroup
   events:
     - http:
-        path: socialGroup/create
+        path: socialGroup
         method: post
         cors: true
         authorizer:
@@ -19,7 +19,7 @@ findSocialGroupById:
   handler: src/functions/socialGroup/socialGroup.findSocialGroupById
   events:
     - http:
-        path: socialGroup/findById
+        path: socialGroup/{id}
         method: get
         cors: true
 findSocialGroupsByName:
@@ -54,7 +54,7 @@ findSocialGroupsByMember:
 #  handler: src/functions/socialGroup/socialGroup.updateSocialGroupById
 #  events:
 #    - http:
-#        path: socialGroup/update
+#        path: socialGroup/{id}
 #        method: put
 #        cors: true
 #        authorizer:
@@ -64,7 +64,7 @@ findSocialGroupsByMember:
 #  handler: src/functions/socialGroup/socialGroup.deleteSocialGroupById
 #  events:
 #    - http:
-#        path: socialGroup/delete
+#        path: socialGroup/{id}
 #        method: delete
 #        cors: true
 #        authorizer:

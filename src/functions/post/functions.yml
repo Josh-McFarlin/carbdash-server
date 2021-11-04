@@ -2,7 +2,7 @@ createPost:
   handler: src/functions/post/post.createPost
   events:
     - http:
-        path: post/create
+        path: post
         method: post
         cors: true
         authorizer:
@@ -19,7 +19,7 @@ findPostById:
   handler: src/functions/post/post.findPostById
   events:
     - http:
-        path: post/findById
+        path: post/{id}
         method: get
         cors: true
 findPostsByTags:
@@ -47,7 +47,7 @@ findPostsByRestaurant:
 #  handler: src/functions/post/post.updatePostById
 #  events:
 #    - http:
-#        path: post/update
+#        path: post/{id}
 #        method: put
 #        cors: true
 #        authorizer:
@@ -57,7 +57,7 @@ findPostsByRestaurant:
 #  handler: src/functions/post/post.deletePostById
 #  events:
 #    - http:
-#        path: post/delete
+#        path: post/{id}
 #        method: delete
 #        cors: true
 #        authorizer:

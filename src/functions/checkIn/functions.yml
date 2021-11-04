@@ -2,7 +2,7 @@ createCheckIn:
   handler: src/functions/checkIn/checkIn.createCheckIn
   events:
     - http:
-        path: checkIn/create
+        path: checkIn
         method: post
         cors: true
         authorizer:
@@ -19,7 +19,7 @@ findCheckInById:
   handler: src/functions/checkIn/checkIn.findCheckInById
   events:
     - http:
-        path: checkIn/findById
+        path: checkIn/{id}
         method: get
         cors: true
 findCheckInsByTags:
@@ -47,7 +47,7 @@ findCheckInsByRestaurant:
 #  handler: src/functions/checkIn/checkIn.updateCheckInById
 #  events:
 #    - http:
-#        path: checkIn/update
+#        path: checkIn/{id}
 #        method: put
 #        cors: true
 #        authorizer:
@@ -57,7 +57,7 @@ findCheckInsByRestaurant:
 #  handler: src/functions/checkIn/checkIn.deleteCheckInById
 #  events:
 #    - http:
-#        path: checkIn/delete
+#        path: checkIn/{id}
 #        method: delete
 #        cors: true
 #        authorizer:

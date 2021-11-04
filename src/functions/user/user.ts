@@ -36,9 +36,9 @@ export const findUserById: APIGatewayProxyHandler = async (
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const query = event.pathParameters;
+    const { id } = event.pathParameters;
 
-    const user = await actions.findUserById(query.id);
+    const user = await actions.findUserById(id);
 
     return Response.success({
       user,
@@ -84,10 +84,10 @@ export const updateUserById: APIGatewayProxyHandler = async (
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const query = event.pathParameters;
+    const { id } = event.pathParameters;
     const body = JSON.parse(event.body);
 
-    const user = await actions.updateUserById(query.id, body);
+    const user = await actions.updateUserById(id, body);
 
     return Response.success({
       user,
@@ -109,9 +109,9 @@ export const deleteUserById: APIGatewayProxyHandler = async (
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const query = event.pathParameters;
+    const { id } = event.pathParameters;
 
-    await actions.deleteUserById(query.id);
+    await actions.deleteUserById(id);
 
     return Response.success();
   } catch (error) {

@@ -59,9 +59,9 @@ export const findCheckInById: APIGatewayProxyHandler = async (
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const query = event.pathParameters;
+    const { id } = event.pathParameters;
 
-    const checkIn = await actions.findCheckInById(query.id);
+    const checkIn = await actions.findCheckInById(id);
 
     return Response.success({
       checkIn,
@@ -131,10 +131,10 @@ export const updateCheckInById: APIGatewayProxyHandler = async (
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const query = event.pathParameters;
+    const { id } = event.pathParameters;
     const body = JSON.parse(event.body);
 
-    const checkIn = await actions.updateCheckInById(query.id, body);
+    const checkIn = await actions.updateCheckInById(id, body);
 
     return Response.success({
       checkIn,
@@ -156,9 +156,9 @@ export const deleteCheckInById: APIGatewayProxyHandler = async (
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const query = event.pathParameters;
+    const { id } = event.pathParameters;
 
-    await actions.deleteCheckInById(query.id);
+    await actions.deleteCheckInById(id);
 
     return Response.success();
   } catch (error) {
