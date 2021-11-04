@@ -29,6 +29,11 @@ provider:
 
 functions:
   - ${file(src/functions/lambdaAuth/functions.yml)}
-  - ${file(src/functions/user/functions.yml)}
+  - ${file(src/functions/challenge/functions.yml)}
+  - ${file(src/functions/checkIn/functions.yml)}
+  - ${file(src/functions/offer/functions.yml)}
+  - ${file(src/functions/post/functions.yml)}
   - ${file(src/functions/restaurant/functions.yml)}
   - ${file(src/functions/review/functions.yml)}
+  - ${file(src/functions/socialGroup/functions.yml)}
+  - ${file(src/functions/user/functions.yml)}
