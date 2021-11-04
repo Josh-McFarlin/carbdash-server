@@ -37,3 +37,4 @@ functions:
   - ${file(src/functions/review/functions.yml)}
   - ${file(src/functions/socialGroup/functions.yml)}
   - ${file(src/functions/user/functions.yml)}
+  - ${file(src/functions/recent/functions.yml)}

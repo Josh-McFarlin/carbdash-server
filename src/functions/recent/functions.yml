@@ -1,0 +1,7 @@
+findRecent:
+  handler: src/functions/recent/recent.findRecent
+  events:
+    - http:
+        path: recent
+        method: get
+        cors: true
