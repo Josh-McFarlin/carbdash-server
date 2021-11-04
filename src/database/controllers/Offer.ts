@@ -10,24 +10,15 @@ export const createOffer = async (offer: OfferType): Promise<OfferType> => {
   return newOffer.toJSON() as any;
 };
 
-export const findOffers = (): Promise<OfferType[]> =>
-  Offer.find({
-    expiresAt: {
-      $lte: new Date(),
-    },
-  })
-    .sort("-expiresAt")
-    .lean()
-    .exec();
-
 export const findOfferById = (id: string): Promise<OfferType> =>
   Offer.findById(id).lean().exec();
 
-export const findOffersByRestaurant = (
-  restaurantId: string
-): Promise<OfferType[]> =>
+export const findOffers = ({ restaurant }): Promise<OfferType[]> =>
   Offer.find({
-    restaurant: new mongoose.Types.ObjectId(restaurantId) as any,
+    restaurant: new mongoose.Types.ObjectId(restaurant) as any,
+    expiresAt: {
+      $lte: new Date(),
+    },
   })
     .sort("-expiresAt")
     .lean()

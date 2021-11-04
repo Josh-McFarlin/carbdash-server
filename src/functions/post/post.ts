@@ -27,30 +27,6 @@ export const createPost: APIGatewayProxyHandler = async (
 };
 
 /**
- * Find Posts
- * @http GET
- */
-export const findPosts: APIGatewayProxyHandler = async (
-  event,
-  _context
-): Promise<APIGatewayProxyResult> => {
-  try {
-    // const query = event.pathParameters;
-
-    const posts = await actions.findPosts();
-
-    return Response.success({
-      posts,
-    });
-  } catch (error) {
-    return Response.error(
-      StatusCode.InternalServerError,
-      "Unable to find Posts!"
-    );
-  }
-};
-
-/**
  * Find Post By ID
  * @http GET
  */
@@ -75,65 +51,21 @@ export const findPostById: APIGatewayProxyHandler = async (
 };
 
 /**
- * Find Posts By User
+ * Find Posts
  * @http GET
  */
-export const findPostsByUser: APIGatewayProxyHandler = async (
+export const findPosts: APIGatewayProxyHandler = async (
   event,
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const query = event.pathParameters;
+    const { user, restaurant, tags } = event.queryStringParameters || {};
 
-    const posts = await actions.findPostsByUser(query.id);
-
-    return Response.success({
-      posts,
+    const posts = await actions.findPosts({
+      user,
+      restaurant,
+      tags,
     });
-  } catch (error) {
-    return Response.error(
-      StatusCode.InternalServerError,
-      "Unable to find Posts!"
-    );
-  }
-};
-
-/**
- * Find Posts By Restaurant
- * @http GET
- */
-export const findPostsByRestaurant: APIGatewayProxyHandler = async (
-  event,
-  _context
-): Promise<APIGatewayProxyResult> => {
-  try {
-    const query = event.pathParameters;
-
-    const posts = await actions.findPostsByRestaurant(query.id);
-
-    return Response.success({
-      posts,
-    });
-  } catch (error) {
-    return Response.error(
-      StatusCode.InternalServerError,
-      "Unable to find Posts!"
-    );
-  }
-};
-
-/**
- * Find Posts By Tags
- * @http GET
- */
-export const findPostsByTags: APIGatewayProxyHandler = async (
-  event,
-  _context
-): Promise<APIGatewayProxyResult> => {
-  try {
-    const query = event.pathParameters;
-
-    const posts = await actions.findPostsByTags(query.tags.split(","));
 
     return Response.success({
       posts,

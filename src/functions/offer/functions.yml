@@ -8,13 +8,6 @@ createOffer:
         authorizer:
           name: restaurantAuthorizer
           identitySource: method.request.header.Authorization
-findOffers:
-  handler: src/functions/offer/offer.findOffers
-  events:
-    - http:
-        path: offer/find
-        method: get
-        cors: true
 findOfferById:
   handler: src/functions/offer/offer.findOfferById
   events:
@@ -22,11 +15,11 @@ findOfferById:
         path: offer/{id}
         method: get
         cors: true
-findOffersByRestaurant:
-  handler: src/functions/offer/offer.findOffersByRestaurant
+findOffers:
+  handler: src/functions/offer/offer.findOffers
   events:
     - http:
-        path: offer/findByRestaurant
+        path: offer
         method: get
         cors: true
 #updateOfferById:

@@ -27,30 +27,6 @@ export const createChallenge: APIGatewayProxyHandler = async (
 };
 
 /**
- * Find Challenges
- * @http GET
- */
-export const findChallenges: APIGatewayProxyHandler = async (
-  event,
-  _context
-): Promise<APIGatewayProxyResult> => {
-  try {
-    // const query = event.pathParameters;
-
-    const challenges = await actions.findChallenges();
-
-    return Response.success({
-      challenges,
-    });
-  } catch (error) {
-    return Response.error(
-      StatusCode.InternalServerError,
-      "Unable to find Challenges!"
-    );
-  }
-};
-
-/**
  * Find Challenge By ID
  * @http GET
  */
@@ -75,65 +51,21 @@ export const findChallengeById: APIGatewayProxyHandler = async (
 };
 
 /**
- * Find Challenges By Name
+ * Find Challenges
  * @http GET
  */
-export const findChallengesByName: APIGatewayProxyHandler = async (
+export const findChallenges: APIGatewayProxyHandler = async (
   event,
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const query = event.pathParameters;
+    const { name, user, owner } = event.queryStringParameters || {};
 
-    const challenges = await actions.findChallengesByName(query.name);
-
-    return Response.success({
-      challenges,
+    const challenges = await actions.findChallenges({
+      name,
+      user,
+      owner,
     });
-  } catch (error) {
-    return Response.error(
-      StatusCode.InternalServerError,
-      "Unable to find Challenges!"
-    );
-  }
-};
-
-/**
- * Find Challenges By User
- * @http GET
- */
-export const findChallengesByUser: APIGatewayProxyHandler = async (
-  event,
-  _context
-): Promise<APIGatewayProxyResult> => {
-  try {
-    const query = event.pathParameters;
-
-    const challenges = await actions.findChallengesByUser(query.id);
-
-    return Response.success({
-      challenges,
-    });
-  } catch (error) {
-    return Response.error(
-      StatusCode.InternalServerError,
-      "Unable to find Challenges!"
-    );
-  }
-};
-
-/**
- * Find Challenges By Owner
- * @http GET
- */
-export const findChallengesByOwner: APIGatewayProxyHandler = async (
-  event,
-  _context
-): Promise<APIGatewayProxyResult> => {
-  try {
-    const { id } = event.pathParameters;
-
-    const challenges = await actions.findChallengesByOwner(id);
 
     return Response.success({
       challenges,

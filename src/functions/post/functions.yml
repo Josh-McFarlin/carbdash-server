@@ -8,13 +8,6 @@ createPost:
         authorizer:
           name: userAuthorizer
           identitySource: method.request.header.Authorization
-findPosts:
-  handler: src/functions/post/post.findPosts
-  events:
-    - http:
-        path: post/find
-        method: get
-        cors: true
 findPostById:
   handler: src/functions/post/post.findPostById
   events:
@@ -22,25 +15,11 @@ findPostById:
         path: post/{id}
         method: get
         cors: true
-findPostsByTags:
-  handler: src/functions/post/post.findPostsByTags
+findPosts:
+  handler: src/functions/post/post.findPosts
   events:
     - http:
-        path: post/findByTags
-        method: get
-        cors: true
-findPostsByUser:
-  handler: src/functions/post/post.findPostsByUser
-  events:
-    - http:
-        path: post/findByUser
-        method: get
-        cors: true
-findPostsByRestaurant:
-  handler: src/functions/post/post.findPostsByRestaurant
-  events:
-    - http:
-        path: post/findByRestaurant
+        path: post
         method: get
         cors: true
 #updatePostById:

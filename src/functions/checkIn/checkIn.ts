@@ -27,30 +27,6 @@ export const createCheckIn: APIGatewayProxyHandler = async (
 };
 
 /**
- * Find CheckIns
- * @http GET
- */
-export const findCheckIns: APIGatewayProxyHandler = async (
-  event,
-  _context
-): Promise<APIGatewayProxyResult> => {
-  try {
-    // const query = event.pathParameters;
-
-    const checkIns = await actions.findCheckIns();
-
-    return Response.success({
-      checkIns,
-    });
-  } catch (error) {
-    return Response.error(
-      StatusCode.InternalServerError,
-      "Unable to find CheckIns!"
-    );
-  }
-};
-
-/**
  * Find CheckIn By ID
  * @http GET
  */
@@ -75,41 +51,21 @@ export const findCheckInById: APIGatewayProxyHandler = async (
 };
 
 /**
- * Find CheckIns By User
+ * Find CheckIns
  * @http GET
  */
-export const findCheckInsByUser: APIGatewayProxyHandler = async (
+export const findCheckIns: APIGatewayProxyHandler = async (
   event,
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const query = event.pathParameters;
+    const { user, restaurant, tags } = event.queryStringParameters || {};
 
-    const checkIns = await actions.findCheckInsByUser(query.id);
-
-    return Response.success({
-      checkIns,
+    const checkIns = await actions.findCheckIns({
+      user,
+      restaurant,
+      tags,
     });
-  } catch (error) {
-    return Response.error(
-      StatusCode.InternalServerError,
-      "Unable to find CheckIns!"
-    );
-  }
-};
-
-/**
- * Find CheckIns By Restaurant
- * @http GET
- */
-export const findCheckInsByRestaurant: APIGatewayProxyHandler = async (
-  event,
-  _context
-): Promise<APIGatewayProxyResult> => {
-  try {
-    const query = event.pathParameters;
-
-    const checkIns = await actions.findCheckInsByRestaurant(query.id);
 
     return Response.success({
       checkIns,

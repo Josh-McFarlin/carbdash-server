@@ -10,34 +10,17 @@ export const createReview = async (review: ReviewType): Promise<ReviewType> => {
   return newReview.toJSON() as any;
 };
 
-export const findReviews = (): Promise<ReviewType[]> =>
-  Review.find().sort("-createdAt").lean().exec();
-
 export const findReviewById = (id: string): Promise<ReviewType> =>
   Review.findById(id).lean().exec();
 
-export const findReviewsByUser = (userId: string): Promise<ReviewType[]> =>
+export const findReviews = ({
+  user,
+  restaurant,
+  tags,
+}): Promise<ReviewType[]> =>
   Review.find({
     user: new mongoose.Types.ObjectId(userId) as any,
-  })
-    .sort("-createdAt")
-    .lean()
-    .exec();
-
-export const findReviewsByRestaurant = (
-  restaurantId: string
-): Promise<ReviewType[]> =>
-  Review.find({
     restaurant: new mongoose.Types.ObjectId(restaurantId) as any,
-  })
-    .sort("-createdAt")
-    .lean()
-    .exec();
-
-export const findReviewsByTags = (
-  tags: ReviewType["tags"]
-): Promise<ReviewType[]> =>
-  Review.find({
     tags,
   })
     .sort("-createdAt")

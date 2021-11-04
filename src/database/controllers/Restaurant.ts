@@ -11,25 +11,12 @@ export const createRestaurant = async (
   return newRestaurant.toJSON() as any;
 };
 
-export const findRestaurants = (): Promise<RestaurantType[]> =>
-  Restaurant.find().lean().exec();
-
 export const findRestaurantById = (id: string): Promise<RestaurantType> =>
   Restaurant.findById(id).lean().exec();
 
-export const findRestaurantsByName = (
-  name: RestaurantType["name"]
-): Promise<RestaurantType[]> =>
+export const findRestaurants = ({ name, tags }): Promise<RestaurantType[]> =>
   Restaurant.find({
     name,
-  })
-    .lean()
-    .exec();
-
-export const findRestaurantsByTags = (
-  tags: RestaurantType["tags"]
-): Promise<RestaurantType[]> =>
-  Restaurant.find({
     tags,
   })
     .lean()

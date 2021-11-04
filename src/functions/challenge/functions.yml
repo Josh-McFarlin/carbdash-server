@@ -8,13 +8,6 @@ createChallenge:
         authorizer:
           name: userAuthorizer
           identitySource: method.request.header.Authorization
-findChallenges:
-  handler: src/functions/challenge/challenge.findChallenges
-  events:
-    - http:
-        path: challenge/find
-        method: get
-        cors: true
 findChallengeById:
   handler: src/functions/challenge/challenge.findChallengeById
   events:
@@ -22,27 +15,13 @@ findChallengeById:
         path: challenge/{id}
         method: get
         cors: true
-#findChallengesByName:
-#  handler: src/functions/challenge/challenge.findChallengesByName
-#  events:
-#    - http:
-#        path: challenge/findByName
-#        method: get
-#        cors: true
-findChallengesByUser:
-  handler: src/functions/challenge/challenge.findChallengesByUser
+findChallenges:
+  handler: src/functions/challenge/challenge.findChallenges
   events:
     - http:
-        path: challenge/findByUser
+        path: challenge
         method: get
         cors: true
-#findChallengesByOwner:
-#  handler: src/functions/challenge/challenge.findChallengesByOwner
-#  events:
-#    - http:
-#        path: challenge/findByOwner
-#        method: get
-#        cors: true
 #updateChallengeById:
 #  handler: src/functions/challenge/challenge.updateChallengeById
 #  events:

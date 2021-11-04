@@ -15,26 +15,11 @@ export const createCheckIn = async (
 export const findCheckInById = (id: string): Promise<CheckInType> =>
   CheckIn.findById(id).lean().exec();
 
-export const findCheckIns = (): Promise<CheckInType[]> =>
-  CheckIn.find().sort("-createdAt").lean().exec();
-
-export const findCheckInsByUser = (userId: string): Promise<CheckInType[]> =>
-  CheckIn.find({
-    user: new mongoose.Types.ObjectId(userId) as any,
-  })
-    .sort("-createdAt")
-    .lean()
-    .exec();
-
-export const findCheckInsByRestaurant = (
-  restaurantId: string
-): Promise<CheckInType[]> =>
-  CheckIn.find({
-    restaurant: new mongoose.Types.ObjectId(restaurantId) as any,
-  })
-    .sort("-createdAt")
-    .lean()
-    .exec();
+export const findCheckIns = ({
+  user,
+  restaurant,
+  tags,
+}): Promise<CheckInType[]> => CheckIn.find().sort("-createdAt").lean().exec();
 
 export const updateCheckInById = (
   id: string,

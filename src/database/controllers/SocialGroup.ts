@@ -12,41 +12,19 @@ export const createSocialGroup = async (
   return newSocialGroup.toJSON() as any;
 };
 
-export const findSocialGroups = (): Promise<SocialGroupType[]> =>
-  SocialGroup.find().sort("name").lean().exec();
-
 export const findSocialGroupById = (id: string): Promise<SocialGroupType> =>
   SocialGroup.findById(id).lean().exec();
 
-export const findSocialGroupsByOwner = (
-  userId: string
-): Promise<SocialGroupType[]> =>
+export const findSocialGroups = ({
+  name,
+  owner,
+  member,
+  tags,
+}): Promise<SocialGroupType[]> =>
   SocialGroup.find({
-    owner: new mongoose.Types.ObjectId(userId) as any,
-  })
-    .sort("name")
-    .lean()
-    .exec();
-
-export const findSocialGroupsByMember = (
-  userId: string
-): Promise<SocialGroupType[]> =>
-  SocialGroup.find({
-    members: new mongoose.Types.ObjectId(userId) as any,
-  })
-    .sort("name")
-    .lean()
-    .exec();
-
-export const findSocialGroupsByName = (
-  name: SocialGroupType["name"]
-): Promise<SocialGroupType[]> =>
-  SocialGroup.find({ name }).sort("name").lean().exec();
-
-export const findSocialGroupsByTags = (
-  tags: SocialGroupType["tags"]
-): Promise<SocialGroupType[]> =>
-  SocialGroup.find({
+    name,
+    owner: new mongoose.Types.ObjectId(owner) as any,
+    members: new mongoose.Types.ObjectId(member) as any,
     tags,
   })
     .sort("name")

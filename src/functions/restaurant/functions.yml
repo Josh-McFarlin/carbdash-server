@@ -8,13 +8,6 @@ createRestaurant:
         authorizer:
           name: restaurantAuthorizer
           identitySource: method.request.header.Authorization
-findRestaurants:
-  handler: src/functions/restaurant/restaurant.findRestaurants
-  events:
-    - http:
-        path: restaurant/find
-        method: get
-        cors: true
 findRestaurantById:
   handler: src/functions/restaurant/restaurant.findRestaurantById
   events:
@@ -22,18 +15,11 @@ findRestaurantById:
         path: restaurant/{id}
         method: get
         cors: true
-findRestaurantsByName:
-  handler: src/functions/restaurant/restaurant.findRestaurantsByName
+findRestaurants:
+  handler: src/functions/restaurant/restaurant.findRestaurants
   events:
     - http:
-        path: restaurant/findByName
-        method: get
-        cors: true
-findRestaurantsByTags:
-  handler: src/functions/restaurant/restaurant.findRestaurantsByTags
-  events:
-    - http:
-        path: restaurant/findByTags
+        path: restaurant
         method: get
         cors: true
 updateRestaurantById:

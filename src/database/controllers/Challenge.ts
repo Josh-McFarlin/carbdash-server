@@ -12,44 +12,18 @@ export const createChallenge = async (
   return newChallenge.toJSON() as any;
 };
 
-export const findChallenges = (): Promise<ChallengeType[]> =>
+export const findChallengeById = (id: string): Promise<ChallengeType> =>
+  Challenge.findById(id).lean().exec();
+
+export const findChallenges = ({
+  name,
+  user,
+  owner,
+}): Promise<ChallengeType[]> =>
   Challenge.find({
     expiresAt: {
       $lte: new Date(),
     },
-  })
-    .sort("-expiresAt")
-    .lean()
-    .exec();
-
-export const findChallengeById = (id: string): Promise<ChallengeType> =>
-  Challenge.findById(id).lean().exec();
-
-export const findChallengesByUser = (
-  userId: string
-): Promise<ChallengeType[]> =>
-  Challenge.find({
-    completedBy: new mongoose.Types.ObjectId(userId) as any,
-  })
-    .sort("-expiresAt")
-    .lean()
-    .exec();
-
-export const findChallengesByOwner = (
-  userId: string
-): Promise<ChallengeType[]> =>
-  Challenge.find({
-    owner: new mongoose.Types.ObjectId(userId) as any,
-  })
-    .sort("-expiresAt")
-    .lean()
-    .exec();
-
-export const findChallengesByName = (
-  name: ChallengeType["name"]
-): Promise<ChallengeType[]> =>
-  Challenge.find({
-    name,
   })
     .sort("-expiresAt")
     .lean()

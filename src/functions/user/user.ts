@@ -52,17 +52,20 @@ export const findUserById: APIGatewayProxyHandler = async (
 };
 
 /**
- * Find User By email
+ * Find Users
  * @http GET
  */
-export const findUserByEmail: APIGatewayProxyHandler = async (
+export const findUsers: APIGatewayProxyHandler = async (
   event,
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const query = event.pathParameters;
+    const { email, username } = event.queryStringParameters || {};
 
-    const user = await actions.findUserByEmail(query.email);
+    const user = await actions.findUsers({
+      email,
+      username,
+    });
 
     return Response.success({
       user,

@@ -27,30 +27,6 @@ export const createOffer: APIGatewayProxyHandler = async (
 };
 
 /**
- * Find Offers
- * @http GET
- */
-export const findOffers: APIGatewayProxyHandler = async (
-  event,
-  _context
-): Promise<APIGatewayProxyResult> => {
-  try {
-    // const query = event.pathParameters;
-
-    const offers = await actions.findOffers();
-
-    return Response.success({
-      offers,
-    });
-  } catch (error) {
-    return Response.error(
-      StatusCode.InternalServerError,
-      "Unable to find Offers!"
-    );
-  }
-};
-
-/**
  * Find Offer By ID
  * @http GET
  */
@@ -75,17 +51,19 @@ export const findOfferById: APIGatewayProxyHandler = async (
 };
 
 /**
- * Find Offers By Restaurant
+ * Find Offers
  * @http GET
  */
-export const findOffersByRestaurant: APIGatewayProxyHandler = async (
+export const findOffers: APIGatewayProxyHandler = async (
   event,
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const query = event.pathParameters;
+    const { restaurant } = event.queryStringParameters || {};
 
-    const offers = await actions.findOffersByRestaurant(query.id);
+    const offers = await actions.findOffers({
+      restaurant,
+    });
 
     return Response.success({
       offers,

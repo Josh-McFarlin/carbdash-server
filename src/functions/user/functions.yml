@@ -15,11 +15,11 @@ findUserById:
         path: user/{id}
         method: get
         cors: true
-findUserByEmail:
-  handler: src/functions/user/user.findUserByEmail
+findUsers:
+  handler: src/functions/user/user.findUsers
   events:
     - http:
-        path: user/findByEmail
+        path: user
         method: get
         cors: true
 updateUserById:

@@ -27,30 +27,6 @@ export const createReview: APIGatewayProxyHandler = async (
 };
 
 /**
- * Find Reviews
- * @http GET
- */
-export const findReviews: APIGatewayProxyHandler = async (
-  event,
-  _context
-): Promise<APIGatewayProxyResult> => {
-  try {
-    // const query = event.pathParameters;
-
-    const reviews = await actions.findReviews();
-
-    return Response.success({
-      reviews,
-    });
-  } catch (error) {
-    return Response.error(
-      StatusCode.InternalServerError,
-      "Unable to find Reviews!"
-    );
-  }
-};
-
-/**
  * Find Review By ID
  * @http GET
  */
@@ -75,65 +51,21 @@ export const findReviewById: APIGatewayProxyHandler = async (
 };
 
 /**
- * Find Reviews By User
+ * Find Reviews
  * @http GET
  */
-export const findReviewsByUser: APIGatewayProxyHandler = async (
+export const findReviews: APIGatewayProxyHandler = async (
   event,
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const query = event.pathParameters;
+    const { user, restaurant, tags } = event.queryStringParameters || {};
 
-    const reviews = await actions.findReviewsByUser(query.id);
-
-    return Response.success({
-      reviews,
+    const reviews = await actions.findReviews({
+      user,
+      restaurant,
+      tags,
     });
-  } catch (error) {
-    return Response.error(
-      StatusCode.InternalServerError,
-      "Unable to find Reviews!"
-    );
-  }
-};
-
-/**
- * Find Reviews By Restaurant
- * @http GET
- */
-export const findReviewsByRestaurant: APIGatewayProxyHandler = async (
-  event,
-  _context
-): Promise<APIGatewayProxyResult> => {
-  try {
-    const query = event.pathParameters;
-
-    const reviews = await actions.findReviewsByRestaurant(query.id);
-
-    return Response.success({
-      reviews,
-    });
-  } catch (error) {
-    return Response.error(
-      StatusCode.InternalServerError,
-      "Unable to find Reviews!"
-    );
-  }
-};
-
-/**
- * Find Reviews By Tags
- * @http GET
- */
-export const findReviewsByTags: APIGatewayProxyHandler = async (
-  event,
-  _context
-): Promise<APIGatewayProxyResult> => {
-  try {
-    const query = event.pathParameters;
-
-    const reviews = await actions.findReviewsByTags(query.tags.split(","));
 
     return Response.success({
       reviews,

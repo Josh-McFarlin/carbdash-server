@@ -8,13 +8,6 @@ createReview:
         authorizer:
           name: userAuthorizer
           identitySource: method.request.header.Authorization
-findReviews:
-  handler: src/functions/review/review.findReviews
-  events:
-    - http:
-        path: review/find
-        method: get
-        cors: true
 findReviewById:
   handler: src/functions/review/review.findReviewById
   events:
@@ -22,25 +15,11 @@ findReviewById:
         path: review/{id}
         method: get
         cors: true
-findReviewsByTags:
-  handler: src/functions/review/review.findReviewsByTags
+findReviews:
+  handler: src/functions/review/review.findReviews
   events:
     - http:
-        path: review/findByTags
-        method: get
-        cors: true
-findReviewsByUser:
-  handler: src/functions/review/review.findReviewsByUser
-  events:
-    - http:
-        path: review/findByUser
-        method: get
-        cors: true
-findReviewsByRestaurant:
-  handler: src/functions/review/review.findReviewsByRestaurant
-  events:
-    - http:
-        path: review/findByRestaurant
+        path: review
         method: get
         cors: true
 #updateReviewById:

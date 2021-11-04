@@ -9,19 +9,17 @@ export const createUser = async (user: UserType): Promise<UserType> => {
   return newUser.toJSON() as any;
 };
 
-export const findUsers = (): Promise<UserType[]> =>
-  User.find().sort("username").lean().exec();
-
 export const findUserById = (id: string): Promise<UserType> =>
   User.findById(id).lean().exec();
 
-export const findUserByEmail = (email: UserType["email"]): Promise<UserType> =>
-  User.findOne({ email }).lean().exec();
-
-export const findUsersByUsername = (
-  username: UserType["username"]
-): Promise<UserType[]> =>
-  User.find({ username }).sort("username").lean().exec();
+export const findUsers = ({ email, username }): Promise<UserType[]> =>
+  User.find({
+    email,
+    username,
+  })
+    .sort("username")
+    .lean()
+    .exec();
 
 export const updateUserById = (
   id: string,

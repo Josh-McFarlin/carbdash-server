@@ -8,13 +8,6 @@ createCheckIn:
         authorizer:
           name: userAuthorizer
           identitySource: method.request.header.Authorization
-findCheckIns:
-  handler: src/functions/checkIn/checkIn.findCheckIns
-  events:
-    - http:
-        path: checkIn/find
-        method: get
-        cors: true
 findCheckInById:
   handler: src/functions/checkIn/checkIn.findCheckInById
   events:
@@ -22,25 +15,11 @@ findCheckInById:
         path: checkIn/{id}
         method: get
         cors: true
-findCheckInsByTags:
-  handler: src/functions/checkIn/checkIn.findCheckInsByTags
+findCheckIns:
+  handler: src/functions/checkIn/checkIn.findCheckIns
   events:
     - http:
-        path: checkIn/findByTags
-        method: get
-        cors: true
-findCheckInsByUser:
-  handler: src/functions/checkIn/checkIn.findCheckInsByUser
-  events:
-    - http:
-        path: checkIn/findByUser
-        method: get
-        cors: true
-findCheckInsByRestaurant:
-  handler: src/functions/checkIn/checkIn.findCheckInsByRestaurant
-  events:
-    - http:
-        path: checkIn/findByRestaurant
+        path: checkIn
         method: get
         cors: true
 #updateCheckInById:

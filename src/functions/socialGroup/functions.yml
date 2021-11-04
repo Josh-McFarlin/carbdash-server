@@ -8,13 +8,6 @@ createSocialGroup:
         authorizer:
           name: userAuthorizer
           identitySource: method.request.header.Authorization
-findSocialGroups:
-  handler: src/functions/socialGroup/socialGroup.findSocialGroups
-  events:
-    - http:
-        path: socialGroup/find
-        method: get
-        cors: true
 findSocialGroupById:
   handler: src/functions/socialGroup/socialGroup.findSocialGroupById
   events:
@@ -22,32 +15,11 @@ findSocialGroupById:
         path: socialGroup/{id}
         method: get
         cors: true
-findSocialGroupsByName:
-  handler: src/functions/socialGroup/socialGroup.findSocialGroupsByName
+findSocialGroups:
+  handler: src/functions/socialGroup/socialGroup.findSocialGroups
   events:
     - http:
-        path: socialGroup/findByName
-        method: get
-        cors: true
-findSocialGroupsByTags:
-  handler: src/functions/socialGroup/socialGroup.findSocialGroupsByTags
-  events:
-    - http:
-        path: socialGroup/findByTags
-        method: get
-        cors: true
-findSocialGroupsByOwner:
-  handler: src/functions/socialGroup/socialGroup.findSocialGroupsByOwner
-  events:
-    - http:
-        path: socialGroup/findByOwner
-        method: get
-        cors: true
-findSocialGroupsByMember:
-  handler: src/functions/socialGroup/socialGroup.findSocialGroupsByMember
-  events:
-    - http:
-        path: socialGroup/findByMember
+        path: socialGroup
         method: get
         cors: true
 #updateSocialGroupById:
