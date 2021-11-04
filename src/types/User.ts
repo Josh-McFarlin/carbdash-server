@@ -1,8 +1,16 @@
-import { Document } from "dynamoose/dist/Document";
+import type { Schema } from "mongoose";
+import type { LocationType } from "./Location";
 
-export class UserType extends Document {
+export interface UserType {
   id: string;
-  email: string;
   name: string;
-  friends: UserType[];
+  email: string;
+  username: string;
+  avatarUrl: string;
+  score: number;
+  locations: LocationType[];
+  groups: Schema.Types.ObjectId[];
+  followers: Schema.Types.ObjectId[];
+  following: Schema.Types.ObjectId[];
+  createdAt: Date;
 }

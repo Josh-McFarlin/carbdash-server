@@ -1,12 +1,12 @@
 import type { Schema } from "mongoose";
 
-export interface ReviewType {
+export interface PostType {
   id: string;
-  user: Schema.Types.ObjectId;
+  user?: Schema.Types.ObjectId;
   restaurant: Schema.Types.ObjectId;
-  stars: number;
+  ownerType: "User" | "Restaurant";
   body: string;
-  tags: string[];
   photoUrls: string[];
+  tags: string[];
   createdAt: Date;
 }

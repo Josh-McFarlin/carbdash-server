@@ -1,74 +1,59 @@
-import * as dynamoose from "dynamoose";
-import { RestaurantType } from "../../types/Restaurant";
+import mongoose, { Model } from "mongoose";
+import type { RestaurantType } from "../../types/Restaurant";
+import { CoordinatesSchema, AddressSchema } from "../schemas/Location";
+import { DayAvailabilitySchema } from "../schemas/OpenHours";
 
-const restaurantSchema = new dynamoose.Schema(
-  {
-    id: {
-      type: String,
-      required: true,
-    },
-    name: {
-      type: String,
-      required: true,
-    },
-    email: {
-      type: String,
-      required: true,
-    },
-    location: {
-      type: Object,
-      schema: {
-        address: {
-          type: Object,
-          schema: {
-            street: {
-              type: String,
-              required: true,
-            },
-            city: {
-              type: String,
-              required: true,
-            },
-            state: {
-              type: String,
-              required: true,
-            },
-            zipCode: Number,
-            country: {
-              type: String,
-              required: true,
-            },
-          },
-        },
-        coordinates: {
-          type: Object,
-          schema: {
-            latitude: {
-              type: Number,
-              required: true,
-            },
-            longitude: {
-              type: Number,
-              required: true,
-            },
-          },
-        },
-      },
-    },
-    website: String,
+const arrayLengthSeven = (arr: unknown[]) => arr.length === 7;
+
+const RestaurantSchema = new mongoose.Schema<RestaurantType>({
+  name: {
+    type: String,
+    required: true,
+    text: true,
   },
-  {
-    timestamps: true,
-  }
-);
+  avatarUrl: {
+    type: String,
+    required: true,
+  },
+  headerUrl: {
+    type: String,
+    required: true,
+  },
+  bio: {
+    type: String,
+  },
+  tags: {
+    type: [String],
+    required: true,
+    default: [],
+    index: true,
+  },
+  openHours: {
+    type: [[DayAvailabilitySchema]],
+    required: true,
+    default: [[], [], [], [], [], [], []],
+    validate: [arrayLengthSeven, "{PATH} does not meet the length of 7!"],
+  },
+  address: {
+    type: AddressSchema,
+    required: true,
+  },
+  coordinates: {
+    type: CoordinatesSchema,
+    required: true,
+  },
+  website: {
+    type: String,
+  },
+  phoneNumber: {
+    type: String,
+  },
+  createdAt: {
+    type: Date,
+    required: true,
+    default: Date.now as any,
+  },
+});
 
-const Restaurant = dynamoose.model<RestaurantType>(
-  "restaurantTable",
-  restaurantSchema,
-  {
-    create: true,
-    throughput: "ON_DEMAND",
-  }
-);
-
-export default Restaurant;
+export default (mongoose.models.Restaurant as Model<RestaurantType>) ||
+  mongoose.model<RestaurantType>("Restaurant", RestaurantSchema);

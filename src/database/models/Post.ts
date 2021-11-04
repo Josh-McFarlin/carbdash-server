@@ -1,11 +1,10 @@
 import mongoose, { Model } from "mongoose";
-import type { ReviewType } from "../../types/Review";
+import type { PostType } from "../../types/Post";
 
-const ReviewSchema = new mongoose.Schema<ReviewType>({
+const PostSchema = new mongoose.Schema<PostType>({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
-    required: true,
     index: true,
   },
   restaurant: {
@@ -14,22 +13,25 @@ const ReviewSchema = new mongoose.Schema<ReviewType>({
     required: true,
     index: true,
   },
-  stars: {
-    type: Number,
-    required: true,
+  ownerType: {
+    type: String,
+    enum: ["User", "Restaurant"],
+    default: "User",
+    index: true,
   },
   body: {
     type: String,
     required: true,
   },
-  tags: {
+  photoUrls: {
     type: [String],
     required: true,
     default: [],
   },
-  photoUrls: {
+  tags: {
     type: [String],
     required: true,
+    index: true,
     default: [],
   },
   createdAt: {
@@ -39,5 +41,5 @@ const ReviewSchema = new mongoose.Schema<ReviewType>({
   },
 });
 
-export default (mongoose.models.Review as Model<ReviewType>) ||
-  mongoose.model<ReviewType>("Review", ReviewSchema);
+export default (mongoose.models.Post as Model<PostType>) ||
+  mongoose.model<PostType>("Post", PostSchema);

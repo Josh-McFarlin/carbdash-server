@@ -1,7 +1,1 @@
-export {
-  createUser,
-  findUserById,
-  findUserByEmail,
-  updateUserById,
-  deleteUserById,
-} from "../database/controllers/User";
+export * from "../database/controllers/User";
