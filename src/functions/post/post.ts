@@ -66,7 +66,7 @@ export const findPosts: APIGatewayProxyHandler = async (
       user,
       restaurant,
       ownerType,
-      tags: tags.split(","),
+      tags: tags?.split(","),
     });
 
     return Response.success({

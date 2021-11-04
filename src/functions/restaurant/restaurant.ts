@@ -59,11 +59,16 @@ export const findRestaurants: APIGatewayProxyHandler = async (
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const { name, tags } = event.queryStringParameters || {};
+    const { latitude, longitude, name, tags } =
+      event.queryStringParameters || {};
 
     const restaurants = await actions.findRestaurants({
+      coordinates: {
+        latitude: parseFloat(latitude),
+        longitude: parseFloat(longitude),
+      },
       name,
-      tags: tags.split(","),
+      tags: tags?.split(","),
     });
 
     return Response.success({

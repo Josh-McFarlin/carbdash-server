@@ -1,5 +1,8 @@
 import Restaurant from "../models/Restaurant";
 import { RestaurantType } from "../../types/Restaurant";
+import { CoordinatesType } from "../../types/Location";
+
+const METERS_PER_MILE = 1610;
 
 export const createRestaurant = async (
   restaurant: RestaurantType
@@ -15,9 +18,11 @@ export const findRestaurantById = (id: string): Promise<RestaurantType> =>
   Restaurant.findById(id).lean().exec();
 
 export const findRestaurants = ({
+  coordinates,
   name,
   tags,
 }: {
+  coordinates: CoordinatesType;
   name?: string;
   tags?: string[];
 }): Promise<RestaurantType[]> =>
@@ -29,6 +34,10 @@ export const findRestaurants = ({
       tags,
     }),
   })
+    .near({
+      center: [coordinates.latitude, coordinates.longitude],
+      maxDistance: 5 * METERS_PER_MILE,
+    })
     .lean()
     .exec();
 

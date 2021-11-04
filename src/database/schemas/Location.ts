@@ -1,9 +1,5 @@
 import mongoose from "mongoose";
-import type {
-  AddressType,
-  CoordinatesType,
-  LocationType,
-} from "../../types/Location";
+import type { AddressType, LocationType } from "../../types/Location";
 
 export const AddressSchema = new mongoose.Schema<AddressType>({
   street: {
@@ -27,9 +23,16 @@ export const AddressSchema = new mongoose.Schema<AddressType>({
   },
 });
 
-export const CoordinatesSchema = new mongoose.Schema<CoordinatesType>({
-  latitude: Number,
-  longitude: Number,
+export const PointSchema = new mongoose.Schema({
+  type: {
+    type: String,
+    enum: ["Point"],
+    required: true,
+  },
+  coordinates: {
+    type: [Number],
+    required: true,
+  },
 });
 
 export const LocationSchema = new mongoose.Schema<LocationType>({
@@ -38,7 +41,7 @@ export const LocationSchema = new mongoose.Schema<LocationType>({
     required: true,
   },
   coordinates: {
-    type: CoordinatesSchema,
+    type: PointSchema,
     required: true,
   },
 });

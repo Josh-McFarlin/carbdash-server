@@ -1,6 +1,6 @@
 import mongoose, { Model } from "mongoose";
 import type { RestaurantType } from "../../types/Restaurant";
-import { CoordinatesSchema, AddressSchema } from "../schemas/Location";
+import { AddressSchema, PointSchema } from "../schemas/Location";
 import { DayAvailabilitySchema } from "../schemas/OpenHours";
 
 const arrayLengthSeven = (arr: unknown[]) => arr.length === 7;
@@ -39,8 +39,9 @@ const RestaurantSchema = new mongoose.Schema<RestaurantType>({
     required: true,
   },
   coordinates: {
-    type: CoordinatesSchema,
+    type: PointSchema,
     required: true,
+    index: "2dsphere",
   },
   website: {
     type: String,

@@ -6,7 +6,9 @@ const setupMongoDB = async (): Promise<void> => {
   if (mongoose.connections[0].readyState) return;
 
   try {
-    await mongoose.connect(MONGODB_URL);
+    await mongoose.connect(MONGODB_URL, {
+      connectTimeoutMS: 15000,
+    });
 
     require("./models/User");
     require("./models/Restaurant");

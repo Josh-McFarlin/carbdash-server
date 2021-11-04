@@ -64,7 +64,7 @@ export const findCheckIns: APIGatewayProxyHandler = async (
     const checkIns = await actions.findCheckIns({
       user,
       restaurant,
-      tags: tags.split(","),
+      tags: tags?.split(","),
     });
 
     return Response.success({
