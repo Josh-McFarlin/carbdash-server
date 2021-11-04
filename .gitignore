@@ -243,3 +243,7 @@ public_key
 
 .webpack/
 .dynamodb/
+
+# OSX
+#
+.DS_Store
