@@ -2,7 +2,7 @@ import mongoose, { Model } from "mongoose";
 import type { ChallengeType } from "../../types/Challenge";
 
 const ChallengeSchema = new mongoose.Schema<ChallengeType>({
-  title: {
+  name: {
     type: String,
     required: true,
     text: true,

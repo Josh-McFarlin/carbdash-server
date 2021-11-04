@@ -1,0 +1,110 @@
+createSocialGroup:
+  handler: src/functions/socialGroup/socialGroup.createSocialGroup
+  events:
+    - http:
+        path: socialGroup/create
+        method: post
+        cors: true
+        authorizer:
+          name: socialGroupAuthorizer
+          identitySource: method.request.header.Authorization
+findSocialGroups:
+  handler: src/functions/socialGroup/socialGroup.findSocialGroups
+  events:
+    - http:
+        path: socialGroup/find
+        method: get
+        cors: true
+        authorizer:
+          name: socialGroupAuthorizer
+          identitySource: method.request.header.Authorization
+findSocialGroupById:
+  handler: src/functions/socialGroup/socialGroup.findSocialGroupById
+  events:
+    - http:
+        path: socialGroup/findById
+        method: get
+        cors: true
+        authorizer:
+          name: socialGroupAuthorizer
+          identitySource: method.request.header.Authorization
+findSocialGroupsByName:
+  handler: src/functions/socialGroup/socialGroup.findSocialGroupsByName
+  events:
+    - http:
+        path: socialGroup/findByName
+        method: get
+        cors: true
+        authorizer:
+          name: socialGroupAuthorizer
+          identitySource: method.request.header.Authorization
+findSocialGroupsByTags:
+  handler: src/functions/socialGroup/socialGroup.findSocialGroupsByTags
+  events:
+    - http:
+        path: socialGroup/findByTags
+        method: get
+        cors: true
+        authorizer:
+          name: socialGroupAuthorizer
+          identitySource: method.request.header.Authorization
+findSocialGroupsByUser:
+  handler: src/functions/socialGroup/socialGroup.findSocialGroupsByUser
+  events:
+    - http:
+        path: socialGroup/findByUser
+        method: get
+        cors: true
+        authorizer:
+          name: socialGroupAuthorizer
+          identitySource: method.request.header.Authorization
+findSocialGroupsByRestaurant:
+  handler: src/functions/socialGroup/socialGroup.findSocialGroupsByRestaurant
+  events:
+    - http:
+        path: socialGroup/findByRestaurant
+        method: get
+        cors: true
+        authorizer:
+          name: socialGroupAuthorizer
+          identitySource: method.request.header.Authorization
+findSocialGroupsByOwner:
+  handler: src/functions/socialGroup/socialGroup.findSocialGroupsByOwner
+  events:
+    - http:
+        path: socialGroup/findByOwner
+        method: get
+        cors: true
+        authorizer:
+          name: socialGroupAuthorizer
+          identitySource: method.request.header.Authorization
+findSocialGroupsByMember:
+  handler: src/functions/socialGroup/socialGroup.findSocialGroupsByMember
+  events:
+    - http:
+        path: socialGroup/findByMember
+        method: get
+        cors: true
+        authorizer:
+          name: socialGroupAuthorizer
+          identitySource: method.request.header.Authorization
+updateSocialGroupById:
+  handler: src/functions/socialGroup/socialGroup.updateSocialGroupById
+  events:
+    - http:
+        path: socialGroup/update
+        method: put
+        cors: true
+        authorizer:
+          name: socialGroupAuthorizer
+          identitySource: method.request.header.Authorization
+deleteSocialGroupById:
+  handler: src/functions/socialGroup/socialGroup.deleteSocialGroupById
+  events:
+    - http:
+        path: socialGroup/delete
+        method: delete
+        cors: true
+        authorizer:
+          name: socialGroupAuthorizer
+          identitySource: method.request.header.Authorization

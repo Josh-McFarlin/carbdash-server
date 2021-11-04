@@ -35,11 +35,11 @@ export const findChallengesByUser = (
     .lean()
     .exec();
 
-export const findChallengesByTitle = (
-  title: ChallengeType["title"]
+export const findChallengesByName = (
+  name: ChallengeType["name"]
 ): Promise<ChallengeType[]> =>
   Challenge.find({
-    title,
+    name,
   })
     .sort("-expiresAt")
     .lean()

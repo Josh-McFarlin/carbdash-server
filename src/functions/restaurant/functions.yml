@@ -8,6 +8,16 @@ createRestaurant:
         authorizer:
           name: restaurantAuthorizer
           identitySource: method.request.header.Authorization
+findRestaurants:
+  handler: src/functions/restaurant/restaurant.findRestaurants
+  events:
+    - http:
+        path: restaurant/find
+        method: get
+        cors: true
+        authorizer:
+          name: restaurantAuthorizer
+          identitySource: method.request.header.Authorization
 findRestaurantById:
   handler: src/functions/restaurant/restaurant.findRestaurantById
   events:
@@ -18,11 +28,61 @@ findRestaurantById:
         authorizer:
           name: restaurantAuthorizer
           identitySource: method.request.header.Authorization
-findRestaurantByEmail:
-  handler: src/functions/restaurant/restaurant.findRestaurantByEmail
+findRestaurantsByName:
+  handler: src/functions/restaurant/restaurant.findRestaurantsByName
   events:
     - http:
-        path: restaurant/findByEmail
+        path: restaurant/findByName
+        method: get
+        cors: true
+        authorizer:
+          name: restaurantAuthorizer
+          identitySource: method.request.header.Authorization
+findRestaurantsByTags:
+  handler: src/functions/restaurant/restaurant.findRestaurantsByTags
+  events:
+    - http:
+        path: restaurant/findByTags
+        method: get
+        cors: true
+        authorizer:
+          name: restaurantAuthorizer
+          identitySource: method.request.header.Authorization
+findRestaurantsByUser:
+  handler: src/functions/restaurant/restaurant.findRestaurantsByUser
+  events:
+    - http:
+        path: restaurant/findByUser
+        method: get
+        cors: true
+        authorizer:
+          name: restaurantAuthorizer
+          identitySource: method.request.header.Authorization
+findRestaurantsByRestaurantA:
+  handler: src/functions/restaurant/restaurant.findRestaurantsByRestaurantA
+  events:
+    - http:
+        path: restaurant/findByRestaurantA
+        method: get
+        cors: true
+        authorizer:
+          name: restaurantAuthorizer
+          identitySource: method.request.header.Authorization
+findRestaurantsByOwner:
+  handler: src/functions/restaurant/restaurant.findRestaurantsByOwner
+  events:
+    - http:
+        path: restaurant/findByOwner
+        method: get
+        cors: true
+        authorizer:
+          name: restaurantAuthorizer
+          identitySource: method.request.header.Authorization
+findRestaurantsByMember:
+  handler: src/functions/restaurant/restaurant.findRestaurantsByMember
+  events:
+    - http:
+        path: restaurant/findByMember
         method: get
         cors: true
         authorizer:

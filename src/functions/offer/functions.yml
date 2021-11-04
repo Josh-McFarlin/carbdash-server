@@ -1,110 +1,110 @@
-createReview:
-  handler: src/functions/review/review.createReview
+createOffer:
+  handler: src/functions/offer/offer.createOffer
   events:
     - http:
-        path: review/create
+        path: offer/create
         method: post
         cors: true
         authorizer:
-          name: reviewAuthorizer
+          name: offerAuthorizer
           identitySource: method.request.header.Authorization
-findReviews:
-  handler: src/functions/review/review.findReviews
+findOffers:
+  handler: src/functions/offer/offer.findOffers
   events:
     - http:
-        path: review/find
+        path: offer/find
         method: get
         cors: true
         authorizer:
-          name: reviewAuthorizer
+          name: offerAuthorizer
           identitySource: method.request.header.Authorization
-findReviewById:
-  handler: src/functions/review/review.findReviewById
+findOfferById:
+  handler: src/functions/offer/offer.findOfferById
   events:
     - http:
-        path: review/findById
+        path: offer/findById
         method: get
         cors: true
         authorizer:
-          name: reviewAuthorizer
+          name: offerAuthorizer
           identitySource: method.request.header.Authorization
-findReviewsByName:
-  handler: src/functions/review/review.findReviewsByName
+findOffersByName:
+  handler: src/functions/offer/offer.findOffersByName
   events:
     - http:
-        path: review/findByName
+        path: offer/findByName
         method: get
         cors: true
         authorizer:
-          name: reviewAuthorizer
+          name: offerAuthorizer
           identitySource: method.request.header.Authorization
-findReviewsByTags:
-  handler: src/functions/review/review.findReviewsByTags
+findOffersByTags:
+  handler: src/functions/offer/offer.findOffersByTags
   events:
     - http:
-        path: review/findByTags
+        path: offer/findByTags
         method: get
         cors: true
         authorizer:
-          name: reviewAuthorizer
+          name: offerAuthorizer
           identitySource: method.request.header.Authorization
-findReviewsByUser:
-  handler: src/functions/review/review.findReviewsByUser
+findOffersByUser:
+  handler: src/functions/offer/offer.findOffersByUser
   events:
     - http:
-        path: review/findByUser
+        path: offer/findByUser
         method: get
         cors: true
         authorizer:
-          name: reviewAuthorizer
+          name: offerAuthorizer
           identitySource: method.request.header.Authorization
-findReviewsByRestaurant:
-  handler: src/functions/review/review.findReviewsByRestaurant
+findOffersByRestaurant:
+  handler: src/functions/offer/offer.findOffersByRestaurant
   events:
     - http:
-        path: review/findByRestaurant
+        path: offer/findByRestaurant
         method: get
         cors: true
         authorizer:
-          name: reviewAuthorizer
+          name: offerAuthorizer
           identitySource: method.request.header.Authorization
-findReviewsByOwner:
-  handler: src/functions/review/review.findReviewsByOwner
+findOffersByOwner:
+  handler: src/functions/offer/offer.findOffersByOwner
   events:
     - http:
-        path: review/findByOwner
+        path: offer/findByOwner
         method: get
         cors: true
         authorizer:
-          name: reviewAuthorizer
+          name: offerAuthorizer
           identitySource: method.request.header.Authorization
-findReviewsByMember:
-  handler: src/functions/review/review.findReviewsByMember
+findOffersByMember:
+  handler: src/functions/offer/offer.findOffersByMember
   events:
     - http:
-        path: review/findByMember
+        path: offer/findByMember
         method: get
         cors: true
         authorizer:
-          name: reviewAuthorizer
+          name: offerAuthorizer
           identitySource: method.request.header.Authorization
-updateReviewById:
-  handler: src/functions/review/review.updateReviewById
+updateOfferById:
+  handler: src/functions/offer/offer.updateOfferById
   events:
     - http:
-        path: review/update
+        path: offer/update
         method: put
         cors: true
         authorizer:
-          name: reviewAuthorizer
+          name: offerAuthorizer
           identitySource: method.request.header.Authorization
-deleteReviewById:
-  handler: src/functions/review/review.deleteReviewById
+deleteOfferById:
+  handler: src/functions/offer/offer.deleteOfferById
   events:
     - http:
-        path: review/delete
+        path: offer/delete
         method: delete
         cors: true
         authorizer:
-          name: reviewAuthorizer
+          name: offerAuthorizer
           identitySource: method.request.header.Authorization

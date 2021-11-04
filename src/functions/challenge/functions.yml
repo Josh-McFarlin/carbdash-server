@@ -1,0 +1,110 @@
+createChallenge:
+  handler: src/functions/challenge/challenge.createChallenge
+  events:
+    - http:
+        path: challenge/create
+        method: post
+        cors: true
+        authorizer:
+          name: challengeAuthorizer
+          identitySource: method.request.header.Authorization
+findChallenges:
+  handler: src/functions/challenge/challenge.findChallenges
+  events:
+    - http:
+        path: challenge/find
+        method: get
+        cors: true
+        authorizer:
+          name: challengeAuthorizer
+          identitySource: method.request.header.Authorization
+findChallengeById:
+  handler: src/functions/challenge/challenge.findChallengeById
+  events:
+    - http:
+        path: challenge/findById
+        method: get
+        cors: true
+        authorizer:
+          name: challengeAuthorizer
+          identitySource: method.request.header.Authorization
+findChallengesByName:
+  handler: src/functions/challenge/challenge.findChallengesByName
+  events:
+    - http:
+        path: challenge/findByName
+        method: get
+        cors: true
+        authorizer:
+          name: challengeAuthorizer
+          identitySource: method.request.header.Authorization
+findChallengesByTags:
+  handler: src/functions/challenge/challenge.findChallengesByTags
+  events:
+    - http:
+        path: challenge/findByTags
+        method: get
+        cors: true
+        authorizer:
+          name: challengeAuthorizer
+          identitySource: method.request.header.Authorization
+findChallengesByUser:
+  handler: src/functions/challenge/challenge.findChallengesByUser
+  events:
+    - http:
+        path: challenge/findByUser
+        method: get
+        cors: true
+        authorizer:
+          name: challengeAuthorizer
+          identitySource: method.request.header.Authorization
+findChallengesByRestaurant:
+  handler: src/functions/challenge/challenge.findChallengesByRestaurant
+  events:
+    - http:
+        path: challenge/findByRestaurant
+        method: get
+        cors: true
+        authorizer:
+          name: challengeAuthorizer
+          identitySource: method.request.header.Authorization
+findChallengesByOwner:
+  handler: src/functions/challenge/challenge.findChallengesByOwner
+  events:
+    - http:
+        path: challenge/findByOwner
+        method: get
+        cors: true
+        authorizer:
+          name: challengeAuthorizer
+          identitySource: method.request.header.Authorization
+findChallengesByMember:
+  handler: src/functions/challenge/challenge.findChallengesByMember
+  events:
+    - http:
+        path: challenge/findByMember
+        method: get
+        cors: true
+        authorizer:
+          name: challengeAuthorizer
+          identitySource: method.request.header.Authorization
+updateChallengeById:
+  handler: src/functions/challenge/challenge.updateChallengeById
+  events:
+    - http:
+        path: challenge/update
+        method: put
+        cors: true
+        authorizer:
+          name: challengeAuthorizer
+          identitySource: method.request.header.Authorization
+deleteChallengeById:
+  handler: src/functions/challenge/challenge.deleteChallengeById
+  events:
+    - http:
+        path: challenge/delete
+        method: delete
+        cors: true
+        authorizer:
+          name: challengeAuthorizer
+          identitySource: method.request.header.Authorization

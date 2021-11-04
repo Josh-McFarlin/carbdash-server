@@ -1,0 +1,110 @@
+createCheckIn:
+  handler: src/functions/checkIn/checkIn.createCheckIn
+  events:
+    - http:
+        path: checkIn/create
+        method: post
+        cors: true
+        authorizer:
+          name: checkInAuthorizer
+          identitySource: method.request.header.Authorization
+findCheckIns:
+  handler: src/functions/checkIn/checkIn.findCheckIns
+  events:
+    - http:
+        path: checkIn/find
+        method: get
+        cors: true
+        authorizer:
+          name: checkInAuthorizer
+          identitySource: method.request.header.Authorization
+findCheckInById:
+  handler: src/functions/checkIn/checkIn.findCheckInById
+  events:
+    - http:
+        path: checkIn/findById
+        method: get
+        cors: true
+        authorizer:
+          name: checkInAuthorizer
+          identitySource: method.request.header.Authorization
+findCheckInsByName:
+  handler: src/functions/checkIn/checkIn.findCheckInsByName
+  events:
+    - http:
+        path: checkIn/findByName
+        method: get
+        cors: true
+        authorizer:
+          name: checkInAuthorizer
+          identitySource: method.request.header.Authorization
+findCheckInsByTags:
+  handler: src/functions/checkIn/checkIn.findCheckInsByTags
+  events:
+    - http:
+        path: checkIn/findByTags
+        method: get
+        cors: true
+        authorizer:
+          name: checkInAuthorizer
+          identitySource: method.request.header.Authorization
+findCheckInsByUser:
+  handler: src/functions/checkIn/checkIn.findCheckInsByUser
+  events:
+    - http:
+        path: checkIn/findByUser
+        method: get
+        cors: true
+        authorizer:
+          name: checkInAuthorizer
+          identitySource: method.request.header.Authorization
+findCheckInsByRestaurant:
+  handler: src/functions/checkIn/checkIn.findCheckInsByRestaurant
+  events:
+    - http:
+        path: checkIn/findByRestaurant
+        method: get
+        cors: true
+        authorizer:
+          name: checkInAuthorizer
+          identitySource: method.request.header.Authorization
+findCheckInsByOwner:
+  handler: src/functions/checkIn/checkIn.findCheckInsByOwner
+  events:
+    - http:
+        path: checkIn/findByOwner
+        method: get
+        cors: true
+        authorizer:
+          name: checkInAuthorizer
+          identitySource: method.request.header.Authorization
+findCheckInsByMember:
+  handler: src/functions/checkIn/checkIn.findCheckInsByMember
+  events:
+    - http:
+        path: checkIn/findByMember
+        method: get
+        cors: true
+        authorizer:
+          name: checkInAuthorizer
+          identitySource: method.request.header.Authorization
+updateCheckInById:
+  handler: src/functions/checkIn/checkIn.updateCheckInById
+  events:
+    - http:
+        path: checkIn/update
+        method: put
+        cors: true
+        authorizer:
+          name: checkInAuthorizer
+          identitySource: method.request.header.Authorization
+deleteCheckInById:
+  handler: src/functions/checkIn/checkIn.deleteCheckInById
+  events:
+    - http:
+        path: checkIn/delete
+        method: delete
+        cors: true
+        authorizer:
+          name: checkInAuthorizer
+          identitySource: method.request.header.Authorization
