@@ -14,7 +14,10 @@ export const createSocialGroup: APIGatewayProxyHandler = async (
 ): Promise<APIGatewayProxyResult> => {
   try {
     const body = JSON.parse(event.body);
-    const socialGroup = await actions.createSocialGroup(body);
+    const socialGroup = await actions.createSocialGroup({
+      ...body,
+      owner: event.requestContext.authorizer.principalId,
+    });
 
     return Response.success({
       socialGroup,

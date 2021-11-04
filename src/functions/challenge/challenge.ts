@@ -14,7 +14,10 @@ export const createChallenge: APIGatewayProxyHandler = async (
 ): Promise<APIGatewayProxyResult> => {
   try {
     const body = JSON.parse(event.body);
-    const challenge = await actions.createChallenge(body);
+    const challenge = await actions.createChallenge({
+      ...body,
+      owner: event.requestContext.authorizer.principalId,
+    });
 
     return Response.success({
       challenge,

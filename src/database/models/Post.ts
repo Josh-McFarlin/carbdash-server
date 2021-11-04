@@ -17,6 +17,7 @@ const PostSchema = new mongoose.Schema<PostType>({
     enum: ["User", "Restaurant"],
     default: "User",
     index: true,
+    required: true,
   },
   body: {
     type: String,

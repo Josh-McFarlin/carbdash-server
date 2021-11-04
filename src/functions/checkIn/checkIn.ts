@@ -14,7 +14,10 @@ export const createCheckIn: APIGatewayProxyHandler = async (
 ): Promise<APIGatewayProxyResult> => {
   try {
     const body = JSON.parse(event.body);
-    const checkIn = await actions.createCheckIn(body);
+    const checkIn = await actions.createCheckIn({
+      ...body,
+      user: event.requestContext.authorizer.principalId,
+    });
 
     return Response.success({
       checkIn,

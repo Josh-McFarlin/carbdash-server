@@ -14,7 +14,10 @@ export const createOffer: APIGatewayProxyHandler = async (
 ): Promise<APIGatewayProxyResult> => {
   try {
     const body = JSON.parse(event.body);
-    const offer = await actions.createOffer(body);
+    const offer = await actions.createOffer({
+      ...body,
+      restaurant: event.requestContext.authorizer.principalId,
+    });
 
     return Response.success({
       offer,

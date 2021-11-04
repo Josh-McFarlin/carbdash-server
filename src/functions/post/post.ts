@@ -21,6 +21,13 @@ export const createPost: APIGatewayProxyHandler = async (
     const post = await actions.createPost({
       ...body,
       photoUrls,
+      ...(body.ownerType === "User"
+        ? {
+            user: event.requestContext.authorizer.principalId,
+          }
+        : {
+            restaurant: event.requestContext.authorizer.principalId,
+          }),
     });
 
     return Response.success({

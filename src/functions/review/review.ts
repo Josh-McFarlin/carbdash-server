@@ -2,6 +2,7 @@ import { APIGatewayProxyHandler, APIGatewayProxyResult } from "aws-lambda";
 import Response from "../../utils/Response";
 import { StatusCode } from "../../types/Response";
 import * as actions from "../../actions/review";
+import { createUploadUrl } from "../../utils/s3";
 import "../../database";
 
 /**
@@ -14,7 +15,14 @@ export const createReview: APIGatewayProxyHandler = async (
 ): Promise<APIGatewayProxyResult> => {
   try {
     const body = JSON.parse(event.body);
-    const review = await actions.createReview(body);
+    const photoUrls = await Promise.all(
+      Array.from(Array(body.photoUrls.length)).map(createUploadUrl)
+    );
+    const review = await actions.createReview({
+      ...body,
+      photoUrls,
+      user: event.requestContext.authorizer.principalId,
+    });
 
     return Response.success({
       review,
