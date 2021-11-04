@@ -24,4 +24,4 @@ const setupMongoDB = async (): Promise<void> => {
   }
 };
 
-export default setupMongoDB;
+export default setupMongoDB();

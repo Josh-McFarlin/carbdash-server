@@ -2,6 +2,7 @@ import { APIGatewayProxyHandler, APIGatewayProxyResult } from "aws-lambda";
 import Response from "../../utils/Response";
 import { StatusCode } from "../../types/Response";
 import * as actions from "../../actions/user";
+import "../../database";
 
 /**
  * Create a new User

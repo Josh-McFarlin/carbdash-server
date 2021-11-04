@@ -4,6 +4,7 @@ import {
   APIGatewayTokenAuthorizerEvent,
 } from "aws-lambda";
 import jwt from "jsonwebtoken";
+import "../../database";
 
 const AUTH0_CLIENT_SECRET: string = process.env.AUTH0_CLIENT_SECRET;
 
