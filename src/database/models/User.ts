@@ -6,6 +6,7 @@ const UserSchema = new mongoose.Schema<UserType>({
   auth0Id: {
     type: String,
     required: true,
+    index: true,
   },
   name: {
     type: String,

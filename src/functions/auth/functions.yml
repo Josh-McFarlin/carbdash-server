@@ -1,0 +1,7 @@
+findUserByAuth:
+  handler: src/functions/auth/auth.findUserByAuth
+  events:
+    - http:
+        path: auth/{id}
+        method: get
+        cors: true
