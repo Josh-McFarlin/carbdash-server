@@ -65,7 +65,7 @@ export const findSocialGroups: APIGatewayProxyHandler = async (
       name,
       owner,
       member,
-      tags,
+      tags: tags.split(","),
     });
 
     return Response.success({

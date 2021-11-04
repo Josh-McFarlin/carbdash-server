@@ -20,12 +20,25 @@ export const findSocialGroups = ({
   owner,
   member,
   tags,
+}: {
+  name?: string;
+  owner?: string;
+  member?: string;
+  tags?: string[];
 }): Promise<SocialGroupType[]> =>
   SocialGroup.find({
-    name,
-    owner: new mongoose.Types.ObjectId(owner) as any,
-    members: new mongoose.Types.ObjectId(member) as any,
-    tags,
+    ...(name != null && {
+      name,
+    }),
+    ...(owner != null && {
+      owner: new mongoose.Types.ObjectId(owner) as any,
+    }),
+    ...(member != null && {
+      members: new mongoose.Types.ObjectId(member) as any,
+    }),
+    ...(tags != null && {
+      tags,
+    }),
   })
     .sort("name")
     .lean()

@@ -64,7 +64,7 @@ export const findReviews: APIGatewayProxyHandler = async (
     const reviews = await actions.findReviews({
       user,
       restaurant,
-      tags,
+      tags: tags.split(","),
     });
 
     return Response.success({

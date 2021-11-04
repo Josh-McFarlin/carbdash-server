@@ -63,7 +63,7 @@ export const findRestaurants: APIGatewayProxyHandler = async (
 
     const restaurants = await actions.findRestaurants({
       name,
-      tags,
+      tags: tags.split(","),
     });
 
     return Response.success({

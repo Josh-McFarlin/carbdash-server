@@ -19,11 +19,26 @@ export const findChallenges = ({
   name,
   user,
   owner,
+}: {
+  name?: string;
+  user?: string;
+  owner?: string;
 }): Promise<ChallengeType[]> =>
   Challenge.find({
-    expiresAt: {
-      $lte: new Date(),
-    },
+    ...(name != null && {
+      name,
+    }),
+    ...(user != null && {
+      user: new mongoose.Types.ObjectId(user) as any,
+    }),
+    ...(owner != null && {
+      owner: new mongoose.Types.ObjectId(owner) as any,
+    }),
+    ...((user == null || owner == null) && {
+      expiresAt: {
+        $lte: new Date(),
+      },
+    }),
   })
     .sort("-expiresAt")
     .lean()

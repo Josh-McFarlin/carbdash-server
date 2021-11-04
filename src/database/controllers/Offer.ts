@@ -13,9 +13,15 @@ export const createOffer = async (offer: OfferType): Promise<OfferType> => {
 export const findOfferById = (id: string): Promise<OfferType> =>
   Offer.findById(id).lean().exec();
 
-export const findOffers = ({ restaurant }): Promise<OfferType[]> =>
+export const findOffers = ({
+  restaurant,
+}: {
+  restaurant?: string;
+}): Promise<OfferType[]> =>
   Offer.find({
-    restaurant: new mongoose.Types.ObjectId(restaurant) as any,
+    ...(restaurant != null && {
+      restaurant: new mongoose.Types.ObjectId(restaurant) as any,
+    }),
     expiresAt: {
       $lte: new Date(),
     },

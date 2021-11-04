@@ -14,10 +14,20 @@ export const createRestaurant = async (
 export const findRestaurantById = (id: string): Promise<RestaurantType> =>
   Restaurant.findById(id).lean().exec();
 
-export const findRestaurants = ({ name, tags }): Promise<RestaurantType[]> =>
+export const findRestaurants = ({
+  name,
+  tags,
+}: {
+  name?: string;
+  tags?: string[];
+}): Promise<RestaurantType[]> =>
   Restaurant.find({
-    name,
-    tags,
+    ...(name != null && {
+      name,
+    }),
+    ...(tags != null && {
+      tags,
+    }),
   })
     .lean()
     .exec();

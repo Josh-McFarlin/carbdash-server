@@ -17,11 +17,21 @@ export const findReviews = ({
   user,
   restaurant,
   tags,
+}: {
+  user?: string;
+  restaurant?: string;
+  tags?: string[];
 }): Promise<ReviewType[]> =>
   Review.find({
-    user: new mongoose.Types.ObjectId(userId) as any,
-    restaurant: new mongoose.Types.ObjectId(restaurantId) as any,
-    tags,
+    ...(user != null && {
+      user: new mongoose.Types.ObjectId(user) as any,
+    }),
+    ...(restaurant != null && {
+      restaurant: new mongoose.Types.ObjectId(restaurant) as any,
+    }),
+    ...(tags != null && {
+      tags,
+    }),
   })
     .sort("-createdAt")
     .lean()

@@ -59,12 +59,14 @@ export const findPosts: APIGatewayProxyHandler = async (
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const { user, restaurant, tags } = event.queryStringParameters || {};
+    const { user, restaurant, ownerType, tags } =
+      event.queryStringParameters || {};
 
     const posts = await actions.findPosts({
       user,
       restaurant,
-      tags,
+      ownerType,
+      tags: tags.split(","),
     });
 
     return Response.success({

@@ -13,13 +13,30 @@ export const createPost = async (post: PostType): Promise<PostType> => {
 export const findPostById = (id: string): Promise<PostType> =>
   Post.findById(id).lean().exec();
 
-export const findPosts = ({ user, restaurant, tags }): Promise<PostType[]> =>
+export const findPosts = ({
+  user,
+  restaurant,
+  ownerType,
+  tags,
+}: {
+  user?: string;
+  restaurant?: string;
+  ownerType?: string;
+  tags?: string[];
+}): Promise<PostType[]> =>
   Post.find({
-    user: new mongoose.Types.ObjectId(user) as any,
-    ownerType: "User",
-    restaurant: new mongoose.Types.ObjectId(restaurant) as any,
-    ownerType: "Restaurant",
-    tags,
+    ...(user != null && {
+      user: new mongoose.Types.ObjectId(user) as any,
+    }),
+    ...(restaurant != null && {
+      restaurant: new mongoose.Types.ObjectId(restaurant) as any,
+    }),
+    ...(ownerType != null && {
+      ownerType,
+    }),
+    ...(tags != null && {
+      tags,
+    }),
   })
     .sort("-createdAt")
     .lean()

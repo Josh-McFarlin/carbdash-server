@@ -12,10 +12,20 @@ export const createUser = async (user: UserType): Promise<UserType> => {
 export const findUserById = (id: string): Promise<UserType> =>
   User.findById(id).lean().exec();
 
-export const findUsers = ({ email, username }): Promise<UserType[]> =>
+export const findUsers = ({
+  email,
+  username,
+}: {
+  email?: string;
+  username?: string;
+}): Promise<UserType[]> =>
   User.find({
-    email,
-    username,
+    ...(email != null && {
+      email,
+    }),
+    ...(username != null && {
+      username,
+    }),
   })
     .sort("username")
     .lean()

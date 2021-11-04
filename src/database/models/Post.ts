@@ -10,7 +10,6 @@ const PostSchema = new mongoose.Schema<PostType>({
   restaurant: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "Restaurant",
-    required: true,
     index: true,
   },
   ownerType: {
