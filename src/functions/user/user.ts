@@ -63,13 +63,13 @@ export const findUsers: APIGatewayProxyHandler = async (
   try {
     const { email, username } = event.queryStringParameters || {};
 
-    const user = await actions.findUsers({
+    const users = await actions.findUsers({
       email,
       username,
     });
 
     return Response.success({
-      user,
+      users,
     });
   } catch (error) {
     return Response.error(

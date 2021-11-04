@@ -21,7 +21,7 @@ export const findPosts = ({
 }: {
   user?: string;
   restaurant?: string;
-  ownerType?: string;
+  ownerType?: "User" | "Restaurant";
   tags?: string[];
 }): Promise<PostType[]> =>
   Post.find({
