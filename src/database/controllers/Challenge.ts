@@ -35,6 +35,16 @@ export const findChallengesByUser = (
     .lean()
     .exec();
 
+export const findChallengesByOwner = (
+  userId: string
+): Promise<ChallengeType[]> =>
+  Challenge.find({
+    owner: new mongoose.Types.ObjectId(userId) as any,
+  })
+    .sort("-expiresAt")
+    .lean()
+    .exec();
+
 export const findChallengesByName = (
   name: ChallengeType["name"]
 ): Promise<ChallengeType[]> =>

@@ -6,7 +6,7 @@ createSocialGroup:
         method: post
         cors: true
         authorizer:
-          name: socialGroupAuthorizer
+          name: userAuthorizer
           identitySource: method.request.header.Authorization
 findSocialGroups:
   handler: src/functions/socialGroup/socialGroup.findSocialGroups
@@ -16,7 +16,7 @@ findSocialGroups:
         method: get
         cors: true
         authorizer:
-          name: socialGroupAuthorizer
+          name: userAuthorizer
           identitySource: method.request.header.Authorization
 findSocialGroupById:
   handler: src/functions/socialGroup/socialGroup.findSocialGroupById
@@ -26,7 +26,7 @@ findSocialGroupById:
         method: get
         cors: true
         authorizer:
-          name: socialGroupAuthorizer
+          name: userAuthorizer
           identitySource: method.request.header.Authorization
 findSocialGroupsByName:
   handler: src/functions/socialGroup/socialGroup.findSocialGroupsByName
@@ -36,7 +36,7 @@ findSocialGroupsByName:
         method: get
         cors: true
         authorizer:
-          name: socialGroupAuthorizer
+          name: userAuthorizer
           identitySource: method.request.header.Authorization
 findSocialGroupsByTags:
   handler: src/functions/socialGroup/socialGroup.findSocialGroupsByTags
@@ -46,27 +46,7 @@ findSocialGroupsByTags:
         method: get
         cors: true
         authorizer:
-          name: socialGroupAuthorizer
-          identitySource: method.request.header.Authorization
-findSocialGroupsByUser:
-  handler: src/functions/socialGroup/socialGroup.findSocialGroupsByUser
-  events:
-    - http:
-        path: socialGroup/findByUser
-        method: get
-        cors: true
-        authorizer:
-          name: socialGroupAuthorizer
-          identitySource: method.request.header.Authorization
-findSocialGroupsByRestaurant:
-  handler: src/functions/socialGroup/socialGroup.findSocialGroupsByRestaurant
-  events:
-    - http:
-        path: socialGroup/findByRestaurant
-        method: get
-        cors: true
-        authorizer:
-          name: socialGroupAuthorizer
+          name: userAuthorizer
           identitySource: method.request.header.Authorization
 findSocialGroupsByOwner:
   handler: src/functions/socialGroup/socialGroup.findSocialGroupsByOwner
@@ -76,7 +56,7 @@ findSocialGroupsByOwner:
         method: get
         cors: true
         authorizer:
-          name: socialGroupAuthorizer
+          name: userAuthorizer
           identitySource: method.request.header.Authorization
 findSocialGroupsByMember:
   handler: src/functions/socialGroup/socialGroup.findSocialGroupsByMember
@@ -86,7 +66,7 @@ findSocialGroupsByMember:
         method: get
         cors: true
         authorizer:
-          name: socialGroupAuthorizer
+          name: userAuthorizer
           identitySource: method.request.header.Authorization
 updateSocialGroupById:
   handler: src/functions/socialGroup/socialGroup.updateSocialGroupById
@@ -96,7 +76,7 @@ updateSocialGroupById:
         method: put
         cors: true
         authorizer:
-          name: socialGroupAuthorizer
+          name: userAuthorizer
           identitySource: method.request.header.Authorization
 deleteSocialGroupById:
   handler: src/functions/socialGroup/socialGroup.deleteSocialGroupById
@@ -106,5 +86,5 @@ deleteSocialGroupById:
         method: delete
         cors: true
         authorizer:
-          name: socialGroupAuthorizer
+          name: userAuthorizer
           identitySource: method.request.header.Authorization

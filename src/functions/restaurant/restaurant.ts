@@ -99,102 +99,6 @@ export const findRestaurantsByName: APIGatewayProxyHandler = async (
 };
 
 /**
- * Find Restaurants By User
- * @http GET
- */
-export const findRestaurantsByUser: APIGatewayProxyHandler = async (
-  event,
-  _context
-): Promise<APIGatewayProxyResult> => {
-  try {
-    const query = event.pathParameters;
-
-    const restaurants = await actions.findRestaurantsByUser(query.id);
-
-    return Response.success({
-      restaurants,
-    });
-  } catch (error) {
-    return Response.error(
-      StatusCode.InternalServerError,
-      "Unable to find Restaurants!"
-    );
-  }
-};
-
-/**
- * Find Restaurants By RestaurantA
- * @http GET
- */
-export const findRestaurantsByRestaurantA: APIGatewayProxyHandler = async (
-  event,
-  _context
-): Promise<APIGatewayProxyResult> => {
-  try {
-    const query = event.pathParameters;
-
-    const restaurants = await actions.findRestaurantsByRestaurantA(query.id);
-
-    return Response.success({
-      restaurants,
-    });
-  } catch (error) {
-    return Response.error(
-      StatusCode.InternalServerError,
-      "Unable to find Restaurants!"
-    );
-  }
-};
-
-/**
- * Find Restaurants By Owner
- * @http GET
- */
-export const findRestaurantsByOwner: APIGatewayProxyHandler = async (
-  event,
-  _context
-): Promise<APIGatewayProxyResult> => {
-  try {
-    const query = event.pathParameters;
-
-    const restaurants = await actions.findRestaurantsByOwner(query.id);
-
-    return Response.success({
-      restaurants,
-    });
-  } catch (error) {
-    return Response.error(
-      StatusCode.InternalServerError,
-      "Unable to find Restaurants!"
-    );
-  }
-};
-
-/**
- * Find Restaurants By Member
- * @http GET
- */
-export const findRestaurantsByMember: APIGatewayProxyHandler = async (
-  event,
-  _context
-): Promise<APIGatewayProxyResult> => {
-  try {
-    const query = event.pathParameters;
-
-    const restaurants = await actions.findRestaurantsByMember(query.id);
-
-    return Response.success({
-      restaurants,
-    });
-  } catch (error) {
-    return Response.error(
-      StatusCode.InternalServerError,
-      "Unable to find Restaurants!"
-    );
-  }
-};
-
-/**
  * Find Restaurants By Tags
  * @http GET
  */
@@ -205,7 +109,9 @@ export const findRestaurantsByTags: APIGatewayProxyHandler = async (
   try {
     const query = event.pathParameters;
 
-    const restaurants = await actions.findRestaurantsByTags(query.tags.split(","));
+    const restaurants = await actions.findRestaurantsByTags(
+      query.tags.split(",")
+    );
 
     return Response.success({
       restaurants,

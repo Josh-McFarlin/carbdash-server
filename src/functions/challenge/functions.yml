@@ -6,7 +6,7 @@ createChallenge:
         method: post
         cors: true
         authorizer:
-          name: challengeAuthorizer
+          name: userAuthorizer
           identitySource: method.request.header.Authorization
 findChallenges:
   handler: src/functions/challenge/challenge.findChallenges
@@ -16,7 +16,7 @@ findChallenges:
         method: get
         cors: true
         authorizer:
-          name: challengeAuthorizer
+          name: userAuthorizer
           identitySource: method.request.header.Authorization
 findChallengeById:
   handler: src/functions/challenge/challenge.findChallengeById
@@ -26,7 +26,7 @@ findChallengeById:
         method: get
         cors: true
         authorizer:
-          name: challengeAuthorizer
+          name: userAuthorizer
           identitySource: method.request.header.Authorization
 findChallengesByName:
   handler: src/functions/challenge/challenge.findChallengesByName
@@ -36,17 +36,7 @@ findChallengesByName:
         method: get
         cors: true
         authorizer:
-          name: challengeAuthorizer
-          identitySource: method.request.header.Authorization
-findChallengesByTags:
-  handler: src/functions/challenge/challenge.findChallengesByTags
-  events:
-    - http:
-        path: challenge/findByTags
-        method: get
-        cors: true
-        authorizer:
-          name: challengeAuthorizer
+          name: userAuthorizer
           identitySource: method.request.header.Authorization
 findChallengesByUser:
   handler: src/functions/challenge/challenge.findChallengesByUser
@@ -56,17 +46,7 @@ findChallengesByUser:
         method: get
         cors: true
         authorizer:
-          name: challengeAuthorizer
-          identitySource: method.request.header.Authorization
-findChallengesByRestaurant:
-  handler: src/functions/challenge/challenge.findChallengesByRestaurant
-  events:
-    - http:
-        path: challenge/findByRestaurant
-        method: get
-        cors: true
-        authorizer:
-          name: challengeAuthorizer
+          name: userAuthorizer
           identitySource: method.request.header.Authorization
 findChallengesByOwner:
   handler: src/functions/challenge/challenge.findChallengesByOwner
@@ -76,17 +56,7 @@ findChallengesByOwner:
         method: get
         cors: true
         authorizer:
-          name: challengeAuthorizer
-          identitySource: method.request.header.Authorization
-findChallengesByMember:
-  handler: src/functions/challenge/challenge.findChallengesByMember
-  events:
-    - http:
-        path: challenge/findByMember
-        method: get
-        cors: true
-        authorizer:
-          name: challengeAuthorizer
+          name: userAuthorizer
           identitySource: method.request.header.Authorization
 updateChallengeById:
   handler: src/functions/challenge/challenge.updateChallengeById
@@ -96,7 +66,7 @@ updateChallengeById:
         method: put
         cors: true
         authorizer:
-          name: challengeAuthorizer
+          name: userAuthorizer
           identitySource: method.request.header.Authorization
 deleteChallengeById:
   handler: src/functions/challenge/challenge.deleteChallengeById
@@ -106,5 +76,5 @@ deleteChallengeById:
         method: delete
         cors: true
         authorizer:
-          name: challengeAuthorizer
+          name: userAuthorizer
           identitySource: method.request.header.Authorization

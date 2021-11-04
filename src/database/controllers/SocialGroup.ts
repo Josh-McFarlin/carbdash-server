@@ -43,6 +43,16 @@ export const findSocialGroupsByName = (
 ): Promise<SocialGroupType[]> =>
   SocialGroup.find({ name }).sort("name").lean().exec();
 
+export const findSocialGroupsByTags = (
+  tags: SocialGroupType["tags"]
+): Promise<SocialGroupType[]> =>
+  SocialGroup.find({
+    tags,
+  })
+    .sort("name")
+    .lean()
+    .exec();
+
 export const updateSocialGroupById = (
   id: string,
   updates: Partial<SocialGroupType>

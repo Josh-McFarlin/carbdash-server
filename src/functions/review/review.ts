@@ -1,228 +1,156 @@
 import { APIGatewayProxyHandler, APIGatewayProxyResult } from "aws-lambda";
 import Response from "../../utils/Response";
 import { StatusCode } from "../../types/Response";
-import * as actions from "../../actions/restaurant";
+import * as actions from "../../actions/review";
 
 /**
- * Create a new Restaurant
+ * Create a new Review
  * @http POST
  */
-export const createRestaurant: APIGatewayProxyHandler = async (
+export const createReview: APIGatewayProxyHandler = async (
   event,
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
     const body = JSON.parse(event.body);
-    const restaurant = await actions.createRestaurant(body);
+    const review = await actions.createReview(body);
 
     return Response.success({
-      restaurant,
+      review,
     });
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to create Restaurant!"
+      "Unable to create Review!"
     );
   }
 };
 
 /**
- * Find Restaurants
+ * Find Reviews
  * @http GET
  */
-export const findRestaurants: APIGatewayProxyHandler = async (
+export const findReviews: APIGatewayProxyHandler = async (
   event,
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
     // const query = event.pathParameters;
 
-    const restaurants = await actions.findRestaurants();
+    const reviews = await actions.findReviews();
 
     return Response.success({
-      restaurants,
+      reviews,
     });
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to find Restaurants!"
+      "Unable to find Reviews!"
     );
   }
 };
 
 /**
- * Find Restaurant By ID
+ * Find Review By ID
  * @http GET
  */
-export const findRestaurantById: APIGatewayProxyHandler = async (
+export const findReviewById: APIGatewayProxyHandler = async (
   event,
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
     const query = event.pathParameters;
 
-    const restaurant = await actions.findRestaurantById(query.id);
+    const review = await actions.findReviewById(query.id);
 
     return Response.success({
-      restaurant,
+      review,
     });
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to find Restaurant!"
+      "Unable to find Review!"
     );
   }
 };
 
 /**
- * Find Restaurants By Name
+ * Find Reviews By User
  * @http GET
  */
-export const findRestaurantsByName: APIGatewayProxyHandler = async (
+export const findReviewsByUser: APIGatewayProxyHandler = async (
   event,
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
     const query = event.pathParameters;
 
-    const restaurants = await actions.findRestaurantsByName(query.name);
+    const reviews = await actions.findReviewsByUser(query.id);
 
     return Response.success({
-      restaurants,
+      reviews,
     });
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to find Restaurants!"
+      "Unable to find Reviews!"
     );
   }
 };
 
 /**
- * Find Restaurants By User
+ * Find Reviews By Restaurant
  * @http GET
  */
-export const findRestaurantsByUser: APIGatewayProxyHandler = async (
+export const findReviewsByRestaurant: APIGatewayProxyHandler = async (
   event,
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
     const query = event.pathParameters;
 
-    const restaurants = await actions.findRestaurantsByUser(query.id);
+    const reviews = await actions.findReviewsByRestaurant(query.id);
 
     return Response.success({
-      restaurants,
+      reviews,
     });
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to find Restaurants!"
+      "Unable to find Reviews!"
     );
   }
 };
 
 /**
- * Find Restaurants By RestaurantA
+ * Find Reviews By Tags
  * @http GET
  */
-export const findRestaurantsByRestaurantA: APIGatewayProxyHandler = async (
+export const findReviewsByTags: APIGatewayProxyHandler = async (
   event,
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
     const query = event.pathParameters;
 
-    const restaurants = await actions.findRestaurantsByRestaurantA(query.id);
+    const reviews = await actions.findReviewsByTags(query.tags.split(","));
 
     return Response.success({
-      restaurants,
+      reviews,
     });
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to find Restaurants!"
+      "Unable to find Reviews!"
     );
   }
 };
 
 /**
- * Find Restaurants By Owner
- * @http GET
- */
-export const findRestaurantsByOwner: APIGatewayProxyHandler = async (
-  event,
-  _context
-): Promise<APIGatewayProxyResult> => {
-  try {
-    const query = event.pathParameters;
-
-    const restaurants = await actions.findRestaurantsByOwner(query.id);
-
-    return Response.success({
-      restaurants,
-    });
-  } catch (error) {
-    return Response.error(
-      StatusCode.InternalServerError,
-      "Unable to find Restaurants!"
-    );
-  }
-};
-
-/**
- * Find Restaurants By Member
- * @http GET
- */
-export const findRestaurantsByMember: APIGatewayProxyHandler = async (
-  event,
-  _context
-): Promise<APIGatewayProxyResult> => {
-  try {
-    const query = event.pathParameters;
-
-    const restaurants = await actions.findRestaurantsByMember(query.id);
-
-    return Response.success({
-      restaurants,
-    });
-  } catch (error) {
-    return Response.error(
-      StatusCode.InternalServerError,
-      "Unable to find Restaurants!"
-    );
-  }
-};
-
-/**
- * Find Restaurants By Tags
- * @http GET
- */
-export const findRestaurantsByTags: APIGatewayProxyHandler = async (
-  event,
-  _context
-): Promise<APIGatewayProxyResult> => {
-  try {
-    const query = event.pathParameters;
-
-    const restaurants = await actions.findRestaurantsByTags(query.tags.split(","));
-
-    return Response.success({
-      restaurants,
-    });
-  } catch (error) {
-    return Response.error(
-      StatusCode.InternalServerError,
-      "Unable to find Restaurants!"
-    );
-  }
-};
-
-/**
- * Update Restaurant By ID
+ * Update Review By ID
  * @http POST
  */
-export const updateRestaurantById: APIGatewayProxyHandler = async (
+export const updateReviewById: APIGatewayProxyHandler = async (
   event,
   _context
 ): Promise<APIGatewayProxyResult> => {
@@ -230,37 +158,37 @@ export const updateRestaurantById: APIGatewayProxyHandler = async (
     const query = event.pathParameters;
     const body = JSON.parse(event.body);
 
-    const restaurant = await actions.updateRestaurantById(query.id, body);
+    const review = await actions.updateReviewById(query.id, body);
 
     return Response.success({
-      restaurant,
+      review,
     });
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to update Restaurant!"
+      "Unable to update Review!"
     );
   }
 };
 
 /**
- * Delete Restaurant By ID
+ * Delete Review By ID
  * @http DELETE
  */
-export const deleteRestaurantById: APIGatewayProxyHandler = async (
+export const deleteReviewById: APIGatewayProxyHandler = async (
   event,
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
     const query = event.pathParameters;
 
-    await actions.deleteRestaurantById(query.id);
+    await actions.deleteReviewById(query.id);
 
     return Response.success();
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to delete Restaurant!"
+      "Unable to delete Review!"
     );
   }
 };

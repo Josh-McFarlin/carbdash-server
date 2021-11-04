@@ -4,6 +4,7 @@ export interface SocialGroupType {
   id: string;
   name: string;
   description: string;
+  tags: string[];
   iconUrl: string;
   owner: Schema.Types.ObjectId;
   members: Schema.Types.ObjectId[];

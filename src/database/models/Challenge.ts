@@ -2,6 +2,12 @@ import mongoose, { Model } from "mongoose";
 import type { ChallengeType } from "../../types/Challenge";
 
 const ChallengeSchema = new mongoose.Schema<ChallengeType>({
+  owner: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+    required: true,
+    index: true,
+  },
   name: {
     type: String,
     required: true,

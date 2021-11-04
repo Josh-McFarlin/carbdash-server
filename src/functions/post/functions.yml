@@ -6,7 +6,7 @@ createPost:
         method: post
         cors: true
         authorizer:
-          name: postAuthorizer
+          name: userAuthorizer
           identitySource: method.request.header.Authorization
 findPosts:
   handler: src/functions/post/post.findPosts
@@ -16,7 +16,7 @@ findPosts:
         method: get
         cors: true
         authorizer:
-          name: postAuthorizer
+          name: userAuthorizer
           identitySource: method.request.header.Authorization
 findPostById:
   handler: src/functions/post/post.findPostById
@@ -26,17 +26,7 @@ findPostById:
         method: get
         cors: true
         authorizer:
-          name: postAuthorizer
-          identitySource: method.request.header.Authorization
-findPostsByName:
-  handler: src/functions/post/post.findPostsByName
-  events:
-    - http:
-        path: post/findByName
-        method: get
-        cors: true
-        authorizer:
-          name: postAuthorizer
+          name: userAuthorizer
           identitySource: method.request.header.Authorization
 findPostsByTags:
   handler: src/functions/post/post.findPostsByTags
@@ -46,7 +36,7 @@ findPostsByTags:
         method: get
         cors: true
         authorizer:
-          name: postAuthorizer
+          name: userAuthorizer
           identitySource: method.request.header.Authorization
 findPostsByUser:
   handler: src/functions/post/post.findPostsByUser
@@ -56,7 +46,7 @@ findPostsByUser:
         method: get
         cors: true
         authorizer:
-          name: postAuthorizer
+          name: userAuthorizer
           identitySource: method.request.header.Authorization
 findPostsByRestaurant:
   handler: src/functions/post/post.findPostsByRestaurant
@@ -66,27 +56,7 @@ findPostsByRestaurant:
         method: get
         cors: true
         authorizer:
-          name: postAuthorizer
-          identitySource: method.request.header.Authorization
-findPostsByOwner:
-  handler: src/functions/post/post.findPostsByOwner
-  events:
-    - http:
-        path: post/findByOwner
-        method: get
-        cors: true
-        authorizer:
-          name: postAuthorizer
-          identitySource: method.request.header.Authorization
-findPostsByMember:
-  handler: src/functions/post/post.findPostsByMember
-  events:
-    - http:
-        path: post/findByMember
-        method: get
-        cors: true
-        authorizer:
-          name: postAuthorizer
+          name: userAuthorizer
           identitySource: method.request.header.Authorization
 updatePostById:
   handler: src/functions/post/post.updatePostById
@@ -96,7 +66,7 @@ updatePostById:
         method: put
         cors: true
         authorizer:
-          name: postAuthorizer
+          name: userAuthorizer
           identitySource: method.request.header.Authorization
 deletePostById:
   handler: src/functions/post/post.deletePostById
@@ -106,5 +76,5 @@ deletePostById:
         method: delete
         cors: true
         authorizer:
-          name: postAuthorizer
+          name: userAuthorizer
           identitySource: method.request.header.Authorization

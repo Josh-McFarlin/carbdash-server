@@ -33,6 +33,14 @@ export const findPostsByRestaurant = (
     .lean()
     .exec();
 
+export const findPostsByTags = (tags: PostType["tags"]): Promise<PostType[]> =>
+  Post.find({
+    tags,
+  })
+    .sort("-createdAt")
+    .lean()
+    .exec();
+
 export const findPostById = (id: string): Promise<PostType> =>
   Post.findById(id).lean().exec();
 

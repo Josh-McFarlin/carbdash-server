@@ -6,7 +6,7 @@ createOffer:
         method: post
         cors: true
         authorizer:
-          name: offerAuthorizer
+          name: userAuthorizer
           identitySource: method.request.header.Authorization
 findOffers:
   handler: src/functions/offer/offer.findOffers
@@ -16,7 +16,7 @@ findOffers:
         method: get
         cors: true
         authorizer:
-          name: offerAuthorizer
+          name: userAuthorizer
           identitySource: method.request.header.Authorization
 findOfferById:
   handler: src/functions/offer/offer.findOfferById
@@ -26,37 +26,7 @@ findOfferById:
         method: get
         cors: true
         authorizer:
-          name: offerAuthorizer
-          identitySource: method.request.header.Authorization
-findOffersByName:
-  handler: src/functions/offer/offer.findOffersByName
-  events:
-    - http:
-        path: offer/findByName
-        method: get
-        cors: true
-        authorizer:
-          name: offerAuthorizer
-          identitySource: method.request.header.Authorization
-findOffersByTags:
-  handler: src/functions/offer/offer.findOffersByTags
-  events:
-    - http:
-        path: offer/findByTags
-        method: get
-        cors: true
-        authorizer:
-          name: offerAuthorizer
-          identitySource: method.request.header.Authorization
-findOffersByUser:
-  handler: src/functions/offer/offer.findOffersByUser
-  events:
-    - http:
-        path: offer/findByUser
-        method: get
-        cors: true
-        authorizer:
-          name: offerAuthorizer
+          name: userAuthorizer
           identitySource: method.request.header.Authorization
 findOffersByRestaurant:
   handler: src/functions/offer/offer.findOffersByRestaurant
@@ -66,27 +36,7 @@ findOffersByRestaurant:
         method: get
         cors: true
         authorizer:
-          name: offerAuthorizer
-          identitySource: method.request.header.Authorization
-findOffersByOwner:
-  handler: src/functions/offer/offer.findOffersByOwner
-  events:
-    - http:
-        path: offer/findByOwner
-        method: get
-        cors: true
-        authorizer:
-          name: offerAuthorizer
-          identitySource: method.request.header.Authorization
-findOffersByMember:
-  handler: src/functions/offer/offer.findOffersByMember
-  events:
-    - http:
-        path: offer/findByMember
-        method: get
-        cors: true
-        authorizer:
-          name: offerAuthorizer
+          name: userAuthorizer
           identitySource: method.request.header.Authorization
 updateOfferById:
   handler: src/functions/offer/offer.updateOfferById
@@ -96,7 +46,7 @@ updateOfferById:
         method: put
         cors: true
         authorizer:
-          name: offerAuthorizer
+          name: userAuthorizer
           identitySource: method.request.header.Authorization
 deleteOfferById:
   handler: src/functions/offer/offer.deleteOfferById
@@ -106,5 +56,5 @@ deleteOfferById:
         method: delete
         cors: true
         authorizer:
-          name: offerAuthorizer
+          name: userAuthorizer
           identitySource: method.request.header.Authorization

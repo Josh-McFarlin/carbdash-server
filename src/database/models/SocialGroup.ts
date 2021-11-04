@@ -11,6 +11,11 @@ const SocialGroupSchema = new mongoose.Schema<SocialGroupType>({
     type: String,
     required: true,
   },
+  tags: {
+    type: [String],
+    required: true,
+    default: [],
+  },
   iconUrl: {
     type: String,
     required: true,
