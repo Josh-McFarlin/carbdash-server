@@ -15,9 +15,6 @@ findUserById:
         path: user/findById
         method: get
         cors: true
-        authorizer:
-          name: userAuthorizer
-          identitySource: method.request.header.Authorization
 findUserByEmail:
   handler: src/functions/user/user.findUserByEmail
   events:
@@ -25,9 +22,6 @@ findUserByEmail:
         path: user/findByEmail
         method: get
         cors: true
-        authorizer:
-          name: userAuthorizer
-          identitySource: method.request.header.Authorization
 updateUserById:
   handler: src/functions/user/user.updateUserById
   events:

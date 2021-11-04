@@ -6,7 +6,7 @@ createOffer:
         method: post
         cors: true
         authorizer:
-          name: userAuthorizer
+          name: restaurantAuthorizer
           identitySource: method.request.header.Authorization
 findOffers:
   handler: src/functions/offer/offer.findOffers
@@ -15,9 +15,6 @@ findOffers:
         path: offer/find
         method: get
         cors: true
-        authorizer:
-          name: userAuthorizer
-          identitySource: method.request.header.Authorization
 findOfferById:
   handler: src/functions/offer/offer.findOfferById
   events:
@@ -25,9 +22,6 @@ findOfferById:
         path: offer/findById
         method: get
         cors: true
-        authorizer:
-          name: userAuthorizer
-          identitySource: method.request.header.Authorization
 findOffersByRestaurant:
   handler: src/functions/offer/offer.findOffersByRestaurant
   events:
@@ -35,26 +29,23 @@ findOffersByRestaurant:
         path: offer/findByRestaurant
         method: get
         cors: true
-        authorizer:
-          name: userAuthorizer
-          identitySource: method.request.header.Authorization
-updateOfferById:
-  handler: src/functions/offer/offer.updateOfferById
-  events:
-    - http:
-        path: offer/update
-        method: put
-        cors: true
-        authorizer:
-          name: userAuthorizer
-          identitySource: method.request.header.Authorization
-deleteOfferById:
-  handler: src/functions/offer/offer.deleteOfferById
-  events:
-    - http:
-        path: offer/delete
-        method: delete
-        cors: true
-        authorizer:
-          name: userAuthorizer
-          identitySource: method.request.header.Authorization
+#updateOfferById:
+#  handler: src/functions/offer/offer.updateOfferById
+#  events:
+#    - http:
+#        path: offer/update
+#        method: put
+#        cors: true
+#        authorizer:
+#          name: restaurantAuthorizer
+#          identitySource: method.request.header.Authorization
+#deleteOfferById:
+#  handler: src/functions/offer/offer.deleteOfferById
+#  events:
+#    - http:
+#        path: offer/delete
+#        method: delete
+#        cors: true
+#        authorizer:
+#          name: restaurantAuthorizer
+#          identitySource: method.request.header.Authorization

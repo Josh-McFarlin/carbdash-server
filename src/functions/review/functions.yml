@@ -15,9 +15,6 @@ findReviews:
         path: review/find
         method: get
         cors: true
-        authorizer:
-          name: userAuthorizer
-          identitySource: method.request.header.Authorization
 findReviewById:
   handler: src/functions/review/review.findReviewById
   events:
@@ -25,9 +22,6 @@ findReviewById:
         path: review/findById
         method: get
         cors: true
-        authorizer:
-          name: userAuthorizer
-          identitySource: method.request.header.Authorization
 findReviewsByTags:
   handler: src/functions/review/review.findReviewsByTags
   events:
@@ -35,9 +29,6 @@ findReviewsByTags:
         path: review/findByTags
         method: get
         cors: true
-        authorizer:
-          name: userAuthorizer
-          identitySource: method.request.header.Authorization
 findReviewsByUser:
   handler: src/functions/review/review.findReviewsByUser
   events:
@@ -45,9 +36,6 @@ findReviewsByUser:
         path: review/findByUser
         method: get
         cors: true
-        authorizer:
-          name: userAuthorizer
-          identitySource: method.request.header.Authorization
 findReviewsByRestaurant:
   handler: src/functions/review/review.findReviewsByRestaurant
   events:
@@ -55,26 +43,23 @@ findReviewsByRestaurant:
         path: review/findByRestaurant
         method: get
         cors: true
-        authorizer:
-          name: userAuthorizer
-          identitySource: method.request.header.Authorization
-updateReviewById:
-  handler: src/functions/review/review.updateReviewById
-  events:
-    - http:
-        path: review/update
-        method: put
-        cors: true
-        authorizer:
-          name: userAuthorizer
-          identitySource: method.request.header.Authorization
-deleteReviewById:
-  handler: src/functions/review/review.deleteReviewById
-  events:
-    - http:
-        path: review/delete
-        method: delete
-        cors: true
-        authorizer:
-          name: userAuthorizer
-          identitySource: method.request.header.Authorization
+#updateReviewById:
+#  handler: src/functions/review/review.updateReviewById
+#  events:
+#    - http:
+#        path: review/update
+#        method: put
+#        cors: true
+#        authorizer:
+#          name: userAuthorizer
+#          identitySource: method.request.header.Authorization
+#deleteReviewById:
+#  handler: src/functions/review/review.deleteReviewById
+#  events:
+#    - http:
+#        path: review/delete
+#        method: delete
+#        cors: true
+#        authorizer:
+#          name: userAuthorizer
+#          identitySource: method.request.header.Authorization

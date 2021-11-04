@@ -15,9 +15,6 @@ findPosts:
         path: post/find
         method: get
         cors: true
-        authorizer:
-          name: userAuthorizer
-          identitySource: method.request.header.Authorization
 findPostById:
   handler: src/functions/post/post.findPostById
   events:
@@ -25,9 +22,6 @@ findPostById:
         path: post/findById
         method: get
         cors: true
-        authorizer:
-          name: userAuthorizer
-          identitySource: method.request.header.Authorization
 findPostsByTags:
   handler: src/functions/post/post.findPostsByTags
   events:
@@ -35,9 +29,6 @@ findPostsByTags:
         path: post/findByTags
         method: get
         cors: true
-        authorizer:
-          name: userAuthorizer
-          identitySource: method.request.header.Authorization
 findPostsByUser:
   handler: src/functions/post/post.findPostsByUser
   events:
@@ -45,9 +36,6 @@ findPostsByUser:
         path: post/findByUser
         method: get
         cors: true
-        authorizer:
-          name: userAuthorizer
-          identitySource: method.request.header.Authorization
 findPostsByRestaurant:
   handler: src/functions/post/post.findPostsByRestaurant
   events:
@@ -55,26 +43,23 @@ findPostsByRestaurant:
         path: post/findByRestaurant
         method: get
         cors: true
-        authorizer:
-          name: userAuthorizer
-          identitySource: method.request.header.Authorization
-updatePostById:
-  handler: src/functions/post/post.updatePostById
-  events:
-    - http:
-        path: post/update
-        method: put
-        cors: true
-        authorizer:
-          name: userAuthorizer
-          identitySource: method.request.header.Authorization
-deletePostById:
-  handler: src/functions/post/post.deletePostById
-  events:
-    - http:
-        path: post/delete
-        method: delete
-        cors: true
-        authorizer:
-          name: userAuthorizer
-          identitySource: method.request.header.Authorization
+#updatePostById:
+#  handler: src/functions/post/post.updatePostById
+#  events:
+#    - http:
+#        path: post/update
+#        method: put
+#        cors: true
+#        authorizer:
+#          name: userAuthorizer
+#          identitySource: method.request.header.Authorization
+#deletePostById:
+#  handler: src/functions/post/post.deletePostById
+#  events:
+#    - http:
+#        path: post/delete
+#        method: delete
+#        cors: true
+#        authorizer:
+#          name: userAuthorizer
+#          identitySource: method.request.header.Authorization

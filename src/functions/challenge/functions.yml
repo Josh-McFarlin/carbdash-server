@@ -15,9 +15,6 @@ findChallenges:
         path: challenge/find
         method: get
         cors: true
-        authorizer:
-          name: userAuthorizer
-          identitySource: method.request.header.Authorization
 findChallengeById:
   handler: src/functions/challenge/challenge.findChallengeById
   events:
@@ -25,19 +22,13 @@ findChallengeById:
         path: challenge/findById
         method: get
         cors: true
-        authorizer:
-          name: userAuthorizer
-          identitySource: method.request.header.Authorization
-findChallengesByName:
-  handler: src/functions/challenge/challenge.findChallengesByName
-  events:
-    - http:
-        path: challenge/findByName
-        method: get
-        cors: true
-        authorizer:
-          name: userAuthorizer
-          identitySource: method.request.header.Authorization
+#findChallengesByName:
+#  handler: src/functions/challenge/challenge.findChallengesByName
+#  events:
+#    - http:
+#        path: challenge/findByName
+#        method: get
+#        cors: true
 findChallengesByUser:
   handler: src/functions/challenge/challenge.findChallengesByUser
   events:
@@ -45,36 +36,30 @@ findChallengesByUser:
         path: challenge/findByUser
         method: get
         cors: true
-        authorizer:
-          name: userAuthorizer
-          identitySource: method.request.header.Authorization
-findChallengesByOwner:
-  handler: src/functions/challenge/challenge.findChallengesByOwner
-  events:
-    - http:
-        path: challenge/findByOwner
-        method: get
-        cors: true
-        authorizer:
-          name: userAuthorizer
-          identitySource: method.request.header.Authorization
-updateChallengeById:
-  handler: src/functions/challenge/challenge.updateChallengeById
-  events:
-    - http:
-        path: challenge/update
-        method: put
-        cors: true
-        authorizer:
-          name: userAuthorizer
-          identitySource: method.request.header.Authorization
-deleteChallengeById:
-  handler: src/functions/challenge/challenge.deleteChallengeById
-  events:
-    - http:
-        path: challenge/delete
-        method: delete
-        cors: true
-        authorizer:
-          name: userAuthorizer
-          identitySource: method.request.header.Authorization
+#findChallengesByOwner:
+#  handler: src/functions/challenge/challenge.findChallengesByOwner
+#  events:
+#    - http:
+#        path: challenge/findByOwner
+#        method: get
+#        cors: true
+#updateChallengeById:
+#  handler: src/functions/challenge/challenge.updateChallengeById
+#  events:
+#    - http:
+#        path: challenge/update
+#        method: put
+#        cors: true
+#        authorizer:
+#          name: userAuthorizer
+#          identitySource: method.request.header.Authorization
+#deleteChallengeById:
+#  handler: src/functions/challenge/challenge.deleteChallengeById
+#  events:
+#    - http:
+#        path: challenge/delete
+#        method: delete
+#        cors: true
+#        authorizer:
+#          name: userAuthorizer
+#          identitySource: method.request.header.Authorization

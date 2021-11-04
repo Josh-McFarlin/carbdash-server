@@ -15,9 +15,6 @@ findSocialGroups:
         path: socialGroup/find
         method: get
         cors: true
-        authorizer:
-          name: userAuthorizer
-          identitySource: method.request.header.Authorization
 findSocialGroupById:
   handler: src/functions/socialGroup/socialGroup.findSocialGroupById
   events:
@@ -25,9 +22,6 @@ findSocialGroupById:
         path: socialGroup/findById
         method: get
         cors: true
-        authorizer:
-          name: userAuthorizer
-          identitySource: method.request.header.Authorization
 findSocialGroupsByName:
   handler: src/functions/socialGroup/socialGroup.findSocialGroupsByName
   events:
@@ -35,9 +29,6 @@ findSocialGroupsByName:
         path: socialGroup/findByName
         method: get
         cors: true
-        authorizer:
-          name: userAuthorizer
-          identitySource: method.request.header.Authorization
 findSocialGroupsByTags:
   handler: src/functions/socialGroup/socialGroup.findSocialGroupsByTags
   events:
@@ -45,9 +36,6 @@ findSocialGroupsByTags:
         path: socialGroup/findByTags
         method: get
         cors: true
-        authorizer:
-          name: userAuthorizer
-          identitySource: method.request.header.Authorization
 findSocialGroupsByOwner:
   handler: src/functions/socialGroup/socialGroup.findSocialGroupsByOwner
   events:
@@ -55,9 +43,6 @@ findSocialGroupsByOwner:
         path: socialGroup/findByOwner
         method: get
         cors: true
-        authorizer:
-          name: userAuthorizer
-          identitySource: method.request.header.Authorization
 findSocialGroupsByMember:
   handler: src/functions/socialGroup/socialGroup.findSocialGroupsByMember
   events:
@@ -65,26 +50,23 @@ findSocialGroupsByMember:
         path: socialGroup/findByMember
         method: get
         cors: true
-        authorizer:
-          name: userAuthorizer
-          identitySource: method.request.header.Authorization
-updateSocialGroupById:
-  handler: src/functions/socialGroup/socialGroup.updateSocialGroupById
-  events:
-    - http:
-        path: socialGroup/update
-        method: put
-        cors: true
-        authorizer:
-          name: userAuthorizer
-          identitySource: method.request.header.Authorization
-deleteSocialGroupById:
-  handler: src/functions/socialGroup/socialGroup.deleteSocialGroupById
-  events:
-    - http:
-        path: socialGroup/delete
-        method: delete
-        cors: true
-        authorizer:
-          name: userAuthorizer
-          identitySource: method.request.header.Authorization
+#updateSocialGroupById:
+#  handler: src/functions/socialGroup/socialGroup.updateSocialGroupById
+#  events:
+#    - http:
+#        path: socialGroup/update
+#        method: put
+#        cors: true
+#        authorizer:
+#          name: userAuthorizer
+#          identitySource: method.request.header.Authorization
+#deleteSocialGroupById:
+#  handler: src/functions/socialGroup/socialGroup.deleteSocialGroupById
+#  events:
+#    - http:
+#        path: socialGroup/delete
+#        method: delete
+#        cors: true
+#        authorizer:
+#          name: userAuthorizer
+#          identitySource: method.request.header.Authorization
