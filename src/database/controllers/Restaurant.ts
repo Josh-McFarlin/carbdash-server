@@ -21,10 +21,14 @@ export const findRestaurants = ({
   coordinates,
   name,
   tags,
+  perPage = 20,
+  page = 0,
 }: {
   coordinates: CoordinatesType;
   name?: string;
   tags?: string[];
+  perPage?: number;
+  page?: number;
 }): Promise<RestaurantType[]> =>
   Restaurant.find({
     ...(name != null && {
@@ -38,6 +42,8 @@ export const findRestaurants = ({
       center: [coordinates.latitude, coordinates.longitude],
       maxDistance: 5 * METERS_PER_MILE,
     })
+    .skip(perPage * page)
+    .limit(perPage)
     .lean()
     .exec();
 

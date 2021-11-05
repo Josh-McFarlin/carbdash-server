@@ -15,8 +15,12 @@ export const findOfferById = (id: string): Promise<OfferType> =>
 
 export const findOffers = ({
   restaurant,
+  perPage = 20,
+  page = 0,
 }: {
   restaurant?: string;
+  perPage?: number;
+  page?: number;
 }): Promise<OfferType[]> =>
   Offer.find({
     ...(restaurant != null && {
@@ -27,6 +31,8 @@ export const findOffers = ({
     },
   })
     .sort("-expiresAt")
+    .skip(perPage * page)
+    .limit(perPage)
     .lean()
     .exec();
 

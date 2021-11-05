@@ -68,12 +68,15 @@ export const findReviews: APIGatewayProxyHandler = async (
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const { user, restaurant, tags } = event.queryStringParameters || {};
+    const { user, restaurant, tags, page, perPage } =
+      event.queryStringParameters || {};
 
     const reviews = await actions.findReviews({
       user,
       restaurant,
       tags: tags?.split(","),
+      page: page ? parseInt(page, 10) : null,
+      perPage: perPage ? parseInt(perPage, 10) : null,
     });
 
     return Response.success({

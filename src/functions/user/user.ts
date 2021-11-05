@@ -61,11 +61,14 @@ export const findUsers: APIGatewayProxyHandler = async (
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const { email, username } = event.queryStringParameters || {};
+    const { email, username, page, perPage } =
+      event.queryStringParameters || {};
 
     const users = await actions.findUsers({
       email,
       username,
+      page: page ? parseInt(page, 10) : null,
+      perPage: perPage ? parseInt(perPage, 10) : null,
     });
 
     return Response.success({

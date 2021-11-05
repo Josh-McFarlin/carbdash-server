@@ -63,12 +63,15 @@ export const findChallenges: APIGatewayProxyHandler = async (
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const { name, user, owner } = event.queryStringParameters || {};
+    const { name, user, owner, page, perPage } =
+      event.queryStringParameters || {};
 
     const challenges = await actions.findChallenges({
       name,
       user,
       owner,
+      page: page ? parseInt(page, 10) : null,
+      perPage: perPage ? parseInt(perPage, 10) : null,
     });
 
     return Response.success({

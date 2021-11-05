@@ -15,9 +15,13 @@ export const findUserById = (id: string): Promise<UserType> =>
 export const findUsers = ({
   email,
   username,
+  perPage = 20,
+  page = 0,
 }: {
   email?: string;
   username?: string;
+  perPage?: number;
+  page?: number;
 }): Promise<UserType[]> =>
   User.find({
     ...(email != null && {
@@ -28,6 +32,8 @@ export const findUsers = ({
     }),
   })
     .sort("username")
+    .skip(perPage * page)
+    .limit(perPage)
     .lean()
     .exec();
 

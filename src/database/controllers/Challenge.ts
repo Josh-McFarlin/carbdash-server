@@ -19,10 +19,14 @@ export const findChallenges = ({
   name,
   user,
   owner,
+  perPage = 20,
+  page = 0,
 }: {
   name?: string;
   user?: string;
   owner?: string;
+  perPage?: number;
+  page?: number;
 }): Promise<ChallengeType[]> =>
   Challenge.find({
     ...(name != null && {
@@ -34,13 +38,16 @@ export const findChallenges = ({
     ...(owner != null && {
       owner: new mongoose.Types.ObjectId(owner) as any,
     }),
-    ...((user == null || owner == null) && {
-      expiresAt: {
-        $lte: new Date(),
-      },
-    }),
+    ...(user == null &&
+      owner == null && {
+        expiresAt: {
+          $lte: new Date(),
+        },
+      }),
   })
     .sort("-expiresAt")
+    .skip(perPage * page)
+    .limit(perPage)
     .lean()
     .exec();
 

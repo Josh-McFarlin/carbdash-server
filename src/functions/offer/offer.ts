@@ -63,10 +63,12 @@ export const findOffers: APIGatewayProxyHandler = async (
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const { restaurant } = event.queryStringParameters || {};
+    const { restaurant, page, perPage } = event.queryStringParameters || {};
 
     const offers = await actions.findOffers({
       restaurant,
+      page: page ? parseInt(page, 10) : null,
+      perPage: perPage ? parseInt(perPage, 10) : null,
     });
 
     return Response.success({

@@ -5,8 +5,12 @@ import { RecentType } from "../types/Recent";
 
 export const findRecent = async ({
   user,
+  page = 0,
+  perPage = 20,
 }: {
   user?: string;
+  page?: number;
+  perPage?: number;
 }): Promise<RecentType[]> => {
   const posts = await Post.find().lean().sort("-createdAt").limit(10).exec();
   const reviews = await Review.find()

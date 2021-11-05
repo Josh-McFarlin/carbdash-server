@@ -13,10 +13,12 @@ export const findRecent: APIGatewayProxyHandler = async (
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const { user } = event.queryStringParameters || {};
+    const { user, page, perPage } = event.queryStringParameters || {};
 
     const recent = await actions.findRecent({
       user,
+      page: page ? parseInt(page, 10) : null,
+      perPage: perPage ? parseInt(perPage, 10) : null,
     });
 
     return Response.success({

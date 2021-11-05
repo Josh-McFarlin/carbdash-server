@@ -17,10 +17,14 @@ export const findReviews = ({
   user,
   restaurant,
   tags,
+  perPage = 20,
+  page = 0,
 }: {
   user?: string;
   restaurant?: string;
   tags?: string[];
+  perPage?: number;
+  page?: number;
 }): Promise<ReviewType[]> =>
   Review.find({
     ...(user != null && {
@@ -34,6 +38,8 @@ export const findReviews = ({
     }),
   })
     .sort("-createdAt")
+    .skip(perPage * page)
+    .limit(perPage)
     .lean()
     .exec();
 

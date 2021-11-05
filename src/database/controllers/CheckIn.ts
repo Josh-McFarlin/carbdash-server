@@ -19,10 +19,14 @@ export const findCheckIns = ({
   user,
   restaurant,
   tags,
+  perPage = 20,
+  page = 0,
 }: {
   user?: string;
   restaurant?: string;
   tags?: string[];
+  perPage?: number;
+  page?: number;
 }): Promise<CheckInType[]> =>
   CheckIn.find({
     ...(user != null && {
@@ -36,6 +40,8 @@ export const findCheckIns = ({
     }),
   })
     .sort("-createdAt")
+    .skip(perPage * page)
+    .limit(perPage)
     .lean()
     .exec();
 

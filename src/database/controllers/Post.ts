@@ -18,11 +18,15 @@ export const findPosts = ({
   restaurant,
   ownerType,
   tags,
+  perPage = 20,
+  page = 0,
 }: {
   user?: string;
   restaurant?: string;
   ownerType?: "User" | "Restaurant";
   tags?: string[];
+  perPage?: number;
+  page?: number;
 }): Promise<PostType[]> =>
   Post.find({
     ...(user != null && {
@@ -39,6 +43,8 @@ export const findPosts = ({
     }),
   })
     .sort("-createdAt")
+    .skip(perPage * page)
+    .limit(perPage)
     .lean()
     .exec();
 

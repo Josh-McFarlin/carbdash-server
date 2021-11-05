@@ -20,11 +20,15 @@ export const findSocialGroups = ({
   owner,
   member,
   tags,
+  perPage = 20,
+  page = 0,
 }: {
   name?: string;
   owner?: string;
   member?: string;
   tags?: string[];
+  perPage?: number;
+  page?: number;
 }): Promise<SocialGroupType[]> =>
   SocialGroup.find({
     ...(name != null && {
@@ -41,6 +45,8 @@ export const findSocialGroups = ({
     }),
   })
     .sort("name")
+    .skip(perPage * page)
+    .limit(perPage)
     .lean()
     .exec();
 
