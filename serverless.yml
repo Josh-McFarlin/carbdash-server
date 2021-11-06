@@ -47,3 +47,15 @@ functions:
   - ${file(src/functions/user/functions.yml)}
   - ${file(src/functions/recent/functions.yml)}
   - ${file(src/functions/auth/functions.yml)}
+
+resources:
+  Resources:
+    GatewayResponseDefault4XX:
+      Type: 'AWS::ApiGateway::GatewayResponse'
+      Properties:
+        ResponseParameters:
+          gatewayresponse.header.Access-Control-Allow-Origin: "'*'"
+          gatewayresponse.header.Access-Control-Allow-Headers: "'*'"
+        ResponseType: DEFAULT_4XX
+        RestApiId:
+          Ref: 'ApiGatewayRestApi'
