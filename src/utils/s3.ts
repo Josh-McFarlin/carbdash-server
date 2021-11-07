@@ -7,13 +7,10 @@ export const createUploadUrl = async (): Promise<string> => {
   const fileId = uuid();
   const signedUrlExpireSeconds = 60 * 2;
 
-  const url = await s3.getSignedUrlPromise("putObject", {
+  return s3.getSignedUrlPromise("putObject", {
     Bucket: process.env.S3_BUCKET_POSTS,
     Key: `${fileId}.jpg`,
     ContentType: "image/jpeg",
-    Acl: "public-read",
     Expires: signedUrlExpireSeconds,
   });
-
-  return url;
 };

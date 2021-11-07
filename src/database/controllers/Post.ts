@@ -9,7 +9,7 @@ export const createPost = async (post: PostType): Promise<PostType> => {
   await newPost.save();
 
   const newRecent = new Recent({
-    type: "Review",
+    type: "Post",
     data: newPost._id,
     tags: newPost.tags,
     ...(newPost.user != null && {

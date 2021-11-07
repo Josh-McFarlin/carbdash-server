@@ -31,6 +31,7 @@ provider:
   iamRoleStatements:
     - Effect: Allow
       Action:
+        - S3:GetObject
         - s3:PutObject
         - s3:PutObjectAcl
       Resource: "arn:aws:s3:::${self:custom.photoBucket}/*"

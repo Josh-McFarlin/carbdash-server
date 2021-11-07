@@ -36,7 +36,8 @@ export const createPost: APIGatewayProxyHandler = async (
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to create Post!"
+      // "Unable to create Post!"
+      error?.message || error
     );
   }
 };
