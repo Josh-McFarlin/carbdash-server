@@ -63,6 +63,10 @@ export const findRestaurants: APIGatewayProxyHandler = async (
     const { latitude, longitude, name, tags, page, perPage } =
       event.queryStringParameters || {};
 
+    if (latitude == null || longitude == null) {
+      throw new Error("Coordinates must be provided in request!");
+    }
+
     const restaurants = await actions.findRestaurants({
       coordinates: {
         latitude: parseFloat(latitude),

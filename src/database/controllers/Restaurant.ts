@@ -37,11 +37,16 @@ export const findRestaurants = ({
     ...(tags != null && {
       tags,
     }),
+    coordinates: {
+      $nearSphere: {
+        $geometry: {
+          type: "Point",
+          coordinates: [coordinates.latitude, coordinates.longitude],
+        },
+        $maxDistance: 5 * METERS_PER_MILE,
+      },
+    },
   })
-    .near({
-      center: [coordinates.latitude, coordinates.longitude],
-      maxDistance: 5 * METERS_PER_MILE,
-    })
     .skip(perPage * page)
     .limit(perPage)
     .lean()
