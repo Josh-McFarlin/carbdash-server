@@ -58,6 +58,20 @@ const RestaurantSchema = new mongoose.Schema<RestaurantType>({
   phoneNumber: {
     type: String,
   },
+  ratings: {
+    count: Number,
+    sum: Number,
+    default: {
+      count: 0,
+      sum: 0,
+    },
+  },
+  menuPercents: {
+    type: Map as unknown as Record<string, number>,
+    of: Number,
+    default: {},
+    required: true,
+  },
   createdAt: {
     type: Date,
     required: true,

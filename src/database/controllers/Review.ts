@@ -20,6 +20,13 @@ export const createReview = async (review: ReviewType): Promise<ReviewType> => {
   });
   await newRecent.save();
 
+  await Restaurant.findByIdAndUpdate(newReview.restaurant, {
+    ratings: {
+      count: rest.ratings.count + 1,
+      sum: rest.ratings.sum + newReview.stars,
+    },
+  });
+
   return newReview.toJSON() as any;
 };
 

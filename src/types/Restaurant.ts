@@ -38,5 +38,10 @@ export interface RestaurantType {
   coordinates: CoordinatesType;
   website?: string;
   phoneNumber?: string;
+  ratings: {
+    count: number;
+    sum: number;
+  };
+  menuPercents: Record<string, number>;
   createdAt: Date;
 }
