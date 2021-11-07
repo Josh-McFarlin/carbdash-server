@@ -63,9 +63,18 @@ export const findOffers: APIGatewayProxyHandler = async (
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const { restaurant, page, perPage } = event.queryStringParameters || {};
+    const { latitude, longitude, restaurant, page, perPage } =
+      event.queryStringParameters || {};
+
+    if (latitude == null || longitude == null) {
+      throw new Error("Coordinates must be provided in request!");
+    }
 
     const offers = await actions.findOffers({
+      coordinates: {
+        latitude: parseFloat(latitude),
+        longitude: parseFloat(longitude),
+      },
       restaurant,
       page: page ? parseInt(page, 10) : null,
       perPage: perPage ? parseInt(perPage, 10) : null,

@@ -1,11 +1,27 @@
 import * as mongoose from "mongoose";
 import Post from "../models/Post";
+import Restaurant from "../models/Restaurant";
+import Recent from "../models/Recent";
 import { PostType } from "../../types/Post";
 
 export const createPost = async (post: PostType): Promise<PostType> => {
   const newPost = new Post(post);
-
   await newPost.save();
+
+  const newRecent = new Recent({
+    type: "Review",
+    data: newPost._id,
+    tags: newPost.tags,
+    ...(newPost.user != null && {
+      users: [newPost.user],
+    }),
+    ...(newPost.restaurant != null && {
+      restaurants: [newPost.restaurant],
+      coordinates: (await Restaurant.findById(newPost.restaurant).lean().exec())
+        .coordinates,
+    }),
+  });
+  await newRecent.save();
 
   return newPost.toJSON() as any;
 };

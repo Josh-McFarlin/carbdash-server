@@ -1,13 +1,25 @@
 import * as mongoose from "mongoose";
 import CheckIn from "../models/CheckIn";
 import { CheckInType } from "../../types/CheckIn";
+import Restaurant from "../models/Restaurant";
+import Recent from "../models/Recent";
 
 export const createCheckIn = async (
   checkIn: CheckInType
 ): Promise<CheckInType> => {
   const newCheckIn = new CheckIn(checkIn);
-
   await newCheckIn.save();
+
+  const rest = await Restaurant.findById(newCheckIn.restaurant).lean().exec();
+
+  const newRecent = new Recent({
+    type: "CheckIn",
+    data: newCheckIn._id,
+    coordinates: rest.coordinates,
+    users: [newCheckIn.user, ...newCheckIn.withUsers],
+    restaurants: [newCheckIn.restaurant],
+  });
+  await newRecent.save();
 
   return newCheckIn.toJSON() as any;
 };

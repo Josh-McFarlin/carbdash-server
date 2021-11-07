@@ -13,10 +13,25 @@ export const findRecent: APIGatewayProxyHandler = async (
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const { user, page, perPage } = event.queryStringParameters || {};
+    const { latitude, longitude, tags, users, page, perPage } =
+      event.queryStringParameters || {};
+
+    if ((latitude == null) != (longitude == null)) {
+      throw new Error(
+        "Coordinates must be excluded or include both latitude and longitude in request!"
+      );
+    }
 
     const recent = await actions.findRecent({
-      user,
+      tags: tags?.split(","),
+      ...(latitude != null && {
+        coordinates: {
+          latitude: parseFloat(latitude),
+          longitude: parseFloat(longitude),
+        },
+      }),
+      users: users?.split(","),
+      restaurants: users?.split(","),
       page: page ? parseInt(page, 10) : null,
       perPage: perPage ? parseInt(perPage, 10) : null,
     });

@@ -1,5 +1,6 @@
 import mongoose, { Model } from "mongoose";
 import type { OfferType } from "../../types/Offer";
+import { PointSchema } from "../schemas/Location";
 
 const OfferSchema = new mongoose.Schema<OfferType>({
   restaurant: {
@@ -7,6 +8,11 @@ const OfferSchema = new mongoose.Schema<OfferType>({
     ref: "Restaurant",
     required: true,
     index: true,
+  },
+  coordinates: {
+    type: PointSchema,
+    required: true,
+    index: "2dsphere",
   },
   photoUrl: {
     type: String,

@@ -1,11 +1,24 @@
 import * as mongoose from "mongoose";
 import Review from "../models/Review";
+import Restaurant from "../models/Restaurant";
+import Recent from "../models/Recent";
 import { ReviewType } from "../../types/Review";
 
 export const createReview = async (review: ReviewType): Promise<ReviewType> => {
   const newReview = new Review(review);
-
   await newReview.save();
+
+  const rest = await Restaurant.findById(newReview.restaurant).lean().exec();
+
+  const newRecent = new Recent({
+    type: "Review",
+    data: newReview._id,
+    tags: newReview.tags,
+    coordinates: rest.coordinates,
+    users: [newReview.user],
+    restaurants: [newReview.restaurant],
+  });
+  await newRecent.save();
 
   return newReview.toJSON() as any;
 };
