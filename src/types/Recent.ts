@@ -5,6 +5,7 @@ import { Schema } from "mongoose";
 import { CoordinatesType } from "./Location";
 
 export interface RecentType {
+  _id: string;
   type: "Post" | "Review" | "CheckIn";
   data: PostType | ReviewType | CheckInType;
   tags: string[];

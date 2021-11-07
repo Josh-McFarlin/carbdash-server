@@ -39,7 +39,7 @@ export const userAuthorizer: APIGatewayAuthorizerHandler = async (
             },
           ],
         },
-        principalId: user._id,
+        principalId: user._id.toString(),
       };
     } else {
       throw new Error("Unauthorized.");
@@ -79,7 +79,7 @@ export const restaurantAuthorizer: APIGatewayAuthorizerHandler = async (
             },
           ],
         },
-        principalId: restaurant._id,
+        principalId: restaurant._id.toString(),
       };
     } else {
       throw new Error("Unauthorized.");

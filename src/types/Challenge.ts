@@ -1,7 +1,7 @@
 import type { Schema } from "mongoose";
 
 export interface ChallengeType {
-  id: string;
+  _id: string;
   owner: Schema.Types.ObjectId;
   name: string;
   body?: string;

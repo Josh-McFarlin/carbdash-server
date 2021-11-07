@@ -2,7 +2,7 @@ import type { Schema } from "mongoose";
 import { CoordinatesType } from "./Location";
 
 export interface OfferType {
-  id: string;
+  _id: string;
   restaurant: Schema.Types.ObjectId;
   coordinates: CoordinatesType;
   photoUrl: string;

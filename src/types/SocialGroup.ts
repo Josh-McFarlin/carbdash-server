@@ -1,7 +1,7 @@
 import type { Schema } from "mongoose";
 
 export interface SocialGroupType {
-  id: string;
+  _id: string;
   name: string;
   description: string;
   tags: string[];

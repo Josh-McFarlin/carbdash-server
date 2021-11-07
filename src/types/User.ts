@@ -2,7 +2,7 @@ import type { Schema } from "mongoose";
 import type { LocationType } from "./Location";
 
 export interface UserType {
-  id: string;
+  _id: string;
   auth0Id: string;
   name: string;
   email: string;
