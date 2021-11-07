@@ -36,7 +36,7 @@ export const findRestaurantById: APIGatewayProxyHandler = async (
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const { id } = event.pathParameters;
+    const id = decodeURIComponent(event.pathParameters.id);
 
     const restaurant = await actions.findRestaurantById(id);
 
@@ -94,7 +94,7 @@ export const updateRestaurantById: APIGatewayProxyHandler = async (
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const { id } = event.pathParameters;
+    const id = decodeURIComponent(event.pathParameters.id);
     const body = JSON.parse(event.body);
 
     const restaurant = await actions.updateRestaurantById(id, body);
@@ -119,7 +119,7 @@ export const deleteRestaurantById: APIGatewayProxyHandler = async (
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const { id } = event.pathParameters;
+    const id = decodeURIComponent(event.pathParameters.id);
 
     await actions.deleteRestaurantById(id);
 

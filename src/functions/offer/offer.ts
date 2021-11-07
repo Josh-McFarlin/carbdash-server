@@ -39,7 +39,7 @@ export const findOfferById: APIGatewayProxyHandler = async (
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const { id } = event.pathParameters;
+    const id = decodeURIComponent(event.pathParameters.id);
 
     const offer = await actions.findOfferById(id);
 
@@ -91,7 +91,7 @@ export const updateOfferById: APIGatewayProxyHandler = async (
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const { id } = event.pathParameters;
+    const id = decodeURIComponent(event.pathParameters.id);
     const body = JSON.parse(event.body);
 
     const offer = await actions.updateOfferById(id, body);
@@ -116,7 +116,7 @@ export const deleteOfferById: APIGatewayProxyHandler = async (
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const { id } = event.pathParameters;
+    const id = decodeURIComponent(event.pathParameters.id);
 
     await actions.deleteOfferById(id);
 

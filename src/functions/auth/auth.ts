@@ -13,7 +13,7 @@ export const findUserByAuth: APIGatewayProxyHandler = async (
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const { id } = event.pathParameters;
+    const id = decodeURIComponent(event.pathParameters.id);
     const { type } = event.queryStringParameters || {};
 
     if (type === "USER") {

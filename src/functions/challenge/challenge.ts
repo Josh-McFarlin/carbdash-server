@@ -39,7 +39,7 @@ export const findChallengeById: APIGatewayProxyHandler = async (
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const { id } = event.pathParameters;
+    const id = decodeURIComponent(event.pathParameters.id);
 
     const challenge = await actions.findChallengeById(id);
 
@@ -94,7 +94,7 @@ export const updateChallengeById: APIGatewayProxyHandler = async (
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const { id } = event.pathParameters;
+    const id = decodeURIComponent(event.pathParameters.id);
     const body = JSON.parse(event.body);
 
     const challenge = await actions.updateChallengeById(id, body);
@@ -119,7 +119,7 @@ export const deleteChallengeById: APIGatewayProxyHandler = async (
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const { id } = event.pathParameters;
+    const id = decodeURIComponent(event.pathParameters.id);
 
     await actions.deleteChallengeById(id);
 

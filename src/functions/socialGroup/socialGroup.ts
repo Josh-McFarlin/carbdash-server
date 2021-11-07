@@ -39,7 +39,7 @@ export const findSocialGroupById: APIGatewayProxyHandler = async (
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const { id } = event.pathParameters;
+    const id = decodeURIComponent(event.pathParameters.id);
 
     const socialGroup = await actions.findSocialGroupById(id);
 
@@ -95,7 +95,7 @@ export const updateSocialGroupById: APIGatewayProxyHandler = async (
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const { id } = event.pathParameters;
+    const id = decodeURIComponent(event.pathParameters.id);
     const body = JSON.parse(event.body);
 
     const socialGroup = await actions.updateSocialGroupById(id, body);
@@ -120,7 +120,7 @@ export const deleteSocialGroupById: APIGatewayProxyHandler = async (
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const { id } = event.pathParameters;
+    const id = decodeURIComponent(event.pathParameters.id);
 
     await actions.deleteSocialGroupById(id);
 
