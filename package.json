@@ -25,6 +25,8 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "dayjs": "^1.10.7",
+    "faker": "^5.5.3",
     "isomorphic-unfetch": "^3.1.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.7",

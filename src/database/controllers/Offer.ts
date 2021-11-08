@@ -46,7 +46,7 @@ export const findOffers = ({
       },
     },
     expiresAt: {
-      $lte: new Date(),
+      $gte: new Date(),
     },
   })
     .sort("-expiresAt")
