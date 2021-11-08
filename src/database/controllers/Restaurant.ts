@@ -7,7 +7,16 @@ const METERS_PER_MILE = 1610;
 export const createRestaurant = async (
   restaurant: RestaurantType
 ): Promise<RestaurantType> => {
-  const newRestaurant = new Restaurant(restaurant);
+  const newRestaurant = new Restaurant({
+    ...restaurant,
+    coordinates: {
+      type: "Point",
+      coordinates: [
+        restaurant.coordinates.latitude,
+        restaurant.coordinates.longitude,
+      ],
+    },
+  });
 
   await newRestaurant.save();
 
