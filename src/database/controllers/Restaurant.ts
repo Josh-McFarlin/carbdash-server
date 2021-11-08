@@ -44,7 +44,9 @@ export const findRestaurants = ({
       name,
     }),
     ...(tags != null && {
-      tags,
+      tags: {
+        $in: tags,
+      },
     }),
     coordinates: {
       $nearSphere: {

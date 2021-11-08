@@ -41,7 +41,9 @@ export const findSocialGroups = ({
       members: new mongoose.Types.ObjectId(member) as any,
     }),
     ...(tags != null && {
-      tags,
+      tags: {
+        $in: tags,
+      },
     }),
   })
     .sort("name")

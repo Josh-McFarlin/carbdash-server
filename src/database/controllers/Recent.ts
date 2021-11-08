@@ -25,7 +25,9 @@ export const findRecent = ({
       $or: [
         {
           ...(tags != null && {
-            tags,
+            tags: {
+              $in: tags,
+            },
           }),
         },
         {
@@ -43,16 +45,20 @@ export const findRecent = ({
         },
         {
           ...(users != null && {
-            users: users.map(
-              (user) => new mongoose.Types.ObjectId(user) as any
-            ),
+            users: {
+              $in: users.map(
+                (user) => new mongoose.Types.ObjectId(user) as any
+              ),
+            },
           }),
         },
         {
           ...(restaurants != null && {
-            restaurants: users.map(
-              (restaurant) => new mongoose.Types.ObjectId(restaurant) as any
-            ),
+            restaurants: {
+              $in: users.map(
+                (restaurant) => new mongoose.Types.ObjectId(restaurant) as any
+              ),
+            },
           }),
         },
       ],

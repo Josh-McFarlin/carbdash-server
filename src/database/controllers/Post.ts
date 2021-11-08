@@ -55,7 +55,9 @@ export const findPosts = ({
       ownerType,
     }),
     ...(tags != null && {
-      tags,
+      tags: {
+        $in: tags,
+      },
     }),
   })
     .sort("-createdAt")

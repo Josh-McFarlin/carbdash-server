@@ -48,7 +48,9 @@ export const findCheckIns = ({
       restaurant: new mongoose.Types.ObjectId(restaurant) as any,
     }),
     ...(tags != null && {
-      tags,
+      tags: {
+        $in: tags,
+      },
     }),
   })
     .sort("-createdAt")
