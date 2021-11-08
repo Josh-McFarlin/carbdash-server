@@ -1,11 +1,12 @@
 import AWS from "aws-sdk";
 import { v4 as uuid } from "uuid";
+import { PresignedPost } from "aws-sdk/clients/s3";
 
 const s3 = new AWS.S3();
 
 export const createUploadUrl = async (): Promise<{
   fileUrl: string;
-  uploadUrl: string;
+  uploadUrl: PresignedPost;
 }> => {
   const fileId = uuid();
 
@@ -26,6 +27,6 @@ export const createUploadUrl = async (): Promise<{
 
   return {
     fileUrl,
-    uploadUrl: uploadUrl.url,
+    uploadUrl,
   };
 };
