@@ -20,12 +20,13 @@ export const createReview: APIGatewayProxyHandler = async (
     );
     const review = await actions.createReview({
       ...body,
-      photoUrls,
+      photoUrls: photoUrls.map((i) => i.fileUrl),
       user: event.requestContext.authorizer.principalId,
     });
 
     return Response.success({
       review,
+      uploadUrls: photoUrls.map((i) => i.uploadUrl),
     });
   } catch (error) {
     return Response.error(

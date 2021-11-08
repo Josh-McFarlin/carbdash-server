@@ -20,7 +20,7 @@ export const createPost: APIGatewayProxyHandler = async (
     );
     const post = await actions.createPost({
       ...body,
-      photoUrls,
+      photoUrls: photoUrls.map((i) => i.fileUrl),
       ...(body.ownerType === "User"
         ? {
             user: event.requestContext.authorizer.principalId,
@@ -32,6 +32,7 @@ export const createPost: APIGatewayProxyHandler = async (
 
     return Response.success({
       post,
+      uploadUrls: photoUrls.map((i) => i.uploadUrl),
     });
   } catch (error) {
     return Response.error(

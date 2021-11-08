@@ -9,7 +9,7 @@ plugins:
   - serverless-prune-plugin
 
 custom:
-  photoBucket: photos
+  photoBucket: sustainabyte-photos
   webpack:
     webpackConfig: ./webpack.config.js
     includeModules: true
