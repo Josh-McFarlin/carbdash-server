@@ -42,19 +42,6 @@ export const findRecent = ({
           }),
         },
         {
-          ...(coordinates != null && {
-            coordinates: {
-              $nearSphere: {
-                $geometry: {
-                  type: "Point",
-                  coordinates: [coordinates.latitude, coordinates.longitude],
-                },
-                $maxDistance: 15 * METERS_PER_MILE,
-              },
-            },
-          }),
-        },
-        {
           ...(users != null && {
             users: users.map(
               (user) => new mongoose.Types.ObjectId(user) as any
