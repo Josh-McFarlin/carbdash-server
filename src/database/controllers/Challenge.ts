@@ -30,7 +30,7 @@ export const findChallenges = ({
 }): Promise<ChallengeType[]> =>
   Challenge.find({
     ...(name != null && {
-      name,
+      name: new RegExp(name, "i"),
     }),
     ...(user != null && {
       user: new mongoose.Types.ObjectId(user) as any,

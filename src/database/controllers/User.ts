@@ -25,10 +25,10 @@ export const findUsers = ({
 }): Promise<UserType[]> =>
   User.find({
     ...(email != null && {
-      email,
+      email: new RegExp(email, "i"),
     }),
     ...(username != null && {
-      username,
+      username: new RegExp(username, "i"),
     }),
   })
     .sort("username")

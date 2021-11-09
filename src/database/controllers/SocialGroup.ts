@@ -32,7 +32,7 @@ export const findSocialGroups = ({
 }): Promise<SocialGroupType[]> =>
   SocialGroup.find({
     ...(name != null && {
-      name,
+      name: new RegExp(name, "i"),
     }),
     ...(owner != null && {
       owner: new mongoose.Types.ObjectId(owner) as any,

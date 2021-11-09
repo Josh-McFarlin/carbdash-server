@@ -41,7 +41,7 @@ export const findRestaurants = ({
 }): Promise<RestaurantType[]> =>
   Restaurant.find({
     ...(name != null && {
-      name,
+      name: new RegExp(name, "i"),
     }),
     ...(tags != null && {
       tags: {
