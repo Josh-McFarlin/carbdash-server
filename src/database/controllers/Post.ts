@@ -2,6 +2,7 @@ import * as mongoose from "mongoose";
 import Post from "../models/Post";
 import Restaurant from "../models/Restaurant";
 import Recent from "../models/Recent";
+import User from "../models/User";
 import { PostType } from "../../types/Post";
 
 export const createPost = async (post: PostType): Promise<PostType> => {
@@ -22,6 +23,14 @@ export const createPost = async (post: PostType): Promise<PostType> => {
     }),
   });
   await newRecent.save();
+
+  if (newPost.user != null) {
+    await User.findByIdAndUpdate(newPost.user, {
+      $inc: {
+        score: 20,
+      },
+    });
+  }
 
   return newPost.toJSON() as any;
 };

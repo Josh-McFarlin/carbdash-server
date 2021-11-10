@@ -3,6 +3,7 @@ import Review from "../models/Review";
 import Restaurant from "../models/Restaurant";
 import Recent from "../models/Recent";
 import { ReviewType } from "../../types/Review";
+import User from "../models/User";
 
 export const createReview = async (review: ReviewType): Promise<ReviewType> => {
   const newReview = new Review(review);
@@ -26,6 +27,14 @@ export const createReview = async (review: ReviewType): Promise<ReviewType> => {
       sum: rest.ratings.sum + newReview.stars,
     },
   });
+
+  if (newReview.user != null) {
+    await User.findByIdAndUpdate(newReview.user, {
+      $inc: {
+        score: 15,
+      },
+    });
+  }
 
   return newReview.toJSON() as any;
 };

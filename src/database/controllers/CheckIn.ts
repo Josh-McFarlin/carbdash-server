@@ -3,6 +3,7 @@ import CheckIn from "../models/CheckIn";
 import { CheckInType } from "../../types/CheckIn";
 import Restaurant from "../models/Restaurant";
 import Recent from "../models/Recent";
+import User from "../models/User";
 
 export const createCheckIn = async (
   checkIn: CheckInType
@@ -20,6 +21,14 @@ export const createCheckIn = async (
     restaurants: [newCheckIn.restaurant],
   });
   await newRecent.save();
+
+  if (newCheckIn.user != null) {
+    await User.findByIdAndUpdate(newCheckIn.user, {
+      $inc: {
+        score: 5,
+      },
+    });
+  }
 
   return newCheckIn.toJSON() as any;
 };
