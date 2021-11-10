@@ -47,6 +47,10 @@ export const findChallengeById: APIGatewayProxyHandler = async (
 
     const challenge = await actions.findChallengeById(id);
 
+    if (challenge == null) {
+      throw new Error("Challenge does not exist!");
+    }
+
     return Response.success({
       challenge,
     });

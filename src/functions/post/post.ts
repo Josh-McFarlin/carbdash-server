@@ -56,6 +56,10 @@ export const findPostById: APIGatewayProxyHandler = async (
 
     const post = await actions.findPostById(id);
 
+    if (post == null) {
+      throw new Error("Post does not exist!");
+    }
+
     return Response.success({
       post,
     });

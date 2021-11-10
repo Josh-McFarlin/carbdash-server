@@ -43,6 +43,10 @@ export const findCheckInById: APIGatewayProxyHandler = async (
 
     const checkIn = await actions.findCheckInById(id);
 
+    if (checkIn == null) {
+      throw new Error("CheckIn does not exist!");
+    }
+
     return Response.success({
       checkIn,
     });

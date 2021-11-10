@@ -47,6 +47,10 @@ export const findSocialGroupById: APIGatewayProxyHandler = async (
 
     const socialGroup = await actions.findSocialGroupById(id);
 
+    if (socialGroup == null) {
+      throw new Error("SocialGroup does not exist!");
+    }
+
     return Response.success({
       socialGroup,
     });

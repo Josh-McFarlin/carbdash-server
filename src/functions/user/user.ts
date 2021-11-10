@@ -41,6 +41,10 @@ export const findUserById: APIGatewayProxyHandler = async (
 
     const user = await actions.findUserById(id);
 
+    if (user == null) {
+      throw new Error("User does not exist!");
+    }
+
     return Response.success({
       user,
     });

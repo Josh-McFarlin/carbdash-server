@@ -49,6 +49,10 @@ export const findReviewById: APIGatewayProxyHandler = async (
 
     const review = await actions.findReviewById(id);
 
+    if (review == null) {
+      throw new Error("Review does not exist!");
+    }
+
     return Response.success({
       review,
     });

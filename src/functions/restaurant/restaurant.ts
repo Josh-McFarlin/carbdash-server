@@ -40,6 +40,10 @@ export const findRestaurantById: APIGatewayProxyHandler = async (
 
     const restaurant = await actions.findRestaurantById(id);
 
+    if (restaurant == null) {
+      throw new Error("Restaurant does not exist!");
+    }
+
     return Response.success({
       restaurant,
     });

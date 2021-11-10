@@ -47,6 +47,10 @@ export const findOfferById: APIGatewayProxyHandler = async (
 
     const offer = await actions.findOfferById(id);
 
+    if (offer == null) {
+      throw new Error("Offer does not exist!");
+    }
+
     return Response.success({
       offer,
     });
