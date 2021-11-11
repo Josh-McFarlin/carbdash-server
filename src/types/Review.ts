@@ -10,3 +10,12 @@ export interface ReviewType {
   photoUrls: string[];
   createdAt: Date;
 }
+
+export type ReviewSummaryType = {
+  _id: string;
+  avgRating: number;
+  totalReviews: number;
+  stars: [number, number, number, number, number];
+  reviews: ReviewType[];
+  tags: string[];
+};

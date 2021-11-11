@@ -2,7 +2,7 @@ import * as mongoose from "mongoose";
 import Review from "../models/Review";
 import Restaurant from "../models/Restaurant";
 import Recent from "../models/Recent";
-import { ReviewType } from "../../types/Review";
+import { ReviewSummaryType, ReviewType } from "../../types/Review";
 import User from "../models/User";
 import { RestaurantType } from "../../types/Restaurant";
 
@@ -84,13 +84,7 @@ export const findReviews = ({
  */
 export const summarizeReviewsByRestaurant = (
   restaurant: RestaurantType["_id"]
-): Promise<{
-  _id: RestaurantType["_id"];
-  avgRating: number;
-  totalReviews: number;
-  stars: [number, number, number, number, number];
-  reviews: ReviewType[];
-}> =>
+): Promise<ReviewSummaryType> =>
   Review.aggregate([
     {
       $match: {
@@ -105,6 +99,7 @@ export const summarizeReviewsByRestaurant = (
               _id: {
                 restaurant: "$restaurant",
                 stars: "$stars",
+                tags: "$tags",
               },
               count: {
                 $sum: 1.0,
@@ -120,6 +115,9 @@ export const summarizeReviewsByRestaurant = (
                   count: "$count",
                 },
               },
+              tags: {
+                $addToSet: "$_id.tags",
+              },
               totalItemCount: {
                 $sum: "$count",
               },
@@ -128,10 +126,23 @@ export const summarizeReviewsByRestaurant = (
               },
             },
           },
+          {
+            $addFields: {
+              tags: {
+                $reduce: {
+                  input: "$tags",
+                  initialValue: [],
+                  in: {
+                    $setUnion: ["$$value", "$$this"],
+                  },
+                },
+              },
+            },
+          },
         ],
         reviews: [
           {
-            $skip: 0,
+            $skip: 0.0,
           },
           {
             $limit: 20,
@@ -146,11 +157,19 @@ export const summarizeReviewsByRestaurant = (
       $project: {
         _id: "$numbers._id",
         avgRating: {
-          $divide: ["$numbers.totalRating", "$numbers.totalItemCount"],
+          $round: [
+            {
+              $divide: ["$numbers.totalRating", "$numbers.totalItemCount"],
+            },
+            1,
+          ],
         },
         totalReviews: "$numbers.totalItemCount",
         stars: "$numbers.counts",
-        reviews: "$reviews",
+        tags: "$numbers.tags",
+        reviews: {
+          $slice: ["$reviews", 5],
+        },
       },
     },
   ])
