@@ -4,6 +4,7 @@ import Restaurant from "../models/Restaurant";
 import Recent from "../models/Recent";
 import { ReviewType } from "../../types/Review";
 import User from "../models/User";
+import { RestaurantType } from "../../types/Restaurant";
 
 export const createReview = async (review: ReviewType): Promise<ReviewType> => {
   const newReview = new Review(review);
@@ -73,6 +74,107 @@ export const findReviews = ({
     .limit(perPage)
     .lean()
     .exec();
+
+/**
+ * Returns the reviews and summary for a particular restaurant
+ * Uses a modified version of aggregation created by
+ * @author Tom Slabbaert
+ * @link https://stackoverflow.com/a/60441220
+ * @param restaurant The ID of the restaurant to summarize reviews
+ */
+export const summarizeReviewsByRestaurant = (
+  restaurant: RestaurantType["_id"]
+): Promise<{
+  _id: RestaurantType["_id"];
+  avgRating: number;
+  totalReviews: number;
+  stars: [number, number, number, number, number];
+  reviews: ReviewType[];
+}> =>
+  Review.aggregate([
+    {
+      $match: {
+        restaurant: new mongoose.Types.ObjectId(restaurant),
+      },
+    },
+    {
+      $facet: {
+        numbers: [
+          {
+            $group: {
+              _id: {
+                restaurant: "$restaurant",
+                stars: "$stars",
+              },
+              count: {
+                $sum: 1.0,
+              },
+            },
+          },
+          {
+            $group: {
+              _id: "$_id.restaurant",
+              counts: {
+                $push: {
+                  stars: "$_id.stars",
+                  count: "$count",
+                },
+              },
+              totalItemCount: {
+                $sum: "$count",
+              },
+              totalRating: {
+                $sum: "$_id.stars",
+              },
+            },
+          },
+        ],
+        reviews: [
+          {
+            $skip: 0,
+          },
+          {
+            $limit: 20,
+          },
+        ],
+      },
+    },
+    {
+      $unwind: "$numbers",
+    },
+    {
+      $project: {
+        _id: "$numbers._id",
+        avgRating: {
+          $divide: ["$numbers.totalRating", "$numbers.totalItemCount"],
+        },
+        totalReviews: "$numbers.totalItemCount",
+        stars: "$numbers.counts",
+        reviews: "$reviews",
+      },
+    },
+  ])
+    .exec()
+    .then((res) => {
+      if (res == null || res.length === 0) {
+        throw new Error("Restaurant not found!");
+      }
+
+      return res[0];
+    })
+    .then((summary) => {
+      const newStars = [0, 0, 0, 0, 0];
+
+      (summary.stars as { stars: number; count: number }[]).forEach(
+        ({ stars, count }) => {
+          newStars[stars - 1] = count / summary.totalReviews;
+        }
+      );
+
+      summary.stars = newStars;
+
+      return summary;
+    });
 
 export const updateReviewById = (
   id: string,

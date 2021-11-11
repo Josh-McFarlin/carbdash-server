@@ -76,6 +76,12 @@ export const findReviews: APIGatewayProxyHandler = async (
     const { user, restaurant, tags, page, perPage } =
       event.queryStringParameters || {};
 
+    if (restaurant != null) {
+      const summary = await actions.summarizeReviewsByRestaurant(restaurant);
+
+      return Response.success(summary);
+    }
+
     const reviews = await actions.findReviews({
       user,
       restaurant,
