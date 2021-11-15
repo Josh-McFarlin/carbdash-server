@@ -47,6 +47,7 @@ functions:
   - ${file(src/functions/socialGroup/functions.yml)}
   - ${file(src/functions/user/functions.yml)}
   - ${file(src/functions/recent/functions.yml)}
+  - ${file(src/functions/follow/functions.yml)}
   - ${file(src/functions/auth/functions.yml)}
 
 resources:
