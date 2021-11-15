@@ -11,19 +11,29 @@ export const createFollow = async (follow: FollowType): Promise<FollowType> => {
 };
 
 export const findFollows = ({
+  fromType,
   from,
+  toType,
   to,
   perPage = 20,
   page = 0,
 }: {
+  fromType?: "User" | "Restaurant";
   from?: string;
+  toType?: "User" | "Restaurant";
   to?: string;
   perPage?: number;
   page?: number;
 }): Promise<FollowType[]> =>
   Follow.find({
+    ...(fromType != null && {
+      fromType: fromType,
+    }),
     ...(from != null && {
       from: new mongoose.Types.ObjectId(from) as any,
+    }),
+    ...(toType != null && {
+      toType: toType,
     }),
     ...(to != null && {
       to: new mongoose.Types.ObjectId(to) as any,
