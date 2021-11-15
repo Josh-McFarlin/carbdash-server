@@ -1,4 +1,5 @@
 import type { AddressType, CoordinatesType } from "./Location";
+import { Schema } from "mongoose";
 
 export interface DayAvailabilityType {
   startHour: number;
@@ -43,5 +44,6 @@ export interface RestaurantType {
     sum: number;
   };
   menuPercents: Record<string, number>;
+  followers: Schema.Types.ObjectId[];
   createdAt: Date;
 }

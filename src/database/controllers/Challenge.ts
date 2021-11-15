@@ -41,7 +41,7 @@ export const findChallenges = ({
     ...(user == null &&
       owner == null && {
         expiresAt: {
-          $lte: new Date(),
+          $gte: new Date(),
         },
       }),
   })

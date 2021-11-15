@@ -72,6 +72,12 @@ const RestaurantSchema = new mongoose.Schema<RestaurantType>({
     default: {},
     required: true,
   },
+  followers: {
+    type: [mongoose.Schema.Types.ObjectId],
+    ref: "User",
+    required: true,
+    default: [],
+  },
   createdAt: {
     type: Date,
     required: true,
