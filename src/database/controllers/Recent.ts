@@ -21,25 +21,23 @@ export const findRecent = ({
   page?: number;
 }): Promise<RecentType[]> =>
   Recent.find({
+    ...(coordinates != null && {
+      coordinates: {
+        $nearSphere: {
+          $geometry: {
+            type: "Point",
+            coordinates: [coordinates.latitude, coordinates.longitude],
+          },
+          $maxDistance: 15 * METERS_PER_MILE,
+        },
+      },
+    }),
     ...((tags || coordinates || users || restaurants) && {
       $or: [
         {
           ...(tags != null && {
             tags: {
               $in: tags,
-            },
-          }),
-        },
-        {
-          ...(coordinates != null && {
-            coordinates: {
-              $nearSphere: {
-                $geometry: {
-                  type: "Point",
-                  coordinates: [coordinates.latitude, coordinates.longitude],
-                },
-                $maxDistance: 15 * METERS_PER_MILE,
-              },
             },
           }),
         },
