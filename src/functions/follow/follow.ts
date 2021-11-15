@@ -39,12 +39,14 @@ export const findFollows: APIGatewayProxyHandler = async (
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const { fromType, from, toType, to, page, perPage } =
+    const { fromType, from, toType, to, simpleType, page, perPage } =
       event.queryStringParameters || {};
 
     if (!from && !to) {
       throw new Error("A from or to must be supplied!");
     }
+
+    const isSimple = simpleType != null;
 
     const follows = await actions.findFollows({
       fromType: fromType as any,
@@ -56,7 +58,11 @@ export const findFollows: APIGatewayProxyHandler = async (
     });
 
     return Response.success({
-      follows,
+      follows: isSimple
+        ? simpleType === "from"
+          ? follows.map((i) => i.from)
+          : follows.map((i) => i.to)
+        : follows,
     });
   } catch (error) {
     return Response.error(
