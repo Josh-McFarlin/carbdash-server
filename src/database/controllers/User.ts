@@ -31,7 +31,7 @@ export const findUsers = ({
       username: new RegExp(username, "i"),
     }),
   })
-    .sort("username")
+    .sort("-score")
     .skip(perPage * page)
     .limit(perPage)
     .lean()
