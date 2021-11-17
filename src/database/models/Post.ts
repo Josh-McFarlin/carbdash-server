@@ -28,6 +28,11 @@ const PostSchema = new mongoose.Schema<PostType>({
     required: true,
     default: [],
   },
+  category: {
+    type: String,
+    required: true,
+    index: true,
+  },
   tags: {
     type: [String],
     required: true,

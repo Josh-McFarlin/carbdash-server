@@ -1,0 +1,10 @@
+uploadImage:
+  handler: src/functions/image/image.uploadImage
+  events:
+    - http:
+        path: image
+        method: get
+        cors: true
+        authorizer:
+          name: userAuthorizer
+          identitySource: method.request.header.Authorization

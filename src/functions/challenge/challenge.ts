@@ -3,7 +3,6 @@ import Response from "../../utils/Response";
 import { StatusCode } from "../../types/Response";
 import * as actions from "../../actions/challenge";
 import "../../database";
-import { createUploadUrl } from "../../utils/s3";
 
 /**
  * Create a new Challenge
@@ -15,16 +14,14 @@ export const createChallenge: APIGatewayProxyHandler = async (
 ): Promise<APIGatewayProxyResult> => {
   try {
     const body = JSON.parse(event.body);
-    const upload = await createUploadUrl();
+
     const challenge = await actions.createChallenge({
       ...body,
       owner: event.requestContext.authorizer.principalId,
-      iconUrl: upload.fileUrl,
     });
 
     return Response.success({
       challenge,
-      uploadUrl: upload.uploadUrl,
     });
   } catch (error) {
     return Response.error(

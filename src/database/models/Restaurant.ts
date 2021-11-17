@@ -31,6 +31,11 @@ const RestaurantSchema = new mongoose.Schema<RestaurantType>({
   bio: {
     type: String,
   },
+  category: {
+    type: String,
+    required: true,
+    index: true,
+  },
   tags: {
     type: [String],
     required: true,

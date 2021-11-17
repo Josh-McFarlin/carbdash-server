@@ -13,7 +13,7 @@ export const findRecent: APIGatewayProxyHandler = async (
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const { latitude, longitude, tags, users, page, perPage } =
+    const { latitude, longitude, category, tags, users, page, perPage } =
       event.queryStringParameters || {};
 
     if ((latitude == null) != (longitude == null)) {
@@ -23,6 +23,7 @@ export const findRecent: APIGatewayProxyHandler = async (
     }
 
     const recent = await actions.findRecent({
+      category,
       tags: tags?.split(","),
       ...(latitude != null && {
         coordinates: {

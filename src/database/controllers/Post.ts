@@ -4,22 +4,34 @@ import Restaurant from "../models/Restaurant";
 import Recent from "../models/Recent";
 import User from "../models/User";
 import { PostType } from "../../types/Post";
+import { RestaurantType } from "../../types/Restaurant";
 
 export const createPost = async (post: PostType): Promise<PostType> => {
-  const newPost = new Post(post);
+  const rest: RestaurantType | null =
+    post.restaurant != null
+      ? await Restaurant.findById(post.restaurant).lean().exec()
+      : null;
+
+  const newPost = new Post({
+    ...post,
+    ...(rest != null &&
+      post.category == null && {
+        category: rest.category,
+      }),
+  });
   await newPost.save();
 
   const newRecent = new Recent({
     type: "Post",
     data: newPost._id,
     tags: newPost.tags,
+    category: newPost.category,
     ...(newPost.user != null && {
       users: [newPost.user],
     }),
     ...(newPost.restaurant != null && {
       restaurants: [newPost.restaurant],
-      coordinates: (await Restaurant.findById(newPost.restaurant).lean().exec())
-        .coordinates,
+      coordinates: rest.coordinates,
     }),
   });
   await newRecent.save();
@@ -42,6 +54,7 @@ export const findPosts = ({
   user,
   restaurant,
   ownerType,
+  category,
   tags,
   perPage = 20,
   page = 0,
@@ -49,6 +62,7 @@ export const findPosts = ({
   user?: string;
   restaurant?: string;
   ownerType?: "User" | "Restaurant";
+  category?: string;
   tags?: string[];
   perPage?: number;
   page?: number;
@@ -62,6 +76,9 @@ export const findPosts = ({
     }),
     ...(ownerType != null && {
       ownerType,
+    }),
+    ...(category != null && {
+      category,
     }),
     ...(tags != null && {
       tags: {

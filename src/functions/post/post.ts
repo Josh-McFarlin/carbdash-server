@@ -2,7 +2,6 @@ import { APIGatewayProxyHandler, APIGatewayProxyResult } from "aws-lambda";
 import Response from "../../utils/Response";
 import { StatusCode } from "../../types/Response";
 import * as actions from "../../actions/post";
-import { createUploadUrl } from "../../utils/s3";
 import "../../database";
 
 /**
@@ -15,12 +14,9 @@ export const createPost: APIGatewayProxyHandler = async (
 ): Promise<APIGatewayProxyResult> => {
   try {
     const body = JSON.parse(event.body);
-    const photoUrls = await Promise.all(
-      Array.from(Array(body.photoUrls.length)).map(createUploadUrl)
-    );
+
     const post = await actions.createPost({
       ...body,
-      photoUrls: photoUrls.map((i) => i.fileUrl),
       ...(body.ownerType === "User"
         ? {
             user: event.requestContext.authorizer.principalId,
@@ -32,7 +28,6 @@ export const createPost: APIGatewayProxyHandler = async (
 
     return Response.success({
       post,
-      uploadUrls: photoUrls.map((i) => i.uploadUrl),
     });
   } catch (error) {
     return Response.error(
@@ -80,13 +75,14 @@ export const findPosts: APIGatewayProxyHandler = async (
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const { user, restaurant, ownerType, tags, page, perPage } =
+    const { user, restaurant, ownerType, category, tags, page, perPage } =
       event.queryStringParameters || {};
 
     const posts = await actions.findPosts({
       user,
       restaurant,
       ownerType,
+      category,
       tags: tags?.split(","),
       page: page ? parseInt(page, 10) : null,
       perPage: perPage ? parseInt(perPage, 10) : null,

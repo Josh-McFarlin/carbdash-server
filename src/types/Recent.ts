@@ -8,6 +8,7 @@ export interface RecentType {
   _id: string;
   type: "Post" | "Review" | "CheckIn";
   data: PostType | ReviewType | CheckInType;
+  category?: string;
   tags: string[];
   coordinates?: CoordinatesType;
   users: Schema.Types.ObjectId[];

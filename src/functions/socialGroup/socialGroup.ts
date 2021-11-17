@@ -3,7 +3,6 @@ import Response from "../../utils/Response";
 import { StatusCode } from "../../types/Response";
 import * as actions from "../../actions/socialGroup";
 import "../../database";
-import { createUploadUrl } from "../../utils/s3";
 
 /**
  * Create a new SocialGroup
@@ -15,16 +14,14 @@ export const createSocialGroup: APIGatewayProxyHandler = async (
 ): Promise<APIGatewayProxyResult> => {
   try {
     const body = JSON.parse(event.body);
-    const upload = await createUploadUrl();
+
     const socialGroup = await actions.createSocialGroup({
       ...body,
       owner: event.requestContext.authorizer.principalId,
-      iconUrl: upload.fileUrl,
     });
 
     return Response.success({
       socialGroup,
-      uploadUrl: upload.uploadUrl,
     });
   } catch (error) {
     return Response.error(

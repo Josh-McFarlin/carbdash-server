@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 const METERS_PER_MILE = 1610;
 
 export const findRecent = ({
+  category,
   tags,
   coordinates,
   users,
@@ -13,6 +14,7 @@ export const findRecent = ({
   perPage = 20,
   page = 0,
 }: {
+  category?: string;
   tags?: string[];
   coordinates?: CoordinatesType;
   users?: string[];
@@ -32,8 +34,13 @@ export const findRecent = ({
         },
       },
     }),
-    ...((tags || coordinates || users || restaurants) && {
+    ...((category || tags || coordinates || users || restaurants) && {
       $or: [
+        {
+          ...(category != null && {
+            category,
+          }),
+        },
         {
           ...(tags != null && {
             tags: {

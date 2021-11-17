@@ -7,6 +7,7 @@ export interface PostType {
   ownerType: "User" | "Restaurant";
   body: string;
   photoUrls: string[];
+  category: string;
   tags: string[];
   createdAt: Date;
 }

@@ -3,7 +3,6 @@ import Response from "../../utils/Response";
 import { StatusCode } from "../../types/Response";
 import * as actions from "../../actions/offer";
 import "../../database";
-import { createUploadUrl } from "../../utils/s3";
 
 /**
  * Create a new Offer
@@ -15,16 +14,14 @@ export const createOffer: APIGatewayProxyHandler = async (
 ): Promise<APIGatewayProxyResult> => {
   try {
     const body = JSON.parse(event.body);
-    const upload = await createUploadUrl();
+
     const offer = await actions.createOffer({
       ...body,
       restaurant: event.requestContext.authorizer.principalId,
-      photoUrl: upload.fileUrl,
     });
 
     return Response.success({
       offer,
-      uploadUrl: upload.uploadUrl,
     });
   } catch (error) {
     return Response.error(
