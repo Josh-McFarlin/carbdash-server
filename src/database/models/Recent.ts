@@ -14,6 +14,10 @@ const RecentSchema = new mongoose.Schema<RecentType>({
     refPath: "type",
     required: true,
   },
+  category: {
+    type: String,
+    index: true,
+  },
   tags: {
     type: [String],
     required: true,
