@@ -28,13 +28,22 @@ export const userAuthorizer: APIGatewayAuthorizerHandler = async (
         throw new Error("User not found!");
       }
 
+      console.log("reqARN", event.methodArn);
+
       return {
         policyDocument: {
           Version: "2012-10-17",
           Statement: [
             {
               Action: "execute-api:Invoke",
-              Resource: [event.methodArn],
+              Resource: [
+                event.methodArn,
+                "arn:aws:execute-api:us-east-1:005569292759:7d7zpuz4mf/dev/OPTIONS/*",
+                "arn:aws:execute-api:us-east-1:005569292759:7d7zpuz4mf/dev/GET/*",
+                "arn:aws:execute-api:us-east-1:005569292759:7d7zpuz4mf/dev/POST/*",
+                "arn:aws:execute-api:us-east-1:005569292759:7d7zpuz4mf/dev/PUT/*",
+                "arn:aws:execute-api:us-east-1:005569292759:7d7zpuz4mf/dev/DELETE/*",
+              ],
               Effect: "Allow",
             },
           ],
@@ -74,7 +83,14 @@ export const restaurantAuthorizer: APIGatewayAuthorizerHandler = async (
           Statement: [
             {
               Action: "execute-api:Invoke",
-              Resource: [event.methodArn],
+              Resource: [
+                event.methodArn,
+                "arn:aws:execute-api:us-east-1:005569292759:7d7zpuz4mf/dev/OPTIONS/*",
+                "arn:aws:execute-api:us-east-1:005569292759:7d7zpuz4mf/dev/GET/*",
+                "arn:aws:execute-api:us-east-1:005569292759:7d7zpuz4mf/dev/POST/*",
+                "arn:aws:execute-api:us-east-1:005569292759:7d7zpuz4mf/dev/PUT/*",
+                "arn:aws:execute-api:us-east-1:005569292759:7d7zpuz4mf/dev/DELETE/*",
+              ],
               Effect: "Allow",
             },
           ],
