@@ -27,9 +27,7 @@ export const createUploadUrl = async (
       acl: "public-read",
     },
     Expires: 60,
-    Conditions: [
-      ["content-length-range", 0, 50000000],
-    ],
+    Conditions: [["content-length-range", 0, 50000000]],
   });
 
   return {
