@@ -28,9 +28,7 @@ export const createUploadUrl = async (
     },
     Expires: 60,
     Conditions: [
-      // max image size: 20MB
       ["content-length-range", 0, 50000000],
-      ["starts-with", "$Content-Type", "image/"],
     ],
   });
 

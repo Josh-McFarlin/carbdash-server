@@ -12,7 +12,9 @@ export const uploadImage: APIGatewayProxyHandler = async (
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const { contentTypes } = event.queryStringParameters || {};
+    const contentTypes = decodeURIComponent(
+      event?.queryStringParameters?.contentTypes || ""
+    );
 
     const photoUrls = await Promise.all(
       contentTypes?.split(",").map((type) => createUploadUrl(type))
