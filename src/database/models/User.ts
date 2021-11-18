@@ -28,6 +28,9 @@ const UserSchema = new mongoose.Schema<UserType>({
     type: String,
     required: true,
   },
+  bio: {
+    type: String,
+  },
   score: {
     type: Number,
     required: true,

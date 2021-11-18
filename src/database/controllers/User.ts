@@ -41,7 +41,20 @@ export const updateUserById = (
   id: string,
   updates: Partial<UserType>
 ): Promise<UserType> =>
-  User.findByIdAndUpdate(id, updates, {
+  User.findByIdAndUpdate(id, {
+    ...(updates.name != null && {
+      name: updates.name,
+    }),
+    ...(updates.email != null && {
+      email: updates.email,
+    }),
+    ...(updates.bio != null && {
+      bio: updates.bio,
+    }),
+    ...(updates.avatarUrl != null && {
+      avatarUrl: updates.avatarUrl,
+    }),
+  }, {
     new: true,
   })
     .lean()
