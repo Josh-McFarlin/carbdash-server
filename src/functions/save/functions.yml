@@ -25,3 +25,13 @@ deleteSaveById:
         authorizer:
           name: userAuthorizer
           identitySource: method.request.header.Authorization
+deleteSaveByContent:
+  handler: src/functions/save/save.deleteSaveByContent
+  events:
+    - http:
+        path: save
+        method: delete
+        cors: true
+        authorizer:
+          name: userAuthorizer
+          identitySource: method.request.header.Authorization

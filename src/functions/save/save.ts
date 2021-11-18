@@ -93,3 +93,33 @@ export const deleteSaveById: APIGatewayProxyHandler = async (
     );
   }
 };
+
+/**
+ * Delete Save By Content
+ * @http DELETE
+ */
+export const deleteSaveByContent: APIGatewayProxyHandler = async (
+  event,
+  _context
+): Promise<APIGatewayProxyResult> => {
+  try {
+    const contentType = decodeURIComponent(
+      event.queryStringParameters?.contentType
+    );
+    const content = decodeURIComponent(event.queryStringParameters?.content);
+
+    await actions.deleteSaveByContent({
+      from: event.requestContext.authorizer.principalId,
+      fromType: "User",
+      contentType: contentType as any,
+      content,
+    });
+
+    return Response.success();
+  } catch (error) {
+    return Response.error(
+      StatusCode.InternalServerError,
+      "Unable to delete Save!"
+    );
+  }
+};

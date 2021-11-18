@@ -44,5 +44,48 @@ export const findSaves = ({
     .lean()
     .exec();
 
+export const findSavedPosts = ({
+  fromType,
+  from,
+  perPage = 20,
+  page = 0,
+}: {
+  fromType: "User" | "Restaurant";
+  from: string;
+  perPage?: number;
+  page?: number;
+}): Promise<SaveType[]> =>
+  Save.find({
+    fromType: fromType,
+    from: new mongoose.Types.ObjectId(from) as any,
+    contentType: "Post",
+  })
+    .skip(perPage * page)
+    .limit(perPage)
+    .populate("content")
+    .select("content")
+    .lean()
+    .exec();
+
 export const deleteSaveById = (id: string): Promise<SaveType> =>
   Save.findByIdAndDelete(id).lean().exec();
+
+export const deleteSaveByContent = ({
+  fromType,
+  from,
+  contentType,
+  content,
+}: {
+  fromType: "User" | "Restaurant";
+  from: string;
+  contentType: "CheckIn" | "Post" | "Review";
+  content: string;
+}): Promise<SaveType> =>
+  Save.findOneAndDelete({
+    fromType: fromType,
+    from: new mongoose.Types.ObjectId(from) as any,
+    contentType,
+    content: new mongoose.Types.ObjectId(content) as any,
+  })
+    .lean()
+    .exec();
