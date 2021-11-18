@@ -1,0 +1,27 @@
+createSave:
+  handler: src/functions/save/save.createSave
+  events:
+    - http:
+        path: save
+        method: post
+        cors: true
+        authorizer:
+          name: userAuthorizer
+          identitySource: method.request.header.Authorization
+findSaves:
+  handler: src/functions/save/save.findSaves
+  events:
+    - http:
+        path: save
+        method: get
+        cors: true
+deleteSaveById:
+  handler: src/functions/save/save.deleteSaveById
+  events:
+    - http:
+        path: save/{id}
+        method: delete
+        cors: true
+        authorizer:
+          name: userAuthorizer
+          identitySource: method.request.header.Authorization

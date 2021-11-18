@@ -49,6 +49,7 @@ functions:
   - ${file(src/functions/user/functions.yml)}
   - ${file(src/functions/recent/functions.yml)}
   - ${file(src/functions/follow/functions.yml)}
+  - ${file(src/functions/save/functions.yml)}
   - ${file(src/functions/auth/functions.yml)}
   - ${file(src/functions/image/functions.yml)}
 
