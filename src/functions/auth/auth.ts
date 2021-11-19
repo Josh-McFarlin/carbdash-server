@@ -17,16 +17,24 @@ export const findUserByAuth: APIGatewayProxyHandler = async (
     const { type } = event.queryStringParameters || {};
 
     if (type === "USER") {
-      const auth = await actions.findUserByAuth(id);
+      const user = await actions.findUserByAuth(id);
 
       return Response.success({
-        auth,
+        auth: {
+          ...user,
+          followers: user?.followers?.size || 0,
+          following: user?.following?.size || 0,
+          saved: user?.saved?.size || 0,
+        },
       });
     } else if (type === "RESTAURANT") {
-      const auth = await actions.findRestaurantByAuth(id);
+      const restaurant = await actions.findRestaurantByAuth(id);
 
       return Response.success({
-        auth,
+        auth: {
+          ...restaurant,
+          followers: restaurant?.followers?.size || 0,
+        },
       });
     } else {
       throw new Error("Invalid auth type!");

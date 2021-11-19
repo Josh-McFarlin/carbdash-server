@@ -78,5 +78,5 @@ export const toggleFollowById = async (
   await authedUser.save();
   await followUser.save();
 
-  return authedUser;
+  return authedUser.toJSON() as any;
 };

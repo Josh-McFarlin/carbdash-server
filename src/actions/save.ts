@@ -57,5 +57,5 @@ export const toggleSaveById = async (
 
   await authedUser.save();
 
-  return authedUser;
+  return authedUser.toJSON() as any;
 };

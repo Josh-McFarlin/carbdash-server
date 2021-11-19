@@ -20,9 +20,9 @@ export const createUser: APIGatewayProxyHandler = async (
     return Response.success({
       user: {
         ...user,
-        followers: user.followers.size,
-        following: user.following.size,
-        saved: user.saved.size,
+        followers: user?.followers?.size || 0,
+        following: user?.following?.size || 0,
+        saved: user?.saved?.size || 0,
       },
     });
   } catch (error) {
@@ -53,9 +53,9 @@ export const findUserById: APIGatewayProxyHandler = async (
     return Response.success({
       user: {
         ...user,
-        followers: user.followers.size,
-        following: user.following.size,
-        saved: user.saved.size,
+        followers: user?.followers?.size || 0,
+        following: user?.following?.size || 0,
+        saved: user?.saved?.size || 0,
       },
     });
   } catch (error) {
@@ -88,9 +88,9 @@ export const findUsers: APIGatewayProxyHandler = async (
     return Response.success({
       users: users.map((user) => ({
         ...user,
-        followers: user.followers.size,
-        following: user.following.size,
-        saved: user.saved.size,
+        followers: user?.followers?.size || 0,
+        following: user?.following?.size || 0,
+        saved: user?.saved?.size || 0,
       })),
     });
   } catch (error) {
@@ -118,9 +118,9 @@ export const updateUserById: APIGatewayProxyHandler = async (
     return Response.success({
       user: {
         ...user,
-        followers: user.followers.size,
-        following: user.following.size,
-        saved: user.saved.size,
+        followers: user?.followers?.size || 0,
+        following: user?.following?.size || 0,
+        saved: user?.saved?.size || 0,
       },
     });
   } catch (error) {

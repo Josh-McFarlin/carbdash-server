@@ -55,9 +55,9 @@ export const toggleSave: APIGatewayProxyHandler = async (
     return Response.success({
       user: {
         ...user,
-        followers: user.followers.size,
-        following: user.following.size,
-        saved: user.saved.size,
+        followers: user?.followers?.size || 0,
+        following: user?.following?.size || 0,
+        saved: user?.saved?.size || 0,
       },
     });
   } catch (error) {
