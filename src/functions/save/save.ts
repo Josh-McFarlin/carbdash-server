@@ -15,6 +15,7 @@ export const createSave: APIGatewayProxyHandler = async (
   try {
     const body = JSON.parse(event.body);
     const save = await actions.createSave({
+      fromType: "User",
       ...body,
       from: event.requestContext.authorizer.principalId,
     });
