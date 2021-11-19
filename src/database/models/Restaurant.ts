@@ -2,6 +2,7 @@ import mongoose, { Model } from "mongoose";
 import type { RestaurantType } from "../../types/Restaurant";
 import { AddressSchema, PointSchema } from "../schemas/Location";
 import { DayAvailabilitySchema } from "../schemas/OpenHours";
+import { AccountRefSchema } from "../schemas/AccountRef";
 
 const arrayLengthSeven = (arr: unknown[]) => arr.length === 7;
 
@@ -78,10 +79,10 @@ const RestaurantSchema = new mongoose.Schema<RestaurantType>({
     required: true,
   },
   followers: {
-    type: [mongoose.Schema.Types.ObjectId],
-    ref: "User",
+    type: mongoose.Schema.Types.Map,
+    of: AccountRefSchema,
     required: true,
-    default: [],
+    default: {} as any,
   },
   createdAt: {
     type: Date,

@@ -3,66 +3,36 @@ import Response from "../../utils/Response";
 import { StatusCode } from "../../types/Response";
 import * as actions from "../../actions/follow";
 import "../../database";
-
-/**
- * Create a new Follow
- * @http POST
- */
-export const createFollow: APIGatewayProxyHandler = async (
-  event,
-  _context
-): Promise<APIGatewayProxyResult> => {
-  try {
-    const body = JSON.parse(event.body);
-    const follow = await actions.createFollow({
-      ...body,
-      from: event.requestContext.authorizer.principalId,
-    });
-
-    return Response.success({
-      follow,
-    });
-  } catch (error) {
-    return Response.error(
-      StatusCode.InternalServerError,
-      "Unable to create Follow!"
-    );
-  }
-};
+import { AccountRefType } from "../../types/AccountRef";
 
 /**
  * Find Follows
  * @http GET
  */
-export const findFollows: APIGatewayProxyHandler = async (
+export const findFollowsById: APIGatewayProxyHandler = async (
   event,
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const { fromType, from, toType, to, simpleType, page, perPage } =
-      event.queryStringParameters || {};
+    const { id, format } = event.queryStringParameters || {};
 
-    if (!from && !to) {
-      throw new Error("A from or to must be supplied!");
-    }
-
-    const isSimple = simpleType != null;
-
-    const follows = await actions.findFollows({
-      fromType: fromType as any,
-      from,
-      toType: toType as any,
-      to,
-      page: page ? parseInt(page, 10) : null,
-      perPage: perPage ? parseInt(perPage, 10) : null,
-    });
+    const follows = await actions.findFollowsById(
+      id || event.requestContext.authorizer.principalId,
+      format === "detailed"
+    );
 
     return Response.success({
-      follows: isSimple
-        ? simpleType === "from"
-          ? follows.map((i) => i.from)
-          : follows.map((i) => i.to)
-        : follows,
+      follows:
+        format === "simple"
+          ? {
+              followers: (follows.followers as AccountRefType[]).map(
+                (i: AccountRefType) => i.ref.toString()
+              ),
+              following: (follows.following as AccountRefType[]).map(
+                (i: AccountRefType) => i.ref.toString()
+              ),
+            }
+          : follows,
     });
   } catch (error) {
     return Response.error(
@@ -73,23 +43,33 @@ export const findFollows: APIGatewayProxyHandler = async (
 };
 
 /**
- * Delete Follow By ID
- * @http DELETE
+ * Toggle a Follow
+ * @http POST
  */
-export const deleteFollowById: APIGatewayProxyHandler = async (
+export const toggleFollow: APIGatewayProxyHandler = async (
   event,
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const id = decodeURIComponent(event.pathParameters.id);
+    const { followType, followId } = JSON.parse(event.body);
+    const user = await actions.toggleFollowById(
+      event.requestContext.authorizer.principalId,
+      followType,
+      followId
+    );
 
-    await actions.deleteFollowById(id);
-
-    return Response.success();
+    return Response.success({
+      user: {
+        ...user,
+        followers: user.followers.size,
+        following: user.following.size,
+        saved: user.saved.size,
+      },
+    });
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to delete Follow!"
+      "Unable to create Follow!"
     );
   }
 };

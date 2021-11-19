@@ -1,5 +1,5 @@
-createFollow:
-  handler: src/functions/follow/follow.createFollow
+toggleFollow:
+  handler: src/functions/follow/follow.toggleFollow
   events:
     - http:
         path: follow
@@ -9,19 +9,9 @@ createFollow:
           name: userAuthorizer
           identitySource: method.request.header.Authorization
 findFollows:
-  handler: src/functions/follow/follow.findFollows
+  handler: src/functions/follow/follow.findFollowsById
   events:
     - http:
         path: follow
         method: get
         cors: true
-deleteFollowById:
-  handler: src/functions/follow/follow.deleteFollowById
-  events:
-    - http:
-        path: follow/{id}
-        method: delete
-        cors: true
-        authorizer:
-          name: userAuthorizer
-          identitySource: method.request.header.Authorization

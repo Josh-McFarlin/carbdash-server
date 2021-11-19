@@ -1,6 +1,8 @@
 import mongoose, { Model } from "mongoose";
 import type { UserType } from "../../types/User";
 import { LocationSchema } from "../schemas/Location";
+import { SaveRefSchema } from "../schemas/SaveRef";
+import { AccountRefSchema } from "../schemas/AccountRef";
 
 const UserSchema = new mongoose.Schema<UserType>({
   auth0Id: {
@@ -49,16 +51,22 @@ const UserSchema = new mongoose.Schema<UserType>({
     default: [],
   },
   followers: {
-    type: [mongoose.Schema.Types.ObjectId],
-    ref: "User",
+    type: mongoose.Schema.Types.Map,
+    of: AccountRefSchema,
     required: true,
-    default: [],
+    default: {} as any,
   },
   following: {
-    type: [mongoose.Schema.Types.ObjectId],
-    ref: "User",
+    type: mongoose.Schema.Types.Map,
+    of: AccountRefSchema,
     required: true,
-    default: [],
+    default: {} as any,
+  },
+  saved: {
+    type: mongoose.Schema.Types.Map,
+    of: SaveRefSchema,
+    required: true,
+    default: {} as any,
   },
   createdAt: {
     type: Date,

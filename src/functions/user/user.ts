@@ -18,7 +18,12 @@ export const createUser: APIGatewayProxyHandler = async (
     const user = await actions.createUser(body);
 
     return Response.success({
-      user,
+      user: {
+        ...user,
+        followers: user.followers.size,
+        following: user.following.size,
+        saved: user.saved.size,
+      },
     });
   } catch (error) {
     return Response.error(
@@ -46,7 +51,12 @@ export const findUserById: APIGatewayProxyHandler = async (
     }
 
     return Response.success({
-      user,
+      user: {
+        ...user,
+        followers: user.followers.size,
+        following: user.following.size,
+        saved: user.saved.size,
+      },
     });
   } catch (error) {
     return Response.error(
@@ -76,7 +86,12 @@ export const findUsers: APIGatewayProxyHandler = async (
     });
 
     return Response.success({
-      users,
+      users: users.map((user) => ({
+        ...user,
+        followers: user.followers.size,
+        following: user.following.size,
+        saved: user.saved.size,
+      })),
     });
   } catch (error) {
     return Response.error(
@@ -101,7 +116,12 @@ export const updateUserById: APIGatewayProxyHandler = async (
     const user = await actions.updateUserById(id, body);
 
     return Response.success({
-      user,
+      user: {
+        ...user,
+        followers: user.followers.size,
+        following: user.following.size,
+        saved: user.saved.size,
+      },
     });
   } catch (error) {
     return Response.error(

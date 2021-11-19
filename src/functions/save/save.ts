@@ -3,67 +3,30 @@ import Response from "../../utils/Response";
 import { StatusCode } from "../../types/Response";
 import * as actions from "../../actions/save";
 import "../../database";
-
-/**
- * Create a new Save
- * @http POST
- */
-export const createSave: APIGatewayProxyHandler = async (
-  event,
-  _context
-): Promise<APIGatewayProxyResult> => {
-  try {
-    const body = JSON.parse(event.body);
-    const save = await actions.createSave({
-      fromType: "User",
-      ...body,
-      from: event.requestContext.authorizer.principalId,
-    });
-
-    return Response.success({
-      save,
-    });
-  } catch (error) {
-    return Response.error(
-      StatusCode.InternalServerError,
-      "Unable to create Save!"
-    );
-  }
-};
+import { SaveRefType } from "../../types/SaveRef";
 
 /**
  * Find Saves
  * @http GET
  */
-export const findSaves: APIGatewayProxyHandler = async (
+export const findSavesById: APIGatewayProxyHandler = async (
   event,
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const { fromType, from, contentType, content, simpleType, page, perPage } =
-      event.queryStringParameters || {};
+    const { id, format, filter } = event.queryStringParameters || {};
 
-    if (!from && !content) {
-      throw new Error("A from or content must be supplied!");
-    }
-
-    const isSimple = simpleType != null;
-
-    const saves = await actions.findSaves({
-      fromType: fromType as any,
-      from,
-      contentType: contentType as any,
-      content,
-      page: page ? parseInt(page, 10) : null,
-      perPage: perPage ? parseInt(perPage, 10) : null,
-    });
+    const saves = await actions.findSavedById(
+      id || event.requestContext.authorizer.principalId,
+      format === "detailed",
+      filter as any
+    );
 
     return Response.success({
-      saves: isSimple
-        ? simpleType === "from"
-          ? saves.map((i) => i.from)
-          : saves.map((i) => i.content)
-        : saves,
+      saves:
+        format === "simple"
+          ? (saves as SaveRefType[]).map((i: SaveRefType) => i.ref.toString())
+          : saves,
     });
   } catch (error) {
     return Response.error(
@@ -74,53 +37,33 @@ export const findSaves: APIGatewayProxyHandler = async (
 };
 
 /**
- * Delete Save By ID
- * @http DELETE
+ * Toggle a Save
+ * @http POST
  */
-export const deleteSaveById: APIGatewayProxyHandler = async (
+export const toggleSave: APIGatewayProxyHandler = async (
   event,
   _context
 ): Promise<APIGatewayProxyResult> => {
   try {
-    const id = decodeURIComponent(event.pathParameters.id);
-
-    await actions.deleteSaveById(id);
-
-    return Response.success();
-  } catch (error) {
-    return Response.error(
-      StatusCode.InternalServerError,
-      "Unable to delete Save!"
+    const { contentType, content } = JSON.parse(event.body);
+    const user = await actions.toggleSaveById(
+      event.requestContext.authorizer.principalId,
+      contentType,
+      content
     );
-  }
-};
 
-/**
- * Delete Save By Content
- * @http DELETE
- */
-export const deleteSaveByContent: APIGatewayProxyHandler = async (
-  event,
-  _context
-): Promise<APIGatewayProxyResult> => {
-  try {
-    const contentType = decodeURIComponent(
-      event.queryStringParameters?.contentType
-    );
-    const content = decodeURIComponent(event.queryStringParameters?.content);
-
-    await actions.deleteSaveByContent({
-      from: event.requestContext.authorizer.principalId,
-      fromType: "User",
-      contentType: contentType as any,
-      content,
+    return Response.success({
+      user: {
+        ...user,
+        followers: user.followers.size,
+        following: user.following.size,
+        saved: user.saved.size,
+      },
     });
-
-    return Response.success();
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to delete Save!"
+      "Unable to create Save!"
     );
   }
 };

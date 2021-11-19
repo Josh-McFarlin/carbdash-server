@@ -1,5 +1,7 @@
 import type { Schema } from "mongoose";
 import type { LocationType } from "./Location";
+import { AccountRefType } from "./AccountRef";
+import { SaveRefType } from "./SaveRef";
 
 export interface UserType {
   _id: string;
@@ -12,7 +14,8 @@ export interface UserType {
   score: number;
   locations: LocationType[];
   groups: Schema.Types.ObjectId[];
-  followers: Schema.Types.ObjectId[];
-  following: Schema.Types.ObjectId[];
+  followers: Map<string, AccountRefType>;
+  following: Map<string, AccountRefType>;
+  saved: Map<string, SaveRefType>;
   createdAt: Date;
 }

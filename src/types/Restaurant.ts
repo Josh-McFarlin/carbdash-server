@@ -1,5 +1,5 @@
 import type { AddressType, CoordinatesType } from "./Location";
-import { Schema } from "mongoose";
+import { AccountRefType } from "./AccountRef";
 
 export interface DayAvailabilityType {
   startHour: number;
@@ -45,6 +45,6 @@ export interface RestaurantType {
     sum: number;
   };
   menuPercents: Record<string, number>;
-  followers: Schema.Types.ObjectId[];
+  followers: Map<string, AccountRefType>;
   createdAt: Date;
 }
