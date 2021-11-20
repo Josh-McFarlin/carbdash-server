@@ -61,16 +61,15 @@ export const toggleFollow: APIGatewayProxyHandler = async (
     return Response.success({
       user: {
         ...user,
-        followers: user?.followers?.size || 0,
-        following: user?.following?.size || 0,
-        saved: user?.saved?.size || 0,
+        followers: Object.keys(user?.followers).length || 0,
+        following: Object.keys(user?.following).length || 0,
+        saved: Object.keys(user?.saved).length || 0,
       },
     });
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      // "Unable to create Follow!"
-      error?.message || error
+      "Unable to create Follow!"
     );
   }
 };
