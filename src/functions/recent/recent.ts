@@ -38,7 +38,17 @@ export const findRecent: APIGatewayProxyHandler = async (
     });
 
     return Response.success({
-      recent,
+      recent: recent.map((content) => ({
+        ...content,
+        data: {
+          ...content.data,
+          likedBy: content.data.likedBy
+            ? Object.values(content?.data?.likedBy).map((i) =>
+                i.ref.toString()
+              ) || []
+            : [],
+        },
+      })),
     });
   } catch (error) {
     return Response.error(
