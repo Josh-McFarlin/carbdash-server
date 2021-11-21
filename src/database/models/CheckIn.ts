@@ -1,5 +1,6 @@
 import mongoose, { Model } from "mongoose";
 import type { CheckInType } from "../../types/CheckIn";
+import { AccountRefSchema } from "../schemas/AccountRef";
 
 const CheckInSchema = new mongoose.Schema<CheckInType>({
   user: {
@@ -19,6 +20,12 @@ const CheckInSchema = new mongoose.Schema<CheckInType>({
     ref: "User",
     required: true,
     default: [],
+  },
+  likedBy: {
+    type: mongoose.Schema.Types.Map,
+    of: AccountRefSchema,
+    required: true,
+    default: {} as any,
   },
   createdAt: {
     type: Date,

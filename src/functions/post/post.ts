@@ -27,7 +27,12 @@ export const createPost: APIGatewayProxyHandler = async (
     });
 
     return Response.success({
-      post,
+      post: {
+        ...post,
+        likedBy: post.likedBy
+          ? Object.values(post?.likedBy).map((i) => i.ref.toString()) || []
+          : [],
+      },
     });
   } catch (error) {
     return Response.error(
@@ -56,7 +61,12 @@ export const findPostById: APIGatewayProxyHandler = async (
     }
 
     return Response.success({
-      post,
+      post: {
+        ...post,
+        likedBy: post.likedBy
+          ? Object.values(post?.likedBy).map((i) => i.ref.toString()) || []
+          : [],
+      },
     });
   } catch (error) {
     return Response.error(
@@ -89,7 +99,12 @@ export const findPosts: APIGatewayProxyHandler = async (
     } as any);
 
     return Response.success({
-      posts,
+      posts: posts.map((post) => ({
+        ...post,
+        likedBy: post.likedBy
+          ? Object.values(post?.likedBy).map((i) => i.ref.toString()) || []
+          : [],
+      })),
     });
   } catch (error) {
     return Response.error(
@@ -114,7 +129,12 @@ export const updatePostById: APIGatewayProxyHandler = async (
     const post = await actions.updatePostById(id, body);
 
     return Response.success({
-      post,
+      post: {
+        ...post,
+        likedBy: post.likedBy
+          ? Object.values(post?.likedBy).map((i) => i.ref.toString()) || []
+          : [],
+      },
     });
   } catch (error) {
     return Response.error(

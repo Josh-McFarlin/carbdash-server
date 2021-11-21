@@ -1,4 +1,5 @@
 import type { Schema } from "mongoose";
+import { AccountRefType } from "./AccountRef";
 
 export interface ReviewType {
   _id: string;
@@ -8,6 +9,7 @@ export interface ReviewType {
   body: string;
   tags: string[];
   photoUrls: string[];
+  likedBy: Map<string, AccountRefType>;
   createdAt: Date;
 }
 

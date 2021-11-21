@@ -22,9 +22,13 @@ export const findUserByAuth: APIGatewayProxyHandler = async (
       return Response.success({
         auth: {
           ...user,
-          followers: Object.keys(user?.followers).length || 0,
-          following: Object.keys(user?.following).length || 0,
-          saved: Object.keys(user?.saved).length || 0,
+          followers: user?.followers
+            ? Object.keys(user?.followers).length || 0
+            : 0,
+          following: user?.following
+            ? Object.keys(user?.following).length || 0
+            : 0,
+          saved: user?.saved ? Object.keys(user?.saved).length || 0 : 0,
         },
       });
     } else if (type === "RESTAURANT") {

@@ -20,9 +20,13 @@ export const createUser: APIGatewayProxyHandler = async (
     return Response.success({
       user: {
         ...user,
-        followers: Object.keys(user?.followers).length || 0,
-        following: Object.keys(user?.following).length || 0,
-        saved: Object.keys(user?.saved).length || 0,
+        followers: user?.followers
+          ? Object.keys(user?.followers).length || 0
+          : 0,
+        following: user?.following
+          ? Object.keys(user?.following).length || 0
+          : 0,
+        saved: user?.saved ? Object.keys(user?.saved).length || 0 : 0,
       },
     });
   } catch (error) {
@@ -53,12 +57,17 @@ export const findUserById: APIGatewayProxyHandler = async (
     return Response.success({
       user: {
         ...user,
-        followers: Object.keys(user?.followers).length || 0,
-        following: Object.keys(user?.following).length || 0,
-        saved: Object.keys(user?.saved).length || 0,
+        followers: user?.followers
+          ? Object.keys(user?.followers).length || 0
+          : 0,
+        following: user?.following
+          ? Object.keys(user?.following).length || 0
+          : 0,
+        saved: user?.saved ? Object.keys(user?.saved).length || 0 : 0,
       },
     });
   } catch (error) {
+    console.error("e", error);
     return Response.error(
       StatusCode.InternalServerError,
       "Unable to find User!"
@@ -88,9 +97,13 @@ export const findUsers: APIGatewayProxyHandler = async (
     return Response.success({
       users: users.map((user) => ({
         ...user,
-        followers: Object.keys(user?.followers).length || 0,
-        following: Object.keys(user?.following).length || 0,
-        saved: Object.keys(user?.saved).length || 0,
+        followers: user?.followers
+          ? Object.keys(user?.followers).length || 0
+          : 0,
+        following: user?.following
+          ? Object.keys(user?.following).length || 0
+          : 0,
+        saved: user?.saved ? Object.keys(user?.saved).length || 0 : 0,
       })),
     });
   } catch (error) {
@@ -118,9 +131,13 @@ export const updateUserById: APIGatewayProxyHandler = async (
     return Response.success({
       user: {
         ...user,
-        followers: Object.keys(user?.followers).length || 0,
-        following: Object.keys(user?.following).length || 0,
-        saved: Object.keys(user?.saved).length || 0,
+        followers: user?.followers
+          ? Object.keys(user?.followers).length || 0
+          : 0,
+        following: user?.following
+          ? Object.keys(user?.following).length || 0
+          : 0,
+        saved: user?.saved ? Object.keys(user?.saved).length || 0 : 0,
       },
     });
   } catch (error) {

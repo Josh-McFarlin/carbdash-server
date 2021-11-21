@@ -21,7 +21,12 @@ export const createReview: APIGatewayProxyHandler = async (
     });
 
     return Response.success({
-      review,
+      review: {
+        ...review,
+        likedBy: review.likedBy
+          ? Object.values(review?.likedBy).map((i) => i.ref.toString()) || []
+          : [],
+      },
     });
   } catch (error) {
     return Response.error(
@@ -49,7 +54,12 @@ export const findReviewById: APIGatewayProxyHandler = async (
     }
 
     return Response.success({
-      review,
+      review: {
+        ...review,
+        likedBy: review.likedBy
+          ? Object.values(review?.likedBy).map((i) => i.ref.toString()) || []
+          : [],
+      },
     });
   } catch (error) {
     return Response.error(
@@ -86,7 +96,12 @@ export const findReviews: APIGatewayProxyHandler = async (
     });
 
     return Response.success({
-      reviews,
+      reviews: reviews.map((review) => ({
+        ...review,
+        likedBy: review.likedBy
+          ? Object.values(review?.likedBy).map((i) => i.ref.toString()) || []
+          : [],
+      })),
     });
   } catch (error) {
     return Response.error(
@@ -111,7 +126,12 @@ export const updateReviewById: APIGatewayProxyHandler = async (
     const review = await actions.updateReviewById(id, body);
 
     return Response.success({
-      review,
+      review: {
+        ...review,
+        likedBy: review.likedBy
+          ? Object.values(review?.likedBy).map((i) => i.ref.toString()) || []
+          : [],
+      },
     });
   } catch (error) {
     return Response.error(

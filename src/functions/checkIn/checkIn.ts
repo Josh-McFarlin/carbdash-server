@@ -20,7 +20,12 @@ export const createCheckIn: APIGatewayProxyHandler = async (
     });
 
     return Response.success({
-      checkIn,
+      checkIn: {
+        ...checkIn,
+        likedBy: checkIn.likedBy
+          ? Object.values(checkIn?.likedBy).map((i) => i.ref.toString()) || []
+          : [],
+      },
     });
   } catch (error) {
     return Response.error(
@@ -48,7 +53,12 @@ export const findCheckInById: APIGatewayProxyHandler = async (
     }
 
     return Response.success({
-      checkIn,
+      checkIn: {
+        ...checkIn,
+        likedBy: checkIn.likedBy
+          ? Object.values(checkIn?.likedBy).map((i) => i.ref.toString()) || []
+          : [],
+      },
     });
   } catch (error) {
     return Response.error(
@@ -79,7 +89,12 @@ export const findCheckIns: APIGatewayProxyHandler = async (
     });
 
     return Response.success({
-      checkIns,
+      checkIns: checkIns.map((checkIn) => ({
+        ...checkIn,
+        likedBy: checkIn.likedBy
+          ? Object.values(checkIn?.likedBy).map((i) => i.ref.toString()) || []
+          : [],
+      })),
     });
   } catch (error) {
     return Response.error(
@@ -104,7 +119,12 @@ export const updateCheckInById: APIGatewayProxyHandler = async (
     const checkIn = await actions.updateCheckInById(id, body);
 
     return Response.success({
-      checkIn,
+      checkIn: {
+        ...checkIn,
+        likedBy: checkIn.likedBy
+          ? Object.values(checkIn?.likedBy).map((i) => i.ref.toString()) || []
+          : [],
+      },
     });
   } catch (error) {
     return Response.error(

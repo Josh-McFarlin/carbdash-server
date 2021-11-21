@@ -1,5 +1,6 @@
 import mongoose, { Model } from "mongoose";
 import type { PostType } from "../../types/Post";
+import { AccountRefSchema } from "../schemas/AccountRef";
 
 const PostSchema = new mongoose.Schema<PostType>({
   user: {
@@ -38,6 +39,12 @@ const PostSchema = new mongoose.Schema<PostType>({
     required: true,
     index: true,
     default: [],
+  },
+  likedBy: {
+    type: mongoose.Schema.Types.Map,
+    of: AccountRefSchema,
+    required: true,
+    default: {} as any,
   },
   createdAt: {
     type: Date,

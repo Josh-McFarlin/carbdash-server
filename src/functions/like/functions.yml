@@ -1,0 +1,10 @@
+toggleLike:
+  handler: src/functions/like/like.toggleLike
+  events:
+    - http:
+        path: like
+        method: post
+        cors: true
+        authorizer:
+          name: userAuthorizer
+          identitySource: method.request.header.Authorization

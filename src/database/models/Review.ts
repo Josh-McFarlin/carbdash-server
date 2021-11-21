@@ -1,5 +1,6 @@
 import mongoose, { Model } from "mongoose";
 import type { ReviewType } from "../../types/Review";
+import { AccountRefSchema } from "../schemas/AccountRef";
 
 const ReviewSchema = new mongoose.Schema<ReviewType>({
   user: {
@@ -31,6 +32,12 @@ const ReviewSchema = new mongoose.Schema<ReviewType>({
     type: [String],
     required: true,
     default: [],
+  },
+  likedBy: {
+    type: mongoose.Schema.Types.Map,
+    of: AccountRefSchema,
+    required: true,
+    default: {} as any,
   },
   createdAt: {
     type: Date,
