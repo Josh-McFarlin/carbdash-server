@@ -86,7 +86,15 @@ export const findReviews: APIGatewayProxyHandler = async (
     if (restaurant != null) {
       const summary = await actions.summarizeReviewsByRestaurant(restaurant);
 
-      return Response.success(summary);
+      return Response.success({
+        ...summary,
+        reviews: summary.reviews.map((review) => ({
+          ...review,
+          likedBy: review.likedBy
+            ? Object.values(review?.likedBy).map((i) => i.ref.toString()) || []
+            : [],
+        })),
+      });
     }
 
     const reviews = await actions.findReviews({
