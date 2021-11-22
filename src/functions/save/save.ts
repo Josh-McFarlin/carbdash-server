@@ -31,7 +31,8 @@ export const findSavesById: APIGatewayProxyHandler = async (
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to find Saves!"
+      "Unable to find Saves!",
+      error?.message || error
     );
   }
 };
@@ -67,7 +68,8 @@ export const toggleSave: APIGatewayProxyHandler = async (
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to create Save!"
+      "Unable to create Save!",
+      error?.message || error
     );
   }
 };

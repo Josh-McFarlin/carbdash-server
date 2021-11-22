@@ -37,7 +37,8 @@ export const findFollowsById: APIGatewayProxyHandler = async (
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to find Follows!"
+      "Unable to find Follows!",
+      error?.message || error
     );
   }
 };
@@ -73,7 +74,8 @@ export const toggleFollow: APIGatewayProxyHandler = async (
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to create Follow!"
+      "Unable to create Follow!",
+      error?.message || error
     );
   }
 };

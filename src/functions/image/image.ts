@@ -26,7 +26,8 @@ export const uploadImage: APIGatewayProxyHandler = async (
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to create image url!"
+      "Unable to create image url!",
+      error?.message || error
     );
   }
 };

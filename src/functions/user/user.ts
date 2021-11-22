@@ -32,7 +32,8 @@ export const createUser: APIGatewayProxyHandler = async (
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to create User!"
+      "Unable to create User!",
+      error?.message || error
     );
   }
 };
@@ -70,7 +71,8 @@ export const findUserById: APIGatewayProxyHandler = async (
     console.error("e", error);
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to find User!"
+      "Unable to find User!",
+      error?.message || error
     );
   }
 };
@@ -109,7 +111,8 @@ export const findUsers: APIGatewayProxyHandler = async (
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to find User!"
+      "Unable to find User!",
+      error?.message || error
     );
   }
 };
@@ -143,7 +146,8 @@ export const updateUserById: APIGatewayProxyHandler = async (
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to update User!"
+      "Unable to update User!",
+      error?.message || error
     );
   }
 };
@@ -165,7 +169,8 @@ export const deleteUserById: APIGatewayProxyHandler = async (
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to delete User!"
+      "Unable to delete User!",
+      error?.message || error
     );
   }
 };

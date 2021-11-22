@@ -6,17 +6,20 @@ export default class Response implements ResponseBody {
   readonly message: string;
   readonly error: boolean;
   readonly data: ResponseBody["data"];
+  readonly errorMessage: string | null;
 
   constructor(
     statusCode: StatusCode,
     message: string,
     error: boolean,
-    data?: ResponseBody["data"]
+    data?: ResponseBody["data"],
+    errorMessage?: string
   ) {
     this.statusCode = statusCode;
     this.message = message;
     this.error = error;
     this.data = data;
+    this.errorMessage = errorMessage;
   }
 
   /**
@@ -34,6 +37,7 @@ export default class Response implements ResponseBody {
         message: this.message,
         error: this.error,
         data: this.data,
+        errorMessage: this.errorMessage,
       }),
     };
   }
@@ -44,8 +48,18 @@ export default class Response implements ResponseBody {
     return response.serialize();
   }
 
-  static error(statusCode: StatusCode, message: string): APIGatewayProxyResult {
-    const response = new Response(statusCode, message, true);
+  static error(
+    statusCode: StatusCode,
+    message: string,
+    errorMessage?: string
+  ): APIGatewayProxyResult {
+    const response = new Response(
+      statusCode,
+      message,
+      true,
+      null,
+      errorMessage
+    );
 
     return response.serialize();
   }

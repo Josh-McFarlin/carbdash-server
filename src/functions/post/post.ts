@@ -37,7 +37,7 @@ export const createPost: APIGatewayProxyHandler = async (
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      // "Unable to create Post!"
+      "Unable to create Post!",
       error?.message || error
     );
   }
@@ -71,7 +71,8 @@ export const findPostById: APIGatewayProxyHandler = async (
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to find Post!"
+      "Unable to find Post!",
+      error?.message || error
     );
   }
 };
@@ -109,7 +110,8 @@ export const findPosts: APIGatewayProxyHandler = async (
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to find Posts!"
+      "Unable to find Posts!",
+      error?.message || error
     );
   }
 };
@@ -139,7 +141,8 @@ export const updatePostById: APIGatewayProxyHandler = async (
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to update Post!"
+      "Unable to update Post!",
+      error?.message || error
     );
   }
 };
@@ -161,7 +164,8 @@ export const deletePostById: APIGatewayProxyHandler = async (
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to delete Post!"
+      "Unable to delete Post!",
+      error?.message || error
     );
   }
 };

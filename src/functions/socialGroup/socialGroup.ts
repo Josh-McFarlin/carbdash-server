@@ -26,7 +26,8 @@ export const createSocialGroup: APIGatewayProxyHandler = async (
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to create SocialGroup!"
+      "Unable to create SocialGroup!",
+      error?.message || error
     );
   }
 };
@@ -54,7 +55,8 @@ export const findSocialGroupById: APIGatewayProxyHandler = async (
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to find SocialGroup!"
+      "Unable to find SocialGroup!",
+      error?.message || error
     );
   }
 };
@@ -86,7 +88,8 @@ export const findSocialGroups: APIGatewayProxyHandler = async (
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to find SocialGroups!"
+      "Unable to find SocialGroups!",
+      error?.message || error
     );
   }
 };
@@ -111,7 +114,8 @@ export const updateSocialGroupById: APIGatewayProxyHandler = async (
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to update SocialGroup!"
+      "Unable to update SocialGroup!",
+      error?.message || error
     );
   }
 };
@@ -133,7 +137,8 @@ export const deleteSocialGroupById: APIGatewayProxyHandler = async (
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to delete SocialGroup!"
+      "Unable to delete SocialGroup!",
+      error?.message || error
     );
   }
 };

@@ -26,7 +26,8 @@ export const createChallenge: APIGatewayProxyHandler = async (
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to create Challenge!"
+      "Unable to create Challenge!",
+      error?.message || error
     );
   }
 };
@@ -54,7 +55,8 @@ export const findChallengeById: APIGatewayProxyHandler = async (
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to find Challenge!"
+      "Unable to find Challenge!",
+      error?.message || error
     );
   }
 };
@@ -85,7 +87,8 @@ export const findChallenges: APIGatewayProxyHandler = async (
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to find Challenges!"
+      "Unable to find Challenges!",
+      error?.message || error
     );
   }
 };
@@ -110,7 +113,8 @@ export const updateChallengeById: APIGatewayProxyHandler = async (
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to update Challenge!"
+      "Unable to update Challenge!",
+      error?.message || error
     );
   }
 };
@@ -132,7 +136,8 @@ export const deleteChallengeById: APIGatewayProxyHandler = async (
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to delete Challenge!"
+      "Unable to delete Challenge!",
+      error?.message || error
     );
   }
 };

@@ -46,7 +46,8 @@ export const findUserByAuth: APIGatewayProxyHandler = async (
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to find User!"
+      "Unable to find User!",
+      error?.message || error
     );
   }
 };

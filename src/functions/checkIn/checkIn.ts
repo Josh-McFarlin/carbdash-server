@@ -30,7 +30,8 @@ export const createCheckIn: APIGatewayProxyHandler = async (
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to create CheckIn!"
+      "Unable to create CheckIn!",
+      error?.message || error
     );
   }
 };
@@ -63,7 +64,8 @@ export const findCheckInById: APIGatewayProxyHandler = async (
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to find CheckIn!"
+      "Unable to find CheckIn!",
+      error?.message || error
     );
   }
 };
@@ -99,7 +101,8 @@ export const findCheckIns: APIGatewayProxyHandler = async (
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to find CheckIns!"
+      "Unable to find CheckIns!",
+      error?.message || error
     );
   }
 };
@@ -129,7 +132,8 @@ export const updateCheckInById: APIGatewayProxyHandler = async (
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to update CheckIn!"
+      "Unable to update CheckIn!",
+      error?.message || error
     );
   }
 };
@@ -151,7 +155,8 @@ export const deleteCheckInById: APIGatewayProxyHandler = async (
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to delete CheckIn!"
+      "Unable to delete CheckIn!",
+      error?.message || error
     );
   }
 };

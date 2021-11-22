@@ -26,7 +26,8 @@ export const createOffer: APIGatewayProxyHandler = async (
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to create Offer!"
+      "Unable to create Offer!",
+      error?.message || error
     );
   }
 };
@@ -54,7 +55,8 @@ export const findOfferById: APIGatewayProxyHandler = async (
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to find Offer!"
+      "Unable to find Offer!",
+      error?.message || error
     );
   }
 };
@@ -91,7 +93,8 @@ export const findOffers: APIGatewayProxyHandler = async (
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to find Offers!"
+      "Unable to find Offers!",
+      error?.message || error
     );
   }
 };
@@ -116,7 +119,8 @@ export const updateOfferById: APIGatewayProxyHandler = async (
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to update Offer!"
+      "Unable to update Offer!",
+      error?.message || error
     );
   }
 };
@@ -138,7 +142,8 @@ export const deleteOfferById: APIGatewayProxyHandler = async (
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to delete Offer!"
+      "Unable to delete Offer!",
+      error?.message || error
     );
   }
 };

@@ -31,7 +31,8 @@ export const createReview: APIGatewayProxyHandler = async (
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to create Review!"
+      "Unable to create Review!",
+      error?.message || error
     );
   }
 };
@@ -64,7 +65,8 @@ export const findReviewById: APIGatewayProxyHandler = async (
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to find Review!"
+      "Unable to find Review!",
+      error?.message || error
     );
   }
 };
@@ -106,7 +108,8 @@ export const findReviews: APIGatewayProxyHandler = async (
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to find Reviews!"
+      "Unable to find Reviews!",
+      error?.message || error
     );
   }
 };
@@ -136,7 +139,8 @@ export const updateReviewById: APIGatewayProxyHandler = async (
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to update Review!"
+      "Unable to update Review!",
+      error?.message || error
     );
   }
 };
@@ -158,7 +162,8 @@ export const deleteReviewById: APIGatewayProxyHandler = async (
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to delete Review!"
+      "Unable to delete Review!",
+      error?.message || error
     );
   }
 };

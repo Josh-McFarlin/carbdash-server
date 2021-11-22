@@ -53,7 +53,8 @@ export const findRecent: APIGatewayProxyHandler = async (
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to find recent!"
+      "Unable to find recent!",
+      error?.message || error
     );
   }
 };

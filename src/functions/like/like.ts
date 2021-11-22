@@ -31,7 +31,8 @@ export const toggleLike: APIGatewayProxyHandler = async (
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to create Like!"
+      "Unable to create Like!",
+      error?.message || error
     );
   }
 };

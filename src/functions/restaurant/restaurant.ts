@@ -22,7 +22,8 @@ export const createRestaurant: APIGatewayProxyHandler = async (
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to create Restaurant!"
+      "Unable to create Restaurant!",
+      error?.message || error
     );
   }
 };
@@ -50,7 +51,8 @@ export const findRestaurantById: APIGatewayProxyHandler = async (
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to find Restaurant!"
+      "Unable to find Restaurant!",
+      error?.message || error
     );
   }
 };
@@ -88,7 +90,8 @@ export const findRestaurants: APIGatewayProxyHandler = async (
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to find Restaurants!"
+      "Unable to find Restaurants!",
+      error?.message || error
     );
   }
 };
@@ -113,7 +116,8 @@ export const updateRestaurantById: APIGatewayProxyHandler = async (
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to update Restaurant!"
+      "Unable to update Restaurant!",
+      error?.message || error
     );
   }
 };
@@ -135,7 +139,8 @@ export const deleteRestaurantById: APIGatewayProxyHandler = async (
   } catch (error) {
     return Response.error(
       StatusCode.InternalServerError,
-      "Unable to delete Restaurant!"
+      "Unable to delete Restaurant!",
+      error?.message || error
     );
   }
 };
