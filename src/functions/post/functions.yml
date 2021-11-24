@@ -32,13 +32,13 @@ findPosts:
 #        authorizer:
 #          name: userAuthorizer
 #          identitySource: method.request.header.Authorization
-#deletePostById:
-#  handler: src/functions/post/post.deletePostById
-#  events:
-#    - http:
-#        path: post/{id}
-#        method: delete
-#        cors: true
-#        authorizer:
-#          name: userAuthorizer
-#          identitySource: method.request.header.Authorization
+deletePostById:
+  handler: src/functions/post/post.deletePostById
+  events:
+    - http:
+        path: post/{id}
+        method: delete
+        cors: true
+        authorizer:
+          name: userAuthorizer
+          identitySource: method.request.header.Authorization

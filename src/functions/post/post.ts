@@ -158,7 +158,10 @@ export const deletePostById: APIGatewayProxyHandler = async (
   try {
     const id = decodeURIComponent(event.pathParameters.id);
 
-    await actions.deletePostById(id);
+    await actions.deletePostById(
+      event.requestContext.authorizer.principalId,
+      id
+    );
 
     return Response.success();
   } catch (error) {

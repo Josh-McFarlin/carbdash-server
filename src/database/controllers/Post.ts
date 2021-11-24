@@ -102,5 +102,23 @@ export const updatePostById = (
     .lean()
     .exec();
 
-export const deletePostById = (id: string): Promise<PostType> =>
-  Post.findByIdAndDelete(id).lean().exec();
+export const deletePostById = async (
+  owner: string,
+  id: string
+): Promise<PostType> => {
+  const deletedPost = await Post.findOneAndDelete({
+    ownerType: "User",
+    user: new mongoose.Types.ObjectId(owner) as any,
+    _id: new mongoose.Types.ObjectId(id) as any,
+  })
+    .lean()
+    .exec();
+
+  if (deletedPost == null) {
+    throw new Error(
+      "Post not found or you do not have the correct credentials!"
+    );
+  }
+
+  return deletedPost;
+};
