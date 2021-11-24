@@ -15,6 +15,9 @@ findReviewById:
         path: review/{id}
         method: get
         cors: true
+        authorizer:
+          name: userAuthorizer
+          identitySource: method.request.header.Authorization
 findReviews:
   handler: src/functions/review/review.findReviews
   events:
@@ -22,6 +25,9 @@ findReviews:
         path: review
         method: get
         cors: true
+        authorizer:
+          name: userAuthorizer
+          identitySource: method.request.header.Authorization
 #updateReviewById:
 #  handler: src/functions/review/review.updateReviewById
 #  events:

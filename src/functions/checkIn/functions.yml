@@ -15,6 +15,9 @@ findCheckInById:
         path: checkIn/{id}
         method: get
         cors: true
+        authorizer:
+          name: userAuthorizer
+          identitySource: method.request.header.Authorization
 findCheckIns:
   handler: src/functions/checkIn/checkIn.findCheckIns
   events:
@@ -22,6 +25,9 @@ findCheckIns:
         path: checkIn
         method: get
         cors: true
+        authorizer:
+          name: userAuthorizer
+          identitySource: method.request.header.Authorization
 #updateCheckInById:
 #  handler: src/functions/checkIn/checkIn.updateCheckInById
 #  events:

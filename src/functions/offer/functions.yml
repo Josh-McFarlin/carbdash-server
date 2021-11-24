@@ -15,6 +15,9 @@ findOfferById:
         path: offer/{id}
         method: get
         cors: true
+        authorizer:
+          name: userAuthorizer
+          identitySource: method.request.header.Authorization
 findOffers:
   handler: src/functions/offer/offer.findOffers
   events:
@@ -22,6 +25,9 @@ findOffers:
         path: offer
         method: get
         cors: true
+        authorizer:
+          name: userAuthorizer
+          identitySource: method.request.header.Authorization
 #updateOfferById:
 #  handler: src/functions/offer/offer.updateOfferById
 #  events:

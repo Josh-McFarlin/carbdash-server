@@ -15,6 +15,9 @@ findPostById:
         path: post/{id}
         method: get
         cors: true
+        authorizer:
+          name: userAuthorizer
+          identitySource: method.request.header.Authorization
 findPosts:
   handler: src/functions/post/post.findPosts
   events:
@@ -22,6 +25,9 @@ findPosts:
         path: post
         method: get
         cors: true
+        authorizer:
+          name: userAuthorizer
+          identitySource: method.request.header.Authorization
 #updatePostById:
 #  handler: src/functions/post/post.updatePostById
 #  events:

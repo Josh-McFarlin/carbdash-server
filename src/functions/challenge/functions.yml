@@ -15,6 +15,9 @@ findChallengeById:
         path: challenge/{id}
         method: get
         cors: true
+        authorizer:
+          name: userAuthorizer
+          identitySource: method.request.header.Authorization
 findChallenges:
   handler: src/functions/challenge/challenge.findChallenges
   events:
@@ -22,6 +25,9 @@ findChallenges:
         path: challenge
         method: get
         cors: true
+        authorizer:
+          name: userAuthorizer
+          identitySource: method.request.header.Authorization
 #updateChallengeById:
 #  handler: src/functions/challenge/challenge.updateChallengeById
 #  events:

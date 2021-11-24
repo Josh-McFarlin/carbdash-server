@@ -15,6 +15,9 @@ findUserById:
         path: user/{id}
         method: get
         cors: true
+        authorizer:
+          name: userAuthorizer
+          identitySource: method.request.header.Authorization
 findUsers:
   handler: src/functions/user/user.findUsers
   events:
@@ -22,6 +25,9 @@ findUsers:
         path: user
         method: get
         cors: true
+        authorizer:
+          name: userAuthorizer
+          identitySource: method.request.header.Authorization
 updateUserById:
   handler: src/functions/user/user.updateUserById
   events:

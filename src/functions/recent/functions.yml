@@ -5,3 +5,6 @@ findRecent:
         path: recent
         method: get
         cors: true
+        authorizer:
+          name: userAuthorizer
+          identitySource: method.request.header.Authorization

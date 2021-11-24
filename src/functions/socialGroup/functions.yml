@@ -15,6 +15,9 @@ findSocialGroupById:
         path: socialGroup/{id}
         method: get
         cors: true
+        authorizer:
+          name: userAuthorizer
+          identitySource: method.request.header.Authorization
 findSocialGroups:
   handler: src/functions/socialGroup/socialGroup.findSocialGroups
   events:
@@ -22,6 +25,9 @@ findSocialGroups:
         path: socialGroup
         method: get
         cors: true
+        authorizer:
+          name: userAuthorizer
+          identitySource: method.request.header.Authorization
 #updateSocialGroupById:
 #  handler: src/functions/socialGroup/socialGroup.updateSocialGroupById
 #  events:
