@@ -30,7 +30,7 @@
     "isomorphic-unfetch": "^3.1.0",
     "jsonwebtoken": "^8.5.1",
     "mime": "^3.0.0",
-    "mongoose": "^6.0.7",
+    "mongoose": "^6.0.13",
     "uuid": "^8.3.2"
   },
   "devDependencies": {

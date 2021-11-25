@@ -11,29 +11,26 @@ export const findSavedById = async (
   detailed = false,
   filter?: "CheckIn" | "Post" | "Review"
 ): Promise<(CheckInType | PostType | ReviewType)[] | SaveRefType[]> => {
-  const authedUser = await User.findById(authedUserId).exec();
+  const authedUser = await User.findById(authedUserId).lean().exec();
 
   if (authedUser == null) {
     throw new Error("User not found!");
   }
 
   if (detailed) {
-    return [
-      ...(
-        await authedUser.populate({
-          path: "saved",
-          ...(filter != null && {
-            match: {
-              type: filter,
-            },
-          }),
-        })
-      ).saved.values(),
-    ];
+    return Promise.all(
+      Object.values(authedUser?.saved || {})
+        .filter((i: SaveRefType) => filter == null || i.type === filter)
+        .map((i: SaveRefType) =>
+          mongoose.model(i.type).findById(i.ref).lean().exec()
+        )
+    ) as any;
   } else {
     return filter != null
-      ? [...authedUser.saved.values()].filter((i) => i.type === filter)
-      : [...authedUser.saved.values()];
+      ? Object.values(authedUser.saved || {}).filter(
+          (i: SaveRefType) => i.type === filter
+        )
+      : Object.values(authedUser.saved || {});
   }
 };
 
