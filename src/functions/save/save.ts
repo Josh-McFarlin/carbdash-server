@@ -4,6 +4,7 @@ import { StatusCode } from "../../types/Response";
 import * as actions from "../../actions/save";
 import "../../database";
 import { SaveRefType } from "../../types/SaveRef";
+import { AccountRefType } from "../../types/AccountRef";
 
 /**
  * Find Saves
@@ -26,7 +27,16 @@ export const findSavesById: APIGatewayProxyHandler = async (
       saves:
         format === "simple"
           ? (saves as SaveRefType[]).map((i: SaveRefType) => i.ref.toString())
-          : saves,
+          : saves.map((save) => ({
+              ...save,
+              ...(Object.prototype.hasOwnProperty.call(save, "likedBy") && {
+                likedBy: save.likedBy
+                  ? Object.values(save?.likedBy).map((i: AccountRefType) =>
+                      i.ref.toString()
+                    ) || []
+                  : [],
+              }),
+            })),
     });
   } catch (error) {
     return Response.error(
