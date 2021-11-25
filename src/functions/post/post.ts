@@ -3,6 +3,7 @@ import Response from "../../utils/Response";
 import { StatusCode } from "../../types/Response";
 import * as actions from "../../actions/post";
 import "../../database";
+import { deleteRecentByContent } from "../../database/controllers/Recent";
 
 /**
  * Create a new Post
@@ -162,6 +163,8 @@ export const deletePostById: APIGatewayProxyHandler = async (
       event.requestContext.authorizer.principalId,
       id
     );
+
+    await deleteRecentByContent("Post", id);
 
     return Response.success();
   } catch (error) {

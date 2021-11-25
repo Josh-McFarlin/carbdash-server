@@ -76,3 +76,14 @@ export const findRecent = ({
     .populate("data")
     .select("_id type data")
     .exec();
+
+export const deleteRecentByContent = (
+  contentType: "CheckIn" | "Post" | "Review",
+  contentId: string
+): Promise<RecentType> =>
+  Recent.findOneAndDelete({
+    type: contentType,
+    data: new mongoose.Types.ObjectId(contentId) as any,
+  })
+    .lean()
+    .exec();
